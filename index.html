@@ -1,9 +1,217 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="resources/css/index.css" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <title>Numble</title>
+    <style>
+    
+    </style>
+</head>
 <body>
-  <h1>Fraser</h1>
-  <p>Welcome to my website!</p>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
-</body>
+    <h1>Numble</h1>
+    <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+    <div id="digitButtons">
+        <button class="digitButton">0</button>
+        <button class="digitButton">1</button>
+        <button class="digitButton">2</button>
+        <button class="digitButton">3</button>
+        <button class="digitButton">4</button>
+        <button class="digitButton">5</button>
+        <button class="digitButton">6</button>
+        <button class="digitButton">7</button>
+        <button class="digitButton">8</button>
+        <button class="digitButton">9</button>
+    </div>
+    <div id="inputFields">
+        <input type="text" class="singleDigitInput" readonly>
+        <input type="text" class="singleDigitInput" readonly>
+        <input type="text" class="singleDigitInput" readonly>
+        <input type="text" class="singleDigitInput" readonly>
+        <input type="text" class="singleDigitInput" readonly>
+        <input type="text" class="singleDigitInput" readonly>
+    </div>
+    <button id="submitGuess">Guess</button>
+    <button id="restartGame">Restart</button>
+    <div id="guessGrid">
+        <div class="guessRow">
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+        </div>
+    <div id="message"></div>
+    <p>Easy: The target number has no repeating digits.</p>
+    <p>Medium: The target number can have up to two repeating digits.</p>
+    <p>Hard: The target number can have multiple repeating digits.</p>
 
+    <script>
+        let targetNumber, attempts;
+        const guessGrid = document.getElementById('guessGrid');
+        const submitGuess = document.getElementById('submitGuess');
+        const restartGame = document.getElementById('restartGame');
+        const difficultySelect = document.getElementById('difficulty');
+    
+        startNewGame();
+    
+        document.querySelectorAll('.digitButton').forEach(button => {
+            button.addEventListener('click', () => addDigitToInput(button.textContent));
+        });
+    
+        submitGuess.addEventListener('click', function() {
+    const inputs = document.querySelectorAll('.singleDigitInput');
+    const guess = Array.from(inputs).map(input => input.value).join('');
+    if (guess.length === 6 && attempts < 6) {
+        displayGuess(guess);
+        checkWinCondition(guess);
+        attempts++;
+        Array.from(inputs).forEach(input => input.value = ''); // Clearing the inputs
+        if (attempts >= 6 && guess !== targetNumber) {
+            alert("Out of attempts! The number was " + targetNumber);
+        }
+    }
+    submitGuess.disabled = true; // Disable the submit button after each guess
+});
+
+    
+        restartGame.addEventListener('click', startNewGame);
+    
+        function startNewGame() {
+            targetNumber = generateRandomNumber(difficultySelect.value);
+            attempts = 0;
+            guessGrid.innerHTML = '';
+            document.querySelectorAll('.singleDigitInput').forEach(input => input.value = ''); // Clearing the inputs
+            submitGuess.disabled = true; // Disable the submit button at the start
+        }
+    
+        function addDigitToInput(digit) {
+            const inputs = document.querySelectorAll('.singleDigitInput');
+            for (const input of inputs) {
+                if (!input.value) {
+                    input.value = digit;
+                    break;
+                }
+            }
+            checkIfReadyToSubmit();
+        }
+    
+        function checkIfReadyToSubmit() {
+            const inputs = document.querySelectorAll('.singleDigitInput');
+            if (Array.from(inputs).every(input => input.value)) {
+                submitGuess.disabled = false; // Enable the submit button when all inputs are filled
+            }
+        }
+    
+        function generateRandomNumber(difficulty) {
+            let number = '';
+            while (number.length < 6) {
+                let digit = Math.floor(Math.random() * 10).toString();
+                if (difficulty === 'easy' && number.includes(digit)) {
+                    continue;
+                }
+                if (difficulty === 'medium' && number.split(digit).length > 3) {
+                    continue;
+                }
+                number += digit;
+            }
+            return number;
+        }
+    
+        function displayGuess(guess) {
+    const guessRow = document.createElement('div');
+    const targetDigitsCount = targetNumber.split('').reduce((acc, digit) => {
+        acc[digit] = (acc[digit] || 0) + 1;
+        return acc;
+    }, {});
+
+    guess.split('').forEach((digit, index) => {
+        const cell = document.createElement('div');
+        cell.classList.add('guessCell');
+        cell.textContent = digit;
+        
+        if (digit === targetNumber[index]) {
+            cell.classList.add('correct');
+            targetDigitsCount[digit]--;
+        } else if (targetNumber.includes(digit) && targetDigitsCount[digit] > 0) {
+            cell.classList.add('present');
+            targetDigitsCount[digit]--;
+        } else {
+            cell.classList.add('absent');
+        }
+        guessRow.appendChild(cell);
+    });
+    guessGrid.appendChild(guessRow);
+};
+    
+        function checkWinCondition(guess) {
+            if (guess === targetNumber) {
+                alert("Congratulations! You guessed the number!");
+                createShareButton(); // Assuming you still want the share functionality
+            }
+        }
+    
+        function createShareButton() {
+    // Twitter Share Button
+    const twitterShareButton = document.createElement('button');
+    twitterShareButton.textContent = 'Prepare to Share on Twitter';
+    twitterShareButton.addEventListener('click', function() {
+        createScreenshot(true); // Create a screenshot with hidden numbers for sharing
+    });
+    document.getElementById('message').appendChild(twitterShareButton);
+
+    // Screenshot Download Button
+    const downloadButton = document.createElement('button');
+    downloadButton.textContent = 'Download Result';
+    downloadButton.addEventListener('click', function() {
+        createScreenshot(false); // Create a screenshot for download
+    });
+    document.getElementById('message').appendChild(downloadButton);
+}
+
+function createScreenshot(forTwitter) {
+    const originalGrid = document.getElementById('guessGrid');
+    const cloneGrid = originalGrid.cloneNode(true);
+
+    // Hide the numbers in the clone
+    Array.from(cloneGrid.getElementsByClassName('guessCell')).forEach(cell => {
+        cell.textContent = '';
+    });
+
+    html2canvas(cloneGrid).then(canvas => {
+        if (forTwitter) {
+            // For Twitter: Prompt user to manually attach the image
+            const image = canvas.toDataURL("image/png");
+            let link = document.createElement('a');
+            link.download = 'twitter-guess.png';
+            link.href = image;
+            link.click();
+            alert('Download the image and attach it to your tweet.');
+            const tweetText = "I played the Numeric Guessing Game! Here's how I did (image attached).";
+            const url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText);
+            window.open(url, '_blank');
+        } else {
+            // For Download: Provide the image as a download
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            let link = document.createElement('a');
+            link.download = 'my-guess.png';
+            link.href = image;
+            link.click();
+        }
+    });
+}
+
+
+    </script>
+    
+   
+</body>
 </html>
+
