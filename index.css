@@ -271,15 +271,16 @@ body {
   /* Close Button */
 
 #closeModalButton {
-    background-color: black;
-    color: white;
+    background-color:  #C1E1C1;
+    color: black;
     border-radius: 6px;
     height: 40px;
-    width: 100px;
+    width: 150px;
+    font-size: 16px;
 }
 
 #closeModalButton:hover {
-    background-color: green;
+    background-color: #abc4ff;
     color: black;
     cursor: pointer;
 }
@@ -466,24 +467,24 @@ body {
 }
 
 #pop-logo {
-        width: 100%; /* Full width by default */
-        max-width: 200px; /* Suitable for larger screens */
-        display: block;
-        margin: 0 auto;
-        margin-bottom: 20px;
-        background-color: transparent;
+    width: 100%; /* Full width by default */
+    max-width: 200px; /* Suitable for larger screens */
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    background-color: transparent;
 }
 
 /* Smaller devices (phones) */
 @media only screen and (max-width: 600px) {
-    #pop-logo {
-        max-width: 150px; /* Increase this value if the logo is too small */
-    }
+#pop-logo {
+    max-width: 150px; /* Increase this value if the logo is too small */
+}
 }
 
 /* Larger devices (desktops) */
 @media only screen and (min-width: 1024px) {
-    #pop-logo {
-        max-width: 300px;
-    }
+#pop-logo {
+    max-width: 300px;
+}
 }
