@@ -1,5 +1,6 @@
 * {
-
+    background-color: black;
+    color: white;
 }
 
 body {
@@ -17,6 +18,14 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border: 1px solid white;
+    border-radius: 6px;
+    margin: 5px;
+}
+
+#submitGuess {
+    background-color: white;
+    color: black;
 }
 
 #guessGrid {
@@ -24,12 +33,12 @@ body {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 10px;
-    max-width: 600px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
 }
 .guessCell {
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     background-color: darkblue;
     text-align: center;
@@ -50,10 +59,11 @@ body {
     background-color: orange;
 }
 .absent {
-    background-color: white;
+    background-color: black;
 }
 #message {
     margin-top: 20px;
+    color: white;
 }
 
 /* Style for the number buttons */
@@ -84,32 +94,99 @@ body {
 
 /* Style for the input fields */
 .singleDigitInput {
-    padding: 10px;
     margin: 5px;
-    height: 50px;
-    width: 30px;
     font-size: 22px;
+    width: 10px;
+    height: 50px;
     border: 2px solid #333;
     background-color: #051a22;
     color: white;
     text-align: center;
     border-radius: 5px;
+    width: 80%;
 }
 
 /* Additional styles to improve overall consistency */
-#digitButtons, #inputFields {
+#digitButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px; /* Adjust the gap as needed */
+    align-items: center;
+    text-align: center;
+}
+
+#inputFields {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 5px; /* Adjust the gap as needed */
+    overflow-x: auto;
+}
+
+.digitButton {
+    width: 70px;
 }
 
 #inputFields {
     margin-bottom: 20px; /* Space below the input fields */
 }
 
-/* Optionally, remove the default outline on focus for buttons and replace with a custom style */
-button:focus, select:focus, input:focus {
-    outline: none;
-    border-color: #555;
-    box-shadow: 0 0 3px #aaa;
+/* Media query for larger screens */
+@media (min-width: 600px) {
+    .digitButton, .singleDigitInput, #difficulty {
+        font-size: 18px; /* Larger font size for larger screens */
+        padding: 15px; /* Larger padding for larger screens */
+        margin: 5px;
+        border: 2px solid #333;
+    }
+
+    /* Adjust the width of the dropdown and digit inputs for larger screens */
+    .singleDigitInput, #difficulty {
+        width: auto; /* Auto width for larger screens */
+    }
+}
+
+/* Additional responsive adjustments */
+@media (min-width: 768px) {
+    /* Further increase the size and spacing for tablets and desktops */
+    .digitButton, .singleDigitInput, #difficulty {
+        font-size: 20px;
+        padding: 10px;
+        margin: 6px;
+    }
+}
+
+/* Additional responsive adjustments for landscape orientation */
+@media (orientation: landscape) {
+    #digitButtons, #inputFields {
+        justify-content: space-around; /* Distribute space evenly around items */
+    }
+
+    .digitButton, .singleDigitInput, #difficulty {
+        font-size: 18px; /* Adjust the font size for better readability */
+        padding: 10px; /* Reduce padding to fit more content */
+    }
+
+    .singleDigitInput, #difficulty {
+        width: 12%; /* Adjust the width of inputs for landscape */
+        margin: 2%; /* Add some margin to prevent touching the screen edges */
+    }
+}
+
+/* Adjustments for very small screens, like small smartphones */
+@media (max-width: 320px) {
+    .digitButton, .singleDigitInput, #difficulty {
+        font-size: 14px; /* Smaller font size for very small screens */
+        padding: 8px; /* Smaller padding */
+    }
+
+    .singleDigitInput, #difficulty {
+        width: calc(100% - 10px); /* Adjust width to ensure it fits in the viewport */
+    }
+}
+
+/* Ensure the grid container does not stretch too wide on very large screens */
+#guessGrid {
+    max-width: 900px; /* Max width to prevent too wide of a layout */
+    margin: auto; /* Center the grid container */
 }
