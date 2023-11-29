@@ -83,6 +83,26 @@ body {
     background-color: #e0e0e0;
 }
 
+#backButton {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 18px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+    gap: 5px; /* Adjust the gap as needed */
+    align-items: center;
+    text-align: center;
+}
+
+#backButton:hover {
+    background-color: #e0e0e0;
+}
+
 /* Style for the dropdown */
 #difficulty {
     padding: 10px 15px;
@@ -115,6 +135,8 @@ body {
     align-items: center;
     text-align: center;
 }
+
+
 
 #inputFields {
     display: flex;
@@ -201,19 +223,29 @@ body {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
+    background-color: #fefefe !important;
+    color: black;
   }
   
   /* Modal Content */
   .modal-content {
-    background-color: #fefefe;
+    background-color: #fefefe !important;
     margin: 5% auto; /* 5% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
     border-radius: 5px;
+    color: black;
+  }
+
+  .modal h2, .modal ul, .modal li, .modal p {
+    background-color: #fefefe !important;
+    color: black;
+  }
+
+  .modal li {
+    text-align: left;
   }
   
   /* The Close Button */
@@ -222,12 +254,28 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    background-color: #fefefe !important;
   }
   
   .close:hover,
   .close:focus {
-    color: black;
+    color: green;
     text-decoration: none;
     cursor: pointer;
   }
-  
+
+  /* Close Button */
+
+#closeModalButton {
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    height: 40px;
+    width: 100px;
+}
+
+#closeModalButton:hover {
+    background-color: green;
+    color: black;
+    cursor: pointer;
+}
