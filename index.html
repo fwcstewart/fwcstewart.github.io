@@ -39,7 +39,7 @@
         <input type="text" class="singleDigitInput" readonly>
     </div>
     <button id="submitGuess">Guess</button>
-    <button id="restartGame">Restart</button>
+    <button id="backButton">Back</button>
     <div id="guessGrid">
         <div class="guessRow">
             <div class="guessCell"></div>
@@ -49,10 +49,33 @@
             <div class="guessCell"></div>
             <div class="guessCell"></div>
         </div>
+    </div>    
     <div id="message"></div>
+
+    <div>
     <p>Easy: The target number has no repeating digits.</p>
     <p>Medium: The target number can have up to two repeating digits.</p>
     <p>Hard: The target number can have multiple repeating digits.</p>
+    </div>   
+
+    <div>
+        <button id="restartGame">Restart</button>
+    </div>
+    
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Welcome to Numble!</h2>
+      <p>Here are some instructions to get you started:</p>
+      <ul>
+        <li>Guess the 6-digit number.</li>
+        <li>You have six tries to guess it right.</li>
+        <li>After each guess, the color of the tiles will change to show how close your guess was to the number.</li>
+      </ul>
+      <button id="closeModalButton">Close</button>
+    </div>
+    </div>
 
     <script>
         let targetNumber, attempts;
@@ -62,25 +85,41 @@
         const difficultySelect = document.getElementById('difficulty');
     
         startNewGame();
-    
-        document.querySelectorAll('.digitButton').forEach(button => {
-            button.addEventListener('click', () => addDigitToInput(button.textContent));
-        });
-    
-        submitGuess.addEventListener('click', function() {
-    const inputs = document.querySelectorAll('.singleDigitInput');
-    const guess = Array.from(inputs).map(input => input.value).join('');
-    if (guess.length === 6 && attempts < 6) {
-        displayGuess(guess);
-        checkWinCondition(guess);
-        attempts++;
-        Array.from(inputs).forEach(input => input.value = ''); // Clearing the inputs
-        if (attempts >= 6 && guess !== targetNumber) {
-            alert("Out of attempts! The number was " + targetNumber);
-        }
-    }
-    submitGuess.disabled = true; // Disable the submit button after each guess
+
+        let lastFilledInputIndex = -1; // Global variable to track the last filled input
+
+        // Event listeners for digit buttons
+document.querySelectorAll('.digitButton').forEach(button => {
+    button.addEventListener('click', function() {
+        addDigitToInput(this.textContent);
+    });
 });
+
+// Event listener for the back button
+document.getElementById('backButton').addEventListener('click', function() {
+    console.log('Back button clicked'); // Debugging log
+    const inputs = document.querySelectorAll('.singleDigitInput');
+    console.log('Last filled input index:', lastFilledInputIndex); // Check the last filled index
+    if (lastFilledInputIndex >= 0) {
+        inputs[lastFilledInputIndex].value = '';
+        lastFilledInputIndex = lastFilledInputIndex - 1;
+    }
+});
+    
+    submitGuess.addEventListener('click', function() {
+        const inputs = document.querySelectorAll('.singleDigitInput');
+        const guess = Array.from(inputs).map(input => input.value).join('');
+        if (guess.length === 6 && attempts < 6) {
+            displayGuess(guess);
+            checkWinCondition(guess);
+            attempts++;
+            Array.from(inputs).forEach(input => input.value = ''); // Clearing the inputs
+            if (attempts >= 6 && guess !== targetNumber) {
+                alert("Out of attempts! The number was " + targetNumber);
+            }
+        }
+        submitGuess.disabled = true; // Disable the submit button after each guess
+    });
 
     
         restartGame.addEventListener('click', startNewGame);
@@ -94,16 +133,17 @@
         }
     
         function addDigitToInput(digit) {
-            const inputs = document.querySelectorAll('.singleDigitInput');
-            for (const input of inputs) {
-                if (!input.value) {
-                    input.value = digit;
-                    break;
-                }
-            }
-            checkIfReadyToSubmit();
+    const inputs = document.querySelectorAll('.singleDigitInput');
+    for (const [index, input] of Array.from(inputs).entries()) {
+        if (!input.value) {
+            input.value = digit;
+            lastFilledInputIndex = index; // Update the last filled input index
+            break;
         }
-    
+    }
+    checkIfReadyToSubmit();
+}
+
         function checkIfReadyToSubmit() {
             const inputs = document.querySelectorAll('.singleDigitInput');
             if (Array.from(inputs).every(input => input.value)) {
@@ -207,50 +247,51 @@ function createScreenshot(forTwitter) {
             link.click();
         }
     });
+} 
 
-    // Get the modal
-var modal = document.getElementById('myModal');
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('myModal');
+    if (!modal) {
+        console.error('Modal element not found');
+        return;
+    }
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementsByClassName("close")[0];
+    if (!span) {
+        console.error('Close button element not found');
+        return;
+    }
 
-// When the user loads the page, open the modal 
-window.onload = function() {
-  modal.style.display = "block";
-}
+    var closeModalButton = document.getElementById('closeModalButton'); // Get the new button
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    // Open the modal
+    modal.style.display = "block";
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 
-}
+     // When the user clicks on the new button, close the modal
+     closeModalButton.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});
 
 
-    </script>
 
-    <!-- The Modal -->
-<div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Welcome to Numble!</h2>
-      <p>Here are some instructions to get you started:</p>
-      <ul>
-        <li>Guess the 6-digit number.</li>
-        <li>You have six tries to guess it right.</li>
-        <li>After each guess, the color of the tiles will change to show how close your guess was to the number.</li>
-      </ul>
-    </div>
-  </div>
-  
+</script>
+
+
+</body>
+</html>
    
 </body>
 </html>
