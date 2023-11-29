@@ -463,3 +463,12 @@ body {
         max-width: 300px;
     }
 }
+
+#pop-logo {
+        width: 100%; /* Full width by default */
+        max-width: 200px; /* Suitable for larger screens */
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        background-color: transparent;
+}
