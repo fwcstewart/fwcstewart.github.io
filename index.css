@@ -41,8 +41,7 @@ body {
 }
 
 #guessGrid {
-    margin-top: 20px;
-    margin-bottom: 5px;
+    margin 20px;
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* Creates 6 columns */
     grid-template-rows: repeat(6, 1fr); /* Creates 6 rows, though this will be determined by content */
@@ -52,7 +51,6 @@ body {
 
 .guessCell {
     padding: 10px;
-    margin: 10px;
     justify-content: space-evenly;
     background-color: #abc4ff;
     color: white !important;
@@ -62,7 +60,7 @@ body {
     display: flex; /* Using flex to center the content inside the cell */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    aspect-ratio: 2; /* To make the cells square, remove if you want a different shape */
+    height: 40px;
 }
 
 
@@ -99,6 +97,7 @@ body {
 
 .digitButton {
     padding: 10px 15px;
+    margin: 10px;
     font-size: 18px;
     border: 2px solid #ffffff;
     background-color: #f8f8f8;
