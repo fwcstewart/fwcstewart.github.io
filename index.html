@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="index.css" rel="stylesheet">
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <title>Numble</title>
-    <style>
-    
-    </style>
+    <title>Numble - The Number Guessing Game</title>
+    <link rel="stylesheet" href="resources/css/index.css">
 </head>
 <body>
-    <h1>Numble</h1>
-    <h2>The six-digit number game</h2>
-    <div id="scoreDisplay">Score: 0</div>
+    <header>
+        <header>
+            <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+                <span class="burger-menu-icon"></span>
+            </button>
+            <div class="nav-elements">
+                <nav>
+                    <a class="nav-item" href="#">Help</a>
+             </nav>
+          </div>
+          <div class="logo">
+            <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Lyfeguard logo">
+         </div>
+    </header>
+    <div id="scoreDisplay">Your Score: 0</div>
     <select id="difficulty">
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
-    </select>
+    </select> 
+    <div id="guessGrid">
+        <div class="guessRow">
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+            <div class="guessCell"></div>
+        </div>
+    </div>
     <div id="digitButtons">
         <button class="digitButton">0</button>
         <button class="digitButton">1</button>
@@ -30,34 +48,12 @@
         <button class="digitButton">7</button>
         <button class="digitButton">8</button>
         <button class="digitButton">9</button>
-    </div>
-    <div id="inputFields">
-        <input type="text" class="singleDigitInput" readonly>
-        <input type="text" class="singleDigitInput" readonly>
-        <input type="text" class="singleDigitInput" readonly>
-        <input type="text" class="singleDigitInput" readonly>
-        <input type="text" class="singleDigitInput" readonly>
-        <input type="text" class="singleDigitInput" readonly>
-    </div>
-    <button id="submitGuess">Guess</button>
-    <button id="backButton">Back</button>
-    <div id="guessGrid">
-        <div class="guessRow">
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-        </div>
+        <button id="backButton">Back</button>
     </div>    
+    <button id="submitGuess">Guess</button>
     <div id="message"></div>
 
-    <div>
-    <p>Easy: The target number has no repeating digits.</p>
-    <p>Medium: The target number can have up to two repeating digits.</p>
-    <p>Hard: The target number can have multiple repeating digits.</p>
-    </div>   
+
 
     <div>
         <button id="restartGame">Restart</button>
@@ -68,205 +64,127 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Welcome to Numble!</h2>
-      <p>Here are some instructions to get you started:</p>
-      <ul>
-        <li>Guess the 6-digit number.</li>
-        <li>You have six tries to guess it right.</li>
-        <li>After each guess, the color of the tiles will change to show how close your guess was to the number.</li>
-      </ul>
+      <h3>Here are some instructions to get you started:</h3>
+
+        <p>Guess the 6-digit number.</p>
+        <p>You have six tries to guess it right.</p>
+        <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
+     
+        <h3>Difficulty Levels</h3>
+        <p>Easy: The target number has no repeating digits.</p>
+        <p>Medium: The target number can have up to two repeating digits.</p>
+        <p>Hard: The target number can have multiple repeating digits.</p>  
       <button id="closeModalButton">Close</button>
     </div>
     </div>
 
     <script>
-        let targetNumber, attempts;
-        const guessGrid = document.getElementById('guessGrid');
-        const submitGuess = document.getElementById('submitGuess');
-        const restartGame = document.getElementById('restartGame');
-        const difficultySelect = document.getElementById('difficulty');
-    
-        startNewGame();
+ let targetNumber, attempts, currentGuess = [], currentRow = 0;
+  const maxGuessLength = 6;
+  const totalRows = 6;
+  const guessGrid = document.getElementById('guessGrid');
+  const submitGuess = document.getElementById('submitGuess');
+  const restartGame = document.getElementById('restartGame');
+  const difficultySelect = document.getElementById('difficulty');
+  const scoreDisplay = document.getElementById('scoreDisplay');
 
-        let lastFilledInputIndex = -1; // Global variable to track the last filled input
-
-        // Event listeners for digit buttons
-document.querySelectorAll('.digitButton').forEach(button => {
-    button.addEventListener('click', function() {
-        addDigitToInput(this.textContent);
-    });
-});
-
-// Event listener for the back button
-document.getElementById('backButton').addEventListener('click', function() {
-    console.log('Back button clicked'); // Debugging log
-    const inputs = document.querySelectorAll('.singleDigitInput');
-    console.log('Last filled input index:', lastFilledInputIndex); // Check the last filled index
-    if (lastFilledInputIndex >= 0) {
-        inputs[lastFilledInputIndex].value = '';
-        lastFilledInputIndex = lastFilledInputIndex - 1;
+  function generateRandomNumber(difficulty) {
+    let number = '';
+    while (number.length < maxGuessLength) {
+      let digit = Math.floor(Math.random() * 10).toString();
+      if ((difficulty === 'easy' && number.includes(digit)) ||
+          (difficulty === 'medium' && number.split(digit).length - 1 > 2)) {
+        continue;
+      }
+      number += digit;
     }
-});
-    
-    submitGuess.addEventListener('click', function() {
-        const inputs = document.querySelectorAll('.singleDigitInput');
-        const guess = Array.from(inputs).map(input => input.value).join('');
-        if (guess.length === 6 && attempts < 6) {
-            displayGuess(guess);
-            checkWinCondition(guess);
-            attempts++;
-            Array.from(inputs).forEach(input => input.value = ''); // Clearing the inputs
-            if (attempts >= 6 && guess !== targetNumber) {
-                alert("Out of attempts! The number was " + targetNumber);
-            }
-        }
-        submitGuess.disabled = true; // Disable the submit button after each guess
-    });
+    return number;
+  }
 
-    
-        restartGame.addEventListener('click', startNewGame);
-    
-        function startNewGame() {
-            targetNumber = generateRandomNumber(difficultySelect.value);
-            attempts = 0;
-            guessGrid.innerHTML = '';
-            document.querySelectorAll('.singleDigitInput').forEach(input => input.value = ''); // Clearing the inputs
-            submitGuess.disabled = true; // Disable the submit button at the start
-        }
-    
-        function addDigitToInput(digit) {
-    const inputs = document.querySelectorAll('.singleDigitInput');
-    for (const [index, input] of Array.from(inputs).entries()) {
-        if (!input.value) {
-            input.value = digit;
-            lastFilledInputIndex = index; // Update the last filled input index
-            break;
-        }
+  function startNewGame() {
+    targetNumber = generateRandomNumber(difficultySelect.value);
+    attempts = 0;
+    currentRow = 0;
+    currentGuess = [];
+    guessGrid.innerHTML = '';
+    for (let i = 0; i < totalRows * maxGuessLength; i++) {
+      let cell = document.createElement('div');
+      cell.classList.add('guessCell');
+      guessGrid.appendChild(cell);
     }
-    checkIfReadyToSubmit();
-}
+    scoreDisplay.textContent = "Score: 0";
+  }
 
-        function checkIfReadyToSubmit() {
-            const inputs = document.querySelectorAll('.singleDigitInput');
-            if (Array.from(inputs).every(input => input.value)) {
-                submitGuess.disabled = false; // Enable the submit button when all inputs are filled
-            }
-        }
-    
-        function generateRandomNumber(difficulty) {
-            let number = '';
-            while (number.length < 6) {
-                let digit = Math.floor(Math.random() * 10).toString();
-                if (difficulty === 'easy' && number.includes(digit)) {
-                    continue;
-                }
-                if (difficulty === 'medium' && number.split(digit).length > 3) {
-                    continue;
-                }
-                number += digit;
-            }
-            return number;
-        }
-    
-        function displayGuess(guess) {
-    const guessRow = document.createElement('div');
-    const targetDigitsCount = targetNumber.split('').reduce((acc, digit) => {
-        acc[digit] = (acc[digit] || 0) + 1;
-        return acc;
-    }, {});
+  function updateGridWithGuess() {
+    const guessCells = guessGrid.querySelectorAll('.guessCell');
+    guessCells.forEach((cell, index) => {
+      const rowIndex = Math.floor(index / maxGuessLength);
+      const cellIndex = index % maxGuessLength;
+      if (rowIndex === currentRow) {
+        cell.textContent = currentGuess[cellIndex] || '';
+        cell.classList.remove('correct', 'present', 'absent');
+      }
+    });
+  }
+
+  function checkWinCondition(guess) {
+    let score = 100 - (10 * attempts);
+    const guessCells = guessGrid.querySelectorAll('.guessCell');
 
     guess.split('').forEach((digit, index) => {
-        const cell = document.createElement('div');
-        cell.classList.add('guessCell');
-        cell.textContent = digit;
-        
-        if (digit === targetNumber[index]) {
-            cell.classList.add('correct');
-            targetDigitsCount[digit]--;
-        } else if (targetNumber.includes(digit) && targetDigitsCount[digit] > 0) {
-            cell.classList.add('present');
-            targetDigitsCount[digit]--;
-        } else {
-            cell.classList.add('absent');
-        }
-        guessRow.appendChild(cell);
+      const cellIndex = currentRow * maxGuessLength + index;
+      if (digit === targetNumber[index]) {
+        guessCells[cellIndex].classList.add('correct');
+        score += 5; // Bonus points for correct digit
+      } else if (targetNumber.includes(digit)) {
+        guessCells[cellIndex].classList.add('present');
+      } else {
+        guessCells[cellIndex].classList.add('absent');
+      }
     });
-    guessGrid.appendChild(guessRow);
-};
-    
-function checkWinCondition(guess) {
+
     if (guess === targetNumber) {
-        let baseScore = 100;
-        let attemptPenalty = 10 * (attempts - 1);
-        let difficultyMultiplier = 1;
+      alert("Congratulations! You guessed the number! Your score: " + score);
+      startNewGame();
+    } else if (currentRow === totalRows - 1) {
+      alert("Game Over! The number was " + targetNumber);
+      startNewGame();
+    } else {
+      currentRow++;
+      currentGuess = [];
+      updateGridWithGuess();
+    }
 
-        if (difficultySelect.value === 'medium') {
-            difficultyMultiplier = 1.5;
-        } else if (difficultySelect.value === 'hard') {
-            difficultyMultiplier = 2;
-        }
+    scoreDisplay.textContent = "Score: " + score;
+  }
 
-        let finalScore = (baseScore - attemptPenalty) * difficultyMultiplier;
+  startNewGame();
 
-        // Ensure score does not go below zero
-        finalScore = Math.max(finalScore, 0);
-
-        alert("Congratulations! You guessed the number! Your score: " + finalScore);
-        createShareButton();
-        // Update score display
-        scoreDisplay.textContent = "Score: " + finalScore;
-    }}
-
-// Inside checkWinCondition function
-scoreDisplay.textContent = "Score: " + finalScore;
-        function createShareButton() {
-    // Twitter Share Button
-    const twitterShareButton = document.createElement('button');
-    twitterShareButton.textContent = 'Prepare to Share on Twitter';
-    twitterShareButton.addEventListener('click', function() {
-        createScreenshot(true); // Create a screenshot with hidden numbers for sharing
+  document.querySelectorAll('.digitButton').forEach(button => {
+    button.addEventListener('click', () => {
+      if (currentGuess.length < maxGuessLength) {
+        currentGuess.push(button.textContent);
+        updateGridWithGuess();
+      }
     });
-    document.getElementById('message').appendChild(twitterShareButton);
+  });
 
-    // Screenshot Download Button
-    const downloadButton = document.createElement('button');
-    downloadButton.textContent = 'Download Result';
-    downloadButton.addEventListener('click', function() {
-        createScreenshot(false); // Create a screenshot for download
-    });
-    document.getElementById('message').appendChild(downloadButton);
-}
+  document.getElementById('backButton').addEventListener('click', () => {
+    if (currentGuess.length > 0) {
+      currentGuess.pop();
+      updateGridWithGuess();
+    }
+  });
 
-function createScreenshot(forTwitter) {
-    const originalGrid = document.getElementById('guessGrid');
-    const cloneGrid = originalGrid.cloneNode(true);
+  submitGuess.addEventListener('click', () => {
+    if (currentGuess.length === maxGuessLength) {
+      checkWinCondition(currentGuess.join(''));
+    } else {
+      alert("Please enter all 6 digits before submitting.");
+    }
+  });
 
-    // Hide the numbers in the clone
-    Array.from(cloneGrid.getElementsByClassName('guessCell')).forEach(cell => {
-        cell.textContent = '';
-    });
-
-    html2canvas(cloneGrid).then(canvas => {
-        if (forTwitter) {
-            // For Twitter: Prompt user to manually attach the image
-            const image = canvas.toDataURL("image/png");
-            let link = document.createElement('a');
-            link.download = 'twitter-guess.png';
-            link.href = image;
-            link.click();
-            alert('Download the image and attach it to your tweet.');
-            const tweetText = "I played the Numeric Guessing Game! Here's how I did (image attached).";
-            const url = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText);
-            window.open(url, '_blank');
-        } else {
-            // For Download: Provide the image as a download
-            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-            let link = document.createElement('a');
-            link.download = 'my-guess.png';
-            link.href = image;
-            link.click();
-        }
-    });
-} 
+  restartGame.addEventListener('click', startNewGame);
 
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('myModal');
@@ -302,6 +220,21 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = "none";
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var burger = document.querySelector('.burger-menu-button');
+        var menu = document.querySelector('.nav-elements');
+      
+        burger.addEventListener('click', function() {
+            menu.classList.toggle('is-active');
+        });
+      });
+      
+      burger.addEventListener('click', function() {
+        var isExpanded = this.getAttribute('aria-expanded') === 'true' || false;
+        this.setAttribute('aria-expanded', !isExpanded);
+        menu.classList.toggle('is-active');
+      });
 });
 
 
