@@ -473,3 +473,17 @@ body {
         margin-bottom: 20px;
         background-color: transparent;
 }
+
+/* Smaller devices (phones) */
+@media only screen and (max-width: 600px) {
+    #pop-logo {
+        max-width: 150px; /* Increase this value if the logo is too small */
+    }
+}
+
+/* Larger devices (desktops) */
+@media only screen and (min-width: 1024px) {
+    #pop-logo {
+        max-width: 300px;
+    }
+}
