@@ -1,3 +1,115 @@
-h1 {
-  color: blue;
+* {
+
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+#guessInput {
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+}
+#submitGuess, #restartGame {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#guessGrid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.guessCell {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: darkblue;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+
+/* Other styles... */
+
+
+
+
+.correct {
+    background-color: #4caf50;
+}
+.present {
+    background-color: orange;
+}
+.absent {
+    background-color: white;
+}
+#message {
+    margin-top: 20px;
+}
+
+/* Style for the number buttons */
+.digitButton {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 18px;
+    border: 2px solid #333;
+    background-color: #f8f8f8;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.digitButton:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for the dropdown */
+#difficulty {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the input fields */
+.singleDigitInput {
+    padding: 10px;
+    margin: 5px;
+    height: 50px;
+    width: 30px;
+    font-size: 22px;
+    border: 2px solid #333;
+    background-color: #051a22;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* Additional styles to improve overall consistency */
+#digitButtons, #inputFields {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adjust the gap as needed */
+}
+
+#inputFields {
+    margin-bottom: 20px; /* Space below the input fields */
+}
+
+/* Optionally, remove the default outline on focus for buttons and replace with a custom style */
+button:focus, select:focus, input:focus {
+    outline: none;
+    border-color: #555;
+    box-shadow: 0 0 3px #aaa;
 }
