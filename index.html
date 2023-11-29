@@ -13,6 +13,7 @@
 <body>
     <h1>Numble</h1>
     <h2>The six-digit number game</h2>
+    <div id="scoreDisplay">Score: 0</div>
     <select id="difficulty">
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
@@ -192,13 +193,31 @@ document.getElementById('backButton').addEventListener('click', function() {
     guessGrid.appendChild(guessRow);
 };
     
-        function checkWinCondition(guess) {
-            if (guess === targetNumber) {
-                alert("Congratulations! You guessed the number!");
-                createShareButton(); // Assuming you still want the share functionality
-            }
+function checkWinCondition(guess) {
+    if (guess === targetNumber) {
+        let baseScore = 100;
+        let attemptPenalty = 10 * (attempts - 1);
+        let difficultyMultiplier = 1;
+
+        if (difficultySelect.value === 'medium') {
+            difficultyMultiplier = 1.5;
+        } else if (difficultySelect.value === 'hard') {
+            difficultyMultiplier = 2;
         }
-    
+
+        let finalScore = (baseScore - attemptPenalty) * difficultyMultiplier;
+
+        // Ensure score does not go below zero
+        finalScore = Math.max(finalScore, 0);
+
+        alert("Congratulations! You guessed the number! Your score: " + finalScore);
+        createShareButton();
+        // Update score display
+        scoreDisplay.textContent = "Score: " + finalScore;
+    }}
+
+// Inside checkWinCondition function
+scoreDisplay.textContent = "Score: " + finalScore;
         function createShareButton() {
     // Twitter Share Button
     const twitterShareButton = document.createElement('button');
@@ -286,13 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
 </script>
 
 
 </body>
 </html>
-   
-</body>
-</html>
-
