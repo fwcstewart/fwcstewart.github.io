@@ -38,16 +38,16 @@
         </div>
     </div>
     <div id="digitButtons">
-        <button class="digitButton">0</button>
-        <button class="digitButton">1</button>
-        <button class="digitButton">2</button>
-        <button class="digitButton">3</button>
-        <button class="digitButton">4</button>
-        <button class="digitButton">5</button>
-        <button class="digitButton">6</button>
-        <button class="digitButton">7</button>
-        <button class="digitButton">8</button>
-        <button class="digitButton">9</button>
+        <button class="digitButton" data-digit="0">0</button>
+        <button class="digitButton" data-digit="1">1</button>
+        <button class="digitButton" data-digit="2">2</button>
+        <button class="digitButton" data-digit="3">3</button>
+        <button class="digitButton" data-digit="4">4</button>
+        <button class="digitButton" data-digit="5">5</button>
+        <button class="digitButton" data-digit="6">6</button>
+        <button class="digitButton" data-digit="7">7</button>
+        <button class="digitButton" data-digit="8">8</button>
+        <button class="digitButton" data-digit="9">9</button>
         <button id="backButton">Back</button>
     </div>    
     <button id="submitGuess">Guess</button>
@@ -80,112 +80,146 @@
     </div>
 
     <script>
- let targetNumber, attempts, currentGuess = [], currentRow = 0;
-  const maxGuessLength = 6;
-  const totalRows = 6;
-  const guessGrid = document.getElementById('guessGrid');
-  const submitGuess = document.getElementById('submitGuess');
-  const restartGame = document.getElementById('restartGame');
-  const difficultySelect = document.getElementById('difficulty');
-  const scoreDisplay = document.getElementById('scoreDisplay');
-
-  function generateRandomNumber(difficulty) {
-    let number = '';
-    while (number.length < maxGuessLength) {
-      let digit = Math.floor(Math.random() * 10).toString();
-      if ((difficulty === 'easy' && number.includes(digit)) ||
-          (difficulty === 'medium' && number.split(digit).length - 1 > 2)) {
-        continue;
+      let targetNumber, attempts, currentGuess = [], currentRow = 0;
+      const maxGuessLength = 6;
+      const totalRows = 6;
+      const guessGrid = document.getElementById('guessGrid');
+      const submitGuess = document.getElementById('submitGuess');
+      const restartGame = document.getElementById('restartGame');
+      const difficultySelect = document.getElementById('difficulty');
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const digitButtons = document.querySelectorAll('.digitButton');
+      
+      function generateRandomNumber(difficulty) {
+        let number = '';
+        while (number.length < maxGuessLength) {
+          let digit = Math.floor(Math.random() * 10).toString();
+          if ((difficulty === 'easy' && number.includes(digit)) ||
+              (difficulty === 'medium' && number.split(digit).length - 1 > 2)) {
+            continue;
+          }
+          number += digit;
+        }
+        return number;
       }
-      number += digit;
+      
+      function startNewGame() {
+        targetNumber = generateRandomNumber(difficultySelect.value);
+        attempts = 0;
+        currentRow = 0;
+        currentGuess = [];
+        guessGrid.innerHTML = ''; // Clear the grid
+        for (let i = 0; i < totalRows * maxGuessLength; i++) {
+          let cell = document.createElement('div');
+          cell.classList.add('guessCell');
+          guessGrid.appendChild(cell);
+        }
+        scoreDisplay.textContent = "Score: 0";
+        resetDigitButtons(); // Reset the digit buttons at the start of the game
+      }
+      
+      function resetDigitButtons() {
+        digitButtons.forEach(button => {
+          button.classList.remove('crossed-out');
+          button.disabled = false;
+        });
+      }
+      
+      function crossOutAbsentDigits(absentDigits) {
+        digitButtons.forEach(button => {
+          if (absentDigits.has(button.textContent)) {
+            button.classList.add('crossed-out');
+            button.disabled = true; // Disable the button
+          }
+        });
+      }
+      
+      function updateGridWithGuess() {
+        const guessCells = guessGrid.querySelectorAll('.guessCell');
+        guessCells.forEach((cell, index) => {
+          const rowIndex = Math.floor(index / maxGuessLength);
+          const cellIndex = index % maxGuessLength;
+          if (rowIndex === currentRow) {
+            cell.textContent = currentGuess[cellIndex] || '';
+            cell.classList.remove('correct', 'present', 'absent');
+          }
+        });
+      }
+      
+      function checkWinCondition(guess) {
+  const guessCells = guessGrid.querySelectorAll('.guessCell');
+  let score = 100 - (10 * attempts);
+  let digitsPresentInTarget = new Set(targetNumber.split('')); // Digits in the target number
+
+  guess.split('').forEach((digit, index) => {
+    const cellIndex = currentRow * maxGuessLength + index;
+    if (digit === targetNumber[index]) {
+      guessCells[cellIndex].classList.add('correct');
+      score += 5; // Bonus points for correct digit
+    } else if (targetNumber.includes(digit)) {
+      guessCells[cellIndex].classList.add('present');
+    } else {
+      guessCells[cellIndex].classList.add('absent');
     }
-    return number;
+  });
+
+  // After checking the guess, cross out digit buttons for digits that are not in the target number
+  if (difficultySelect.value === 'easy') {
+    digitButtons.forEach(button => {
+      if (!digitsPresentInTarget.has(button.textContent)) {
+        button.classList.add('crossed-out');
+        button.disabled = true; // Optionally disable the button
+      }
+    });
   }
 
-  function startNewGame() {
-    targetNumber = generateRandomNumber(difficultySelect.value);
-    attempts = 0;
-    currentRow = 0;
+  if (guess === targetNumber) {
+    alert("Congratulations! You guessed the number! Your score: " + score);
+    startNewGame();
+  } else if (currentRow === totalRows - 1) {
+    alert("Game Over! The number was " + targetNumber);
+    startNewGame();
+  } else {
+    currentRow++;
     currentGuess = [];
-    guessGrid.innerHTML = '';
-    for (let i = 0; i < totalRows * maxGuessLength; i++) {
-      let cell = document.createElement('div');
-      cell.classList.add('guessCell');
-      guessGrid.appendChild(cell);
-    }
-    scoreDisplay.textContent = "Score: 0";
+    updateGridWithGuess();
   }
 
-  function updateGridWithGuess() {
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-    guessCells.forEach((cell, index) => {
-      const rowIndex = Math.floor(index / maxGuessLength);
-      const cellIndex = index % maxGuessLength;
-      if (rowIndex === currentRow) {
-        cell.textContent = currentGuess[cellIndex] || '';
-        cell.classList.remove('correct', 'present', 'absent');
-      }
-    });
-  }
+  scoreDisplay.textContent = "Score: " + score;
+}
 
-  function checkWinCondition(guess) {
-    let score = 100 - (10 * attempts);
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-
-    guess.split('').forEach((digit, index) => {
-      const cellIndex = currentRow * maxGuessLength + index;
-      if (digit === targetNumber[index]) {
-        guessCells[cellIndex].classList.add('correct');
-        score += 5; // Bonus points for correct digit
-      } else if (targetNumber.includes(digit)) {
-        guessCells[cellIndex].classList.add('present');
-      } else {
-        guessCells[cellIndex].classList.add('absent');
-      }
-    });
-
-    if (guess === targetNumber) {
-      alert("Congratulations! You guessed the number! Your score: " + score);
+      
       startNewGame();
-    } else if (currentRow === totalRows - 1) {
-      alert("Game Over! The number was " + targetNumber);
-      startNewGame();
-    } else {
-      currentRow++;
-      currentGuess = [];
-      updateGridWithGuess();
-    }
-
-    scoreDisplay.textContent = "Score: " + score;
-  }
-
-  startNewGame();
-
-  document.querySelectorAll('.digitButton').forEach(button => {
-    button.addEventListener('click', () => {
-      if (currentGuess.length < maxGuessLength) {
-        currentGuess.push(button.textContent);
-        updateGridWithGuess();
-      }
-    });
-  });
-
-  document.getElementById('backButton').addEventListener('click', () => {
-    if (currentGuess.length > 0) {
-      currentGuess.pop();
-      updateGridWithGuess();
-    }
-  });
-
-  submitGuess.addEventListener('click', () => {
-    if (currentGuess.length === maxGuessLength) {
-      checkWinCondition(currentGuess.join(''));
-    } else {
-      alert("Please enter all 6 digits before submitting.");
-    }
-  });
-
-  restartGame.addEventListener('click', startNewGame);
+      
+      digitButtons.forEach(button => {
+        button.setAttribute('data-digit', button.textContent); // Set data-digit attribute
+        button.addEventListener('click', () => {
+          if (currentGuess.length < maxGuessLength) {
+            currentGuess.push(button.textContent);
+            updateGridWithGuess();
+          }
+        });
+      });
+      
+      document.getElementById('backButton').addEventListener('click', () => {
+        if (currentGuess.length > 0) {
+          currentGuess.pop();
+          updateGridWithGuess();
+        }
+      });
+      
+      submitGuess.addEventListener('click', () => {
+        if (currentGuess.length === maxGuessLength) {
+          attempts++;
+          checkWinCondition(currentGuess.join(''));
+          currentGuess = [];
+          updateGridWithGuess();
+        } else {
+          alert("Please enter all 6 digits before submitting.");
+        }
+      });
+      
+      restartGame.addEventListener('click', startNewGame);
 
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('myModal');
