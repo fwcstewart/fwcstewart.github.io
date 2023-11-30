@@ -64,7 +64,12 @@ body {
 }
 
 
-
+.crossed-out {
+    text-decoration: line-through;
+    opacity: 0.5;
+    color: #000;
+    cursor: not-allowed;
+  }
 
 /* Other styles... */
 
