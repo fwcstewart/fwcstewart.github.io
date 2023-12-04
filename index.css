@@ -61,7 +61,13 @@ body {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     height: 40px;
+    transform-style: preserve-3d;
+  transition: transform 0.6s, opacity 0.6s;
 }
+
+.guessCell.flip {
+    animation: flipIn 0.6s forwards;
+  }
 
 
 .crossed-out {
@@ -239,18 +245,18 @@ body {
   
   /* Modal Content */
   .modal-content {
-    background-color: #fefefe !important;
+    background-color: darkblue !important;
     margin: 5% auto; /* 5% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #fff;
     width: 80%; /* Could be more or less, depending on screen size */
     border-radius: 5px;
-    color: black;
+    color: white;
   }
 
   .modal h2, .modal ul, .modal li, .modal p, .modal h3 {
-    background-color: #fefefe !important;
-    color: black;
+    color: white;
+    background-color: darkblue !important;
   }
 
   .modal li {
@@ -259,11 +265,11 @@ body {
   
   /* The Close Button */
   .close {
-    color: #aaa;
+    color: #fff;
     float: right;
     font-size: 28px;
     font-weight: bold;
-    background-color: #fefefe !important;
+    background-color: darkblue !important;
   }
   
   .close:hover,
@@ -276,7 +282,7 @@ body {
   /* Close Button */
 
 #closeModalButton {
-    background-color:  #C1E1C1;
+    background-color:  #fff;
     color: black;
     border-radius: 6px;
     height: 40px;
@@ -492,4 +498,92 @@ body {
 #pop-logo {
     max-width: 300px;
 }
+}
+
+@keyframes flipIn {
+    from {
+      transform: rotateX(-90deg);
+      opacity: 0;
+    }
+    to {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+
+
+  #gameOverModal {
+    display: none;
+    position: fixed;
+    z-index: 10; /* Increased z-index to ensure it's on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent background */
+}
+
+#modalscore {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+#modaltitle {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+.over-modal-content {
+    background-color: #fefefe !important;
+    border: 1px solid #888;
+    margin: 10% auto; /* Adjusted for vertical centering */
+    padding: 40px;
+    width: 80%;
+    max-width: 500px; /* Restricts maximum width for larger screens */
+    border-radius: 10px; /* Rounded corners for the modal box */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    text-align: center; /* Centers the text inside the modal */
+}
+
+.closeGameOver {
+    color: #aaa !important;
+    position: absolute; /* Allows precise positioning */
+    top: 10px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeGameOver:hover,
+.closeGameOver:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px; /* Spacing between buttons */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#playAgainButton {
+    background-color: #4CAF50 !important; /* Green background */
+    color: white;
+    width: 250px;
+}
+
+#shareButton {
+    background-color: #008CBA !important; /* Blue background */
+    color: white;
+    width: 250px;
+}
+
+button:hover {
+    opacity: 0.8; /* Slight dim on hover for feedback */
 }
