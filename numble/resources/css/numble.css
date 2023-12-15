@@ -1,9 +1,23 @@
-/* Numble Page Specific Styles */
+/* Numble Game Specific Styles */
+
+/* Logo Styles */
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#logo-img {
+    width: auto; /* Adjust as needed */
+    max-width: 200px; /* Set a maximum width */
+    height: auto; /* Maintain aspect ratio */
+}
 
 /* Score Display */
 #scoreDisplay {
     margin-bottom: 10px;
     font-size: 20px;
+    color: #fff; /* Assuming white color for score text */
 }
 
 /* Difficulty Selector */
@@ -20,18 +34,17 @@
 
 /* Guess Grid */
 #guessGrid {
-    margin: 20px;
+    margin: 20px auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr); /* 6 columns for guesses */
     gap: 5px;
-    max-width: 800px;
-    margin: auto;
+    max-width: 600px; /* Adjust based on your layout needs */
 }
 
 /* Guess Cell */
 .guessCell {
     padding: 10px;
-    background-color: #abc4ff;
+    background-color: #abc4ff; /* Your brand color */
     color: white;
     border: 1px solid white;
     text-align: center;
@@ -40,7 +53,28 @@
     justify-content: center;
     align-items: center;
     height: 40px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adding transform for effect */
+}
+
+/* Correct Guess - Digit is correct and in the right position */
+.guessCell.correct {
+    background-color: #4CAF50; /* Green for correct */
+    color: white;
+    transform: scale(1.1); /* Slight increase in size for emphasis */
+}
+
+/* Present Guess - Digit is correct but in the wrong position */
+.guessCell.present {
+    background-color: #FFEB3B; /* Yellow for present */
+    color: black;
+    transform: scale(1.05); /* Slightly smaller increase in size */
+}
+
+/* Absent Guess - Digit is incorrect */
+.guessCell.absent {
+    background-color: #F44336; /* Red for absent */
+    color: white;
+    transform: scale(0.9); /* Slight decrease in size */
 }
 
 /* Digit Buttons */
@@ -104,8 +138,10 @@
 
 /* Modal Styles */
 .modal-content {
-    background-color: #333; /* Assuming a dark theme for Numble */
-    color: white; /* Text color for content */
+    background-color: #333; /* Dark theme for the modal */
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 #closeModalButton {
@@ -113,6 +149,8 @@
     color: white;
     border-radius: 6px;
     font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 20px;
 }
 
 #closeModalButton:hover {
