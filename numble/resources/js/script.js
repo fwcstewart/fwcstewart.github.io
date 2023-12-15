@@ -1,198 +1,191 @@
-let targetNumber, attempts, currentGuess = [], currentRow = 0;
-const maxGuessLength = 6;
-const totalRows = 6;
-const guessGrid = document.getElementById('guessGrid');
-const submitGuess = document.getElementById('submitGuess');
-const restartGame = document.getElementById('restartGame');
-const difficultySelect = document.getElementById('difficulty');
-const scoreDisplay = document.getElementById('scoreDisplay');
-const digitButtons = document.querySelectorAll('.digitButton');
+// Numble Game JavaScript - Enhanced
 
-function generateRandomNumber(difficulty) {
-    let number = '';
-    while (number.length < maxGuessLength) {
-        let digit = Math.floor(Math.random() * 10).toString();
-        if ((difficulty === 'easy' && number.includes(digit)) ||
-            (difficulty === 'medium' && number.split(digit).length - 1 > 2)) {
-            continue;
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize game when the DOM is fully loaded
+    initializeGame();
+});
+
+function initializeGame() {
+    let targetNumber, attempts, currentGuess = [], currentRow = 0;
+    const maxGuessLength = 6;
+    const totalRows = 6;
+    const guessGrid = document.getElementById('guessGrid');
+    const submitGuess = document.getElementById('submitGuess');
+    const restartGame = document.getElementById('restartGame');
+    const difficultySelect = document.getElementById('difficulty');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const digitButtons = Array.from(document.querySelectorAll('.digitButton'));
+
+    // Generates a random number based on the difficulty
+    function generateRandomNumber(difficulty) {
+        let number = '';
+        while (number.length < maxGuessLength) {
+            let digit = Math.floor(Math.random() * 10).toString();
+            if (shouldSkipDigit(digit, difficulty, number)) continue;
+            number += digit;
         }
-        number += digit;
+        return number;
     }
-    return number;
-}
 
-function startNewGame() {
-    targetNumber = generateRandomNumber(difficultySelect.value);
-    attempts = 0;
-    currentRow = 0;
-    currentGuess = [];
-    guessGrid.innerHTML = ''; 
-    for (let i = 0; i < totalRows * maxGuessLength; i++) {
-        let cell = document.createElement('div');
-        cell.classList.add('guessCell');
-        guessGrid.appendChild(cell);
+    // Determines if a digit should be skipped based on difficulty
+    function shouldSkipDigit(digit, difficulty, number) {
+        if (difficulty === 'easy' && number.includes(digit)) return true;
+        if (difficulty === 'medium' && number.split(digit).length - 1 > 2) return true;
+        return false;
     }
-    scoreDisplay.textContent = "Score: 0";
-    resetDigitButtons(); 
 
-    let modal = document.getElementById('myModal');
-    modal.style.display = "block";
-}
+    // Starts a new game, resets the game state
+    function startNewGame() {
+        targetNumber = generateRandomNumber(difficultySelect.value);
+        attempts = 0;
+        currentRow = 0;
+        currentGuess = [];
+        scoreDisplay.textContent = "Score: 0";
+        resetGuessGrid();
+        resetDigitButtons(); 
+        showModal('myModal');
+    }
 
-function resetDigitButtons() {
-    digitButtons.forEach(button => {
-        button.classList.remove('crossed-out');
-        button.disabled = false;
-    });
-}
-
-function updateGridWithGuess() {
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-    guessCells.forEach((cell, index) => {
-        const rowIndex = Math.floor(index / maxGuessLength);
-        const cellIndex = index % maxGuessLength;
-        if (rowIndex === currentRow) {
-            cell.textContent = currentGuess[cellIndex] || '';
-            cell.classList.remove('correct', 'present', 'absent', 'flip');
+    // Resets the guess grid for a new game
+    function resetGuessGrid() {
+        guessGrid.innerHTML = ''; 
+        for (let i = 0; i < totalRows * maxGuessLength; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('guessCell');
+            guessGrid.appendChild(cell);
         }
-    });
-}
+    }
 
-function checkWinCondition(guess) {
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-    let score = 100 - (10 * attempts);
-    let absentDigits = new Set();
+    // Resets the digit buttons for a new game
+    function resetDigitButtons() {
+        digitButtons.forEach(button => {
+            button.classList.remove('crossed-out');
+            button.disabled = false;
+        });
+    }
 
-    guess.split('').forEach((digit, index) => {
-        const cellIndex = currentRow * maxGuessLength + index;
-        const cell = guessCells[cellIndex];
-        
-        if (!targetNumber.includes(digit)) {
-            absentDigits.add(digit);
-        }
-
-
-        // Delay flipping and coloring
-        setTimeout(() => {
-            cell.classList.add('flip');
-            if (digit === targetNumber[index]) {
-                cell.classList.add('correct');
-                score += 5;
-            } else if (targetNumber.includes(digit)) {
-                cell.classList.add('present');
-            } else {
-                cell.classList.add('absent');
+    // Updates the guess grid with the current guess
+    function updateGridWithGuess() {
+        const guessCells = guessGrid.querySelectorAll('.guessCell');
+        guessCells.forEach((cell, index) => {
+            const rowIndex = Math.floor(index / maxGuessLength);
+            const cellIndex = index % maxGuessLength;
+            if (rowIndex === currentRow) {
+                cell.textContent = currentGuess[cellIndex] || '';
+                cell.classList.remove('correct', 'present', 'absent', 'flip');
             }
-        }, (index + 1) * 500);
-    });
+        });
+    }
 
-    setTimeout(() => {
+    // Checks if the current guess is correct
+    function checkWinCondition() {
+        const guess = currentGuess.join('');
+        let score = calculateScore(guess);
+        animateGuessResults(guess);
+        setTimeout(() => updateGameState(guess, score), maxGuessLength * 600);
+    }
+
+    // Calculates the current score
+    function calculateScore(guess) {
+        let score = 100 - (10 * attempts);
+        for (let i = 0; i < guess.length; i++) {
+            if (guess[i] === targetNumber[i]) score += 5;
+        }
+        return score;
+    }
+
+    // Animates guess results and updates cell classes
+    function animateGuessResults(guess) {
+        const guessCells = guessGrid.querySelectorAll('.guessCell');
+        guess.split('').forEach((digit, index) => {
+            const cellIndex = currentRow * maxGuessLength + index;
+            const cell = guessCells[cellIndex];
+            setTimeout(() => updateCellClass(cell, digit, index), (index + 1) * 500);
+        });
+    }
+
+    // Updates the class of a cell based on the guess
+    function updateCellClass(cell, digit, index) {
+        cell.classList.add('flip');
+        if (digit === targetNumber[index]) {
+            cell.classList.add('correct');
+        } else if (targetNumber.includes(digit)) {
+            cell.classList.add('present');
+        } else {
+            cell.classList.add('absent');
+        }
+    }
+
+    // Updates the game state after a guess
+    function updateGameState(guess, score) {
+        crossOutAbsentDigits();
+        if (guess === targetNumber) {
+            endGame(true, score);
+        } else if (currentRow === totalRows - 1) {
+            endGame(false, score);
+        } else {
+            prepareNextGuess();
+        }
+        scoreDisplay.textContent = "Score: " + score;
+    }
+
+    // Prepares for the next guess
+    function prepareNextGuess() {
+        currentRow++;
+        currentGuess = [];
+        updateGridWithGuess();
+    }
+
+    // Crosses out absent digits
+    function crossOutAbsentDigits() {
         digitButtons.forEach(button => {
             if (!targetNumber.includes(button.textContent)) {
                 button.classList.add('crossed-out');
                 button.disabled = true;
             }
         });
+    }
 
-        if (guess === targetNumber) {
-            endGame(true, score);
-        } else if (currentRow === totalRows - 1) {
-            endGame(false, score);
-        } else {
-            currentRow++;
-            currentGuess = [];
-            updateGridWithGuess();
-        }
-        scoreDisplay.textContent = "Score: " + score;
-    }, maxGuessLength * 600);
-}
+    // Ends the game and shows the result
+    function endGame(isWin, score) {
+        document.getElementById('finalScore').textContent = score;
+        showModal(isWin ? 'gameOverModal' : 'myModal');
+    }
 
-function crossOutAbsentDigits(absentDigits) {
+    // Shows a modal
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "block";
+    }
+
+    // Event listeners
     digitButtons.forEach(button => {
-        if (!absentDigits.has(button.textContent)) {
-            button.classList.add('crossed-out');
-            button.disabled = true;
-        }
+        button.addEventListener('click', digitButtonClickHandler);
     });
-}
 
-function endGame(isWin, score) {
-    document.getElementById('finalScore').textContent = score;
-    
-    // Show the game over modal
-    let gameOverModal = document.getElementById('gameOverModal');
-    gameOverModal.style.display = "block";
-}
+    submitGuess.addEventListener('click', submitGuessHandler);
+    restartGame.addEventListener('click', startNewGame);
 
-// Event listener for 'Play Again' button
-document.getElementById('playAgainButton').addEventListener('click', () => {
-    gameOverModal.style.display = "none";
-    startNewGame(); // You will need to define this function or replace it with the relevant code
-});
-
-// Event listener for 'Share with a Friend' button
-document.getElementById('shareButton').addEventListener('click', () => {
-    const gameUrl = "https://numble-game.com";
-    navigator.clipboard.writeText(gameUrl).then(() => {
-        alert("Link copied to clipboard!");
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-    });
-});
-
-digitButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    // Handles digit button click events
+    function digitButtonClickHandler(event) {
         if (currentGuess.length < maxGuessLength) {
-            currentGuess.push(button.textContent);
+            currentGuess.push(event.target.textContent);
             updateGridWithGuess();
         }
-    });
-});
-
-document.getElementById('backButton').addEventListener('click', () => {
-    if (currentGuess.length > 0) {
-        currentGuess.pop();
-        updateGridWithGuess();
     }
-});
 
-submitGuess.addEventListener('click', () => {
-    if (currentGuess.length === maxGuessLength) {
-        attempts++;
-        checkWinCondition(currentGuess.join(''));
-    } else {
-        alert("Please enter all 6 digits before submitting.");
+    // Handles submit guess button click events
+    function submitGuessHandler() {
+        if (currentGuess.length === maxGuessLength) {
+            attempts++;
+            checkWinCondition();
+        } else {
+            alert("Please enter all 6 digits before submitting.");
+        }
     }
-});
 
-restartGame.addEventListener('click', startNewGame);
-
-var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-var gameOverModal = document.getElementById('gameOverModal');
-var spanCloseGameOver = document.getElementsByClassName("closeGameOver")[0];
-spanCloseGameOver.onclick = function() {
-    gameOverModal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal || event.target == gameOverModal) {
-        modal.style.display = "none";
-        gameOverModal.style.display = "none";
-    }
-}
-
-document.getElementById('playAgainButton').addEventListener('click', () => {
-    gameOverModal.style.display = "none";
+    // Initialization
     startNewGame();
 });
 
-document.getElementById('closeModalButton').addEventListener('click', () => {
-    modal.style.display = "none";
-});
 
-startNewGame();
