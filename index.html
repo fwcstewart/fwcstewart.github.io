@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Hub</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Gaming Hub - Play Numble and RPS</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="main-container">
-        <header>
-            <h1>Welcome to the Gaming Hub</h1>
-        </header>
-        <nav>
-            <ul>
-                <li><a id="numble-link" href="/numble">Numble</a></li>
-                <li><a id="rps-link" href="/rps">Rock Paper Scissors</a></li>
-            </ul>
-        </nav>
-        <footer>
-            <p>&copy; 2023 Gaming Hub</p>
-        </footer>
+    <div class="hero">
+        <h1 class="hero-title">Welcome to the Ultimate Gaming Hub</h1>
+        <p class="hero-subtitle">Choose your game and start the fun!</p>
     </div>
+
+    <section class="game-selection">
+        <article class="card" id="numble-card">
+            <h2>Numble</h2>
+            <p>A brainy numbers puzzle game to challenge your intellect.</p>
+            <button class="play-btn" onclick="location.href='numble.html'">Play Numble</button>
+        </article>
+
+        <article class="card" id="rps-card">
+            <h2>Rock Paper Scissors</h2>
+            <p>Test your luck and strategy in the classic hand game.</p>
+            <button class="play-btn" onclick="location.href='rps.html'">Play RPS</button>
+        </article>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Gaming Hub. All rights reserved.</p>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
-
