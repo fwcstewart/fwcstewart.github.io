@@ -1,20 +1,31 @@
 /* Rock Paper Scissors (RPS) Game Specific Styles */
 
+:root {
+    /* Define RPS-specific color variables for easy modification */
+    --rps-bg-color: #2ecc71;
+    --rps-active-bg-color: #3498db;
+    --rps-choice-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --rps-hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    --rps-scoreboard-bg: rgba(255, 255, 255, 0.8);
+    --rps-history-bg: rgba(255, 255, 255, 0.8);
+    --rps-text-color: #34495e;
+}
+
 /* Game Mode Indicator */
 .game-mode-indicator {
     display: inline-block;
     padding: 5px 15px;
-    border-radius: 15px;
-    background-color: #2ecc71; /* Green background for visibility */
+    border-radius: var(--border-radius);
+    background-color: var(--rps-bg-color);
     color: white;
     font-weight: bold;
     margin: 10px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
     transition: background-color 0.3s;
 }
   
 .game-mode-indicator.active {
-    background-color: #2ecc71; /* Blue for active state */
+    background-color: var(--rps-active-bg-color);
 }
 
 #current-game-mode {
@@ -32,56 +43,56 @@
 .choice {
     width: 120px;
     height: 120px;
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     background-size: cover;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--rps-choice-shadow);
     cursor: pointer;
-    transition: all 0.3s;
-    margin: 10px; /* Spacing between choices */
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px;
 }
 
 .choice:hover {
     transform: scale(1.1);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--rps-hover-shadow);
 }
 
 /* Countdown Timer */
 #countdown {
-    font-size: 3em; /* Larger font size for visibility */
+    font-size: 3em;
     color: white;
     margin-top: 10px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 /* Result and Score Display */
 #result, #score {
     font-size: 1.5em;
     margin-top: 20px;
-    color: #fff;
+    color: white;
 }
 
 .score-board {
     display: inline-flex;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
+    background-color: var(--rps-scoreboard-bg);
+    border-radius: var(--border-radius);
     padding: 15px;
     width: 95%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow);
     justify-content: space-evenly;
 }
 
 .score h2 {
-    color: #34495e;
+    color: var(--rps-text-color);
     margin-bottom: 10px;
     font-size: 22px;
 }
 
 .score span {
     font-size: 2em;
-    color: #2ecc71;
+    color: var(--rps-bg-color);
 }
 
 /* Game Modes */
@@ -98,7 +109,7 @@
     padding: 10px 20px;
     margin: 10px;
     border: 1px solid white;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: all 0.3s;
     font-size: 1em;
@@ -112,13 +123,13 @@
 
 /* Game History */
 #game-history {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #333;
-    border-radius: 10px;
+    background-color: var(--rps-history-bg);
+    color: var(--rps-text-color);
+    border-radius: var(--border-radius);
     margin-top: 30px;
     padding: 10px;
     width: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--box-shadow);
     text-align: center;
 }
 
@@ -133,17 +144,106 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
-    .score-board, #game-history, #game, #countdown {
-        width: 80%;
-        /* Adjustments for smaller screens */
+/* Rock Paper Scissors (RPS) Game Specific Styles */
+
+/* ... (previous styles) ... */
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    /* Adjustments for medium-sized screens like tablets */
+    .choice {
+        width: 100px;
+        height: 100px;
     }
 
-    .choice {
-        width: 90px;
-        height: 90px;
+    #countdown {
+        font-size: 2.5em;
+    }
+
+    .score-board, #game-history {
+        width: 90%;
     }
 }
 
-/* Additional Responsive Adjustments as needed */
+@media (max-width: 768px) {
+    /* Adjustments for small screens like mobile devices in portrait mode */
+    #game {
+        flex-direction: column; /* Stack choices vertically */
+    }
 
+    .choice {
+        width: 80px;
+        height: 80px;
+        margin: 5px;
+    }
+
+    .score-board, #game-history, #game, #countdown {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #result, #score {
+        font-size: 1.2em;
+    }
+
+    .score h2 {
+        font-size: 18px;
+    }
+
+    .score span {
+        font-size: 1.5em;
+    }
+
+    .game-mode {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    #game-modes, .game-mode-indicator, #history-list {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens like mobile devices in landscape mode */
+    .choice {
+        width: 60px;
+        height: 60px;
+    }
+
+    #countdown {
+        font-size: 2em;
+    }
+
+    .game-mode-indicator, .game-mode {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    #result, #score {
+        font-size: 1em;
+    }
+
+    .score h2, .score span {
+        font-size: 1em;
+    }
+}
+
+/* Landscape Orientation Adjustments */
+@media (orientation: landscape) and (max-width: 768px) {
+    /* Specific adjustments for landscape orientation on small screens */
+    #game {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .choice {
+        margin: 5px;
+    }
+
+    #countdown, #result, #score, .score-board, #game-history {
+        font-size: 1em;
+        padding: 5px;
+        width: 100%;
+    }
+}
