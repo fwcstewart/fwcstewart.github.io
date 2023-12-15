@@ -245,7 +245,7 @@ body {
   
   /* Modal Content */
   .modal-content {
-    background-color: darkblue !important;
+    background-color: transparent !important;
     margin: 5% auto; /* 5% from the top and centered */
     padding: 20px;
     border: 1px solid #fff;
@@ -256,7 +256,7 @@ body {
 
   .modal h2, .modal ul, .modal li, .modal p, .modal h3 {
     color: white;
-    background-color: darkblue !important;
+    background-color: transparent !important;
   }
 
   .modal li {
@@ -269,7 +269,7 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
-    background-color: darkblue !important;
+    background-color: transparent !important;
   }
   
   .close:hover,
