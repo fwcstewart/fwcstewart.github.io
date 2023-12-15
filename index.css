@@ -1,58 +1,73 @@
-/* Reset some basic elements */
-body, html {
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
     height: 100%;
     font-family: 'Arial', sans-serif;
+    background-color: #abc4ff; /* Your brand color */
 }
 
-/* Hero section styling */
-.hero {
-    background-color: #4a90e2;
-    color: #fff;
-    padding: 50px 20px;
+.site-header {
+    background: #fff;
     text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.hero-title {
-    margin: 0;
-    font-size: 3em;
+.site-header h1 {
+    color: #333;
+    font-size: 2.5rem;
 }
 
-.hero-subtitle {
-    font-size: 1.5em;
-}
-
-/* Game selection cards */
-.game-selection {
+.content {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    gap: 20px;
+    padding: 50px 20px;
 }
 
-.card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px;
-    width: 300px;
+.game-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+}
+
+.game-info {
+    padding: 30px;
     text-align: center;
-    transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.game-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.game-card p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1rem;
 }
 
 .play-btn {
     background-color: #5cb85c;
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    margin-top: 15px;
-    border-radius: 5px;
+    padding: 10px 30px;
+    font-size: 1rem;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -61,13 +76,17 @@ body, html {
     background-color: #449d44;
 }
 
-/* Footer styling */
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #fff;
+    color: #333;
     text-align: center;
     padding: 10px;
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 100%;
+    top: 20px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+footer p {
+    font-size: 1rem;
 }
