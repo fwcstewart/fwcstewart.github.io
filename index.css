@@ -12,14 +12,13 @@ body, html {
 }
 
 .site-header {
-    background: #fff;
     text-align: center;
     padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .site-header h1 {
-    color: #333;
+    color: #fff;
     font-size: 2.5rem;
 }
 
@@ -33,8 +32,10 @@ body, html {
 }
 
 .game-card {
-    background: #fff;
+    background-color: transparent;
+    color: white;
     border-radius: 15px;
+    border: 1px solid white;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -49,6 +50,7 @@ body, html {
 
 .game-icon {
     font-size: 4rem;
+    margin-top: 10px;
     margin-bottom: 20px;
     transition: transform 0.3s ease-in-out;
 }
@@ -93,8 +95,7 @@ body, html {
 }
 
 footer {
-    background-color: #fff;
-    color: #333;
+    color: #fff;
     text-align: center;
     padding: 10px;
     position: relative;
