@@ -1,77 +1,6 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: #abc4ff; /* Updated gradient */
-    color: #333; /* Darker color for better contrast */
-    text-align: center;
-    padding: 20px 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* Rock Paper Scissors (RPS) Game Specific Styles */
 
-
-.header-style {
-    width: 100%;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-
-/* Burger Menu Button - Visible only on smaller screens */
-.burger-menu-button {
-    display: none; /* Hidden by default */
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 100;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.burger-menu-icon, .burger-menu-icon::before, .burger-menu-icon::after {
-    background-color: #fff;
-    height: 3px;
-    width: 30px;
-    transition: background-color 0.3s, transform 0.3s;
-    position: relative;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.burger-menu-icon::before { top: -8px; }
-.burger-menu-icon::after { bottom: -8px; }
-
-.nav-elements {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid white;
-}
-
-.nav-item {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    padding: 20px;
-    text-align: center;
-    justify-content: center;
-}
-
-.nav-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
+/* Game Mode Indicator */
 .game-mode-indicator {
     display: inline-block;
     padding: 5px 15px;
@@ -82,18 +11,17 @@ body {
     margin: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s;
-  }
+}
   
-  /* Style changes when a different game mode is active */
-  .game-mode-indicator.active {
+.game-mode-indicator.active {
     background-color: #2ecc71; /* Blue for active state */
-  }
-  
-  /* Style for the text within the game mode indicator */
-  #current-game-mode {
-    text-transform: uppercase;
-  }
+}
 
+#current-game-mode {
+    text-transform: uppercase;
+}
+
+/* Game Choices (Rock, Paper, Scissors images) */
 #game {
     display: flex;
     justify-content: center;
@@ -109,8 +37,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: all 0.3s;
-    border: none;
-    margin: 10px; /* Add margin for spacing between choices */
+    margin: 10px; /* Spacing between choices */
 }
 
 .choice:hover {
@@ -118,24 +45,23 @@ body {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
+/* Countdown Timer */
 #countdown {
-    font-size: 3em; /* Larger font size for better visibility */
-    border: 1px solid white;
+    font-size: 3em; /* Larger font size for visibility */
     color: white;
     margin-top: 10px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: inline-flex; /* Make the countdown block an inline element */
 }
 
+/* Result and Score Display */
 #result, #score {
     font-size: 1.5em;
     margin-top: 20px;
     color: #fff;
 }
-
 
 .score-board {
     display: inline-flex;
@@ -158,6 +84,7 @@ body {
     color: #2ecc71;
 }
 
+/* Game Modes */
 #game-modes {
     display: flex;
     justify-content: center;
@@ -183,17 +110,16 @@ body {
     transform: scale(1.05);
 }
 
+/* Game History */
 #game-history {
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
     border-radius: 10px;
     margin-top: 30px;
+    padding: 10px;
+    width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    justify-content: center;
-    align-items: center;
     text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 #history-list {
@@ -206,132 +132,18 @@ body {
     font-size: 0.9em;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .score-board {
-        align-items: center;
-        display: inline-flex;
+    .score-board, #game-history, #game, #countdown {
         width: 80%;
+        /* Adjustments for smaller screens */
     }
-
-    #game-history {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        align-items: center;
-        width: 80%;
-        display: inline-block;
-    }
-
-    #game {
-        flex-direction: row; /* On smaller screens, choices go back to a row */
-        flex-wrap: wrap; /* Wrap the items if they don't fit */
-    }
-
-    #countdown {
-        margin-top: 10px; /* Less vertical space on smaller screens */
-        font-size: 2em; /* Slightly smaller font size on smaller screens */
-        align-items: center;
-        display: inline-flex;
-        width: 80%;
-        justify-content: center;
-    }
-
 
     .choice {
         width: 90px;
-        height: 90px; 
+        height: 90px;
     }
 }
 
-/* Responsive Navigation for smaller screens */
-@media screen and (max-width: 768px) {
-    .burger-menu-button {
-        display: block;
-    }
+/* Additional Responsive Adjustments as needed */
 
-    .nav-elements {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        padding: 10px 0;
-        background-color: #34495e; /* Adding background for dropdown */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        border-radius: 0 0 10px 10px;
-    }
-
-    .nav-elements.is-active {
-        display: flex;
-    }
-
-    .nav-elements a {
-        text-align: center;
-        padding: 10px 0;
-        color: white;
-        text-decoration: none;
-        border: none; /* Remove borders */
-        box-sizing: border-box;
-    }
-
-    .burger-menu-button.is-active .burger-menu-icon {
-        background-color: transparent;
-    }
-
-    .burger-menu-button.is-active .burger-menu-icon::before {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .burger-menu-button.is-active .burger-menu-icon::after {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-}
-
-#logo-img {
-    max-width: 150px; /* Default logo size */
-    margin-left: 40px;
-}
-
-@media only screen and (min-width: 1024px) {
-    #logo-img {
-        max-width: 150px; /* Larger logo on bigger screens */
-    }
-}
-
-/* Other existing styles for game, modal, choices, etc. */
