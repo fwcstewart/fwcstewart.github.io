@@ -1,18 +1,5 @@
 /* Numble Game Specific Styles */
 
-/* Logo Styles */
-.logo {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-#logo-img {
-    width: auto; /* Adjust as needed */
-    max-width: 200px; /* Set a maximum width */
-    height: auto; /* Maintain aspect ratio */
-}
-
 /* Score Display */
 #scoreDisplay {
     margin-bottom: 10px;
