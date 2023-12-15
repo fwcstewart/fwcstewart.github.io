@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="resources/css/styles.css">
+</head>
+<body>
+    <header class="header-style">
+        <div class="logo">
+            <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
+        </div>
+        <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+            <span class="burger-menu-icon"></span>
+        </button>
+        <div class="nav-elements">
+            <nav>
+                <a class="nav-item" href="../numble/index.html">Play Numble</a>
+            </nav>
+        </div>
+    </header>
+   
+    <main>
+        <section id="game-modes">
+            <button class="game-mode" id="timed">Timed Game</button>
+            <button class="game-mode" id="best-of-three">Best of Three</button>
+            <button class="game-mode" id="continuous">Continuous Play</button>
+        </section>
+        
+        <!-- Add this below or above your game mode buttons -->
+        <div id="game-mode-indicator" class="game-mode-indicator">
+          <span id="current-game-mode">Continuous</span>
+        </div>
+
+        <section id="game">
+            <img src="resources/rock.png" alt="Rock" id="rock" class="choice">
+            <img src="resources/paper.png" alt="Paper" id="paper" class="choice">
+            <img src="resources/scissor.png" alt="Scissors" id="scissors" class="choice">
+        </section>
+
+        <div id="countdown"></div>
+
+        <div id="result"></div>
+
+        <div id="score" class="score-board">
+            <div class="score">
+                <h2>Your Score</h2>
+                <span id="user-score">0</span>
+            </div>
+            <div class="score">
+                <h2>Bot Score</h2>
+                <span id="computer-score">0</span>
+            </div>
+        </div>
+
+        <section id="game-history">
+            <h3>Game History</h3>
+            <ul id="history-list"></ul>
+        </section>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Game Over</h2>
+                <p id="modal-message"></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="resources/js/script.js"></script>
+</body>
+</html>
