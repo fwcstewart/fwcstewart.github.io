@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numble - The Number Guessing Game</title>
+    <link rel="stylesheet" href="resources/css/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+</head>
+<body>
+    <header class="header-style">
+        <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+            <span class="burger-menu-icon"></span>
+        </button>
+        <div class="logo">
+            <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
+        </div>
+        <nav class="nav-elements">
+            <a class="nav-item" href="../rps/index.html">Play Rock, Paper, Scissors</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="scoreDisplay">Your Score: 0</div>
+        <select id="difficulty" class="mt-1 mb-2">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select> 
+
+        <div id="guessGrid" class="mt-2 mb-2">
+            <!-- Guess cells will be populated here -->
+        </div>
+
+        <div id="digitButtons" class="mt-1 mb-1">
+            <button class="digitButton" data-digit="0">0</button>
+            <button class="digitButton" data-digit="1">1</button>
+            <button class="digitButton" data-digit="2">2</button>
+            <button class="digitButton" data-digit="3">3</button>
+            <button class="digitButton" data-digit="4">4</button>
+            <button class="digitButton" data-digit="5">5</button>
+            <button class="digitButton" data-digit="6">6</button>
+            <button class="digitButton" data-digit="7">7</button>
+            <button class="digitButton" data-digit="8">8</button>
+            <button class="digitButton" data-digit="9">9</button>
+            <button id="backButton">Back</button>
+        </div>    
+
+        <button id="submitGuess" class="mb-2">Guess</button>
+        <div id="message" class="mb-2"></div>
+
+        <button id="restartGame" class="mb-2">Restart</button>
+
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome to Numble!</h2>
+                <h3>Here are some instructions to get you started:</h3>
+                <p>Guess the 6-digit number.</p>
+                <p>You have six tries to guess it right.</p>
+                <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
+                <h3>Difficulty Levels</h3>
+                <p>Easy: The target number has no repeating digits.</p>
+                <p>Medium: The target number can have up to two repeating digits.</p>
+                <p>Hard: The target number can have multiple repeating digits.</p>  
+                <button id="closeModalButton">Let's Play!</button>
+            </div>
+        </div>
+
+        <div id="gameOverModal" class="modal">
+            <!-- Modal content -->
+            <div class="over-modal-content">
+                <span class="closeGameOver">&times;</span>
+                <h2 id="modaltitle">Game Over!</h2>
+                <p id="modalScore">Your Score: <span id="finalScore"></span></p>
+                <button id="shareButton">Share with a Friend</button>
+                <button id="playAgainButton">Play Again</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer mt-2">
+        <p>&copy; 2023 Numble Game</p>
+    </footer>
+
+    <script src="resources/js/script.js"></script>
+</body>
+</html>
