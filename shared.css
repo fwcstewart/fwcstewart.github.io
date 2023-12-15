@@ -155,6 +155,7 @@ button:hover {
 
 .modal, .modal-content h1, h2, h3, p {
     color: black !important;
+    line-height: 2px;
 }
 
 .close-button {
