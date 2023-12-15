@@ -110,10 +110,11 @@ button:hover {
         left: 0;
         width: 100%;
         flex-direction: column;
-        padding: 10px 0;
+        padding: 10px 20px;
         background-color: #34495e; /* Adding background for dropdown */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         border-radius: 0 0 10px 10px;
+        text-decoration: none;
     }
 
     .nav-elements.is-active {
