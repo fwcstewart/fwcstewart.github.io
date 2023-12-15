@@ -4,295 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numble - The Number Guessing Game</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="resources/css/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 </head>
 <body>
-    <header>
-        <header>
-            <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
-                <span class="burger-menu-icon"></span>
-            </button>
-            <div class="nav-elements">
-                <nav>
-                    <a class="nav-item" href="#">Help</a>
-             </nav>
-          </div>
-          <div class="logo">
+    <header class="header-style">
+        <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+            <span class="burger-menu-icon"></span>
+        </button>
+        <div class="logo">
             <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
-         </div>
-    </header>
-    <div id="scoreDisplay">Your Score: 0</div>
-    <select id="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select> 
-    <div id="guessGrid">
-        <div class="guessRow">
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
-            <div class="guessCell"></div>
         </div>
-    </div>
-    <div id="digitButtons">
-        <button class="digitButton" data-digit="0">0</button>
-        <button class="digitButton" data-digit="1">1</button>
-        <button class="digitButton" data-digit="2">2</button>
-        <button class="digitButton" data-digit="3">3</button>
-        <button class="digitButton" data-digit="4">4</button>
-        <button class="digitButton" data-digit="5">5</button>
-        <button class="digitButton" data-digit="6">6</button>
-        <button class="digitButton" data-digit="7">7</button>
-        <button class="digitButton" data-digit="8">8</button>
-        <button class="digitButton" data-digit="9">9</button>
-        <button id="backButton">Back</button>
-    </div>    
-    <button id="submitGuess">Guess</button>
-    <div id="message"></div>
+        <nav class="nav-elements">
+            <a class="nav-item" href="../rps/index.html">Play Rock, Paper, Scissors</a>
+        </nav>
+    </header>
 
+    <main>
+        <div id="scoreDisplay">Your Score: 0</div>
+        <select id="difficulty" class="mt-1 mb-2">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select> 
 
+        <div id="guessGrid" class="mt-2 mb-2">
+            <!-- Guess cells will be populated here -->
+        </div>
 
-    <div>
-        <button id="restartGame">Restart</button>
-    </div>
-    
-    <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <img id="pop-logo" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Welcome to Numble!</h2>
-      <h3>Here are some instructions to get you started:</h3>
+        <div id="digitButtons" class="mt-1 mb-1">
+            <button class="digitButton" data-digit="0">0</button>
+            <button class="digitButton" data-digit="1">1</button>
+            <button class="digitButton" data-digit="2">2</button>
+            <button class="digitButton" data-digit="3">3</button>
+            <button class="digitButton" data-digit="4">4</button>
+            <button class="digitButton" data-digit="5">5</button>
+            <button class="digitButton" data-digit="6">6</button>
+            <button class="digitButton" data-digit="7">7</button>
+            <button class="digitButton" data-digit="8">8</button>
+            <button class="digitButton" data-digit="9">9</button>
+            <button id="backButton">Back</button>
+        </div>    
 
-        <p>Guess the 6-digit number.</p>
-        <p>You have six tries to guess it right.</p>
-        <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
-     
-        <h3>Difficulty Levels</h3>
-        <p>Easy: The target number has no repeating digits.</p>
-        <p>Medium: The target number can have up to two repeating digits.</p>
-        <p>Hard: The target number can have multiple repeating digits.</p>  
-      <button id="closeModalButton">Let's Play!</button>
-    </div>
-    </div>
+        <button id="submitGuess" class="mb-2">Guess</button>
+        <div id="message" class="mb-2"></div>
 
-    <div id="gameOverModal">
-      <!-- Modal content -->
-      <div class="over-modal-content">
-          <span class="closeGameOver">&times;</span>
-          <h2 id="modaltitle">Game Over!</h2>
-          <p id="modalScore">Your Score: <span id="finalScore"></span></p>
-          <button id="shareButton">Share with a Friend</button>
-          <button id="playAgainButton">Play Again</button>
-      </div>
-    </div>
+        <button id="restartGame" class="mb-2">Restart</button>
 
-<script>
-let targetNumber, attempts, currentGuess = [], currentRow = 0;
-const maxGuessLength = 6;
-const totalRows = 6;
-const guessGrid = document.getElementById('guessGrid');
-const submitGuess = document.getElementById('submitGuess');
-const restartGame = document.getElementById('restartGame');
-const difficultySelect = document.getElementById('difficulty');
-const scoreDisplay = document.getElementById('scoreDisplay');
-const digitButtons = document.querySelectorAll('.digitButton');
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Welcome to Numble!</h2>
+                <h3>Here are some instructions to get you started:</h3>
+                <p>Guess the 6-digit number.</p>
+                <p>You have six tries to guess it right.</p>
+                <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
+                <h3>Difficulty Levels</h3>
+                <p>Easy: The target number has no repeating digits.</p>
+                <p>Medium: The target number can have up to two repeating digits.</p>
+                <p>Hard: The target number can have multiple repeating digits.</p>  
+                <button id="closeModalButton">Let's Play!</button>
+            </div>
+        </div>
 
-function generateRandomNumber(difficulty) {
-    let number = '';
-    while (number.length < maxGuessLength) {
-        let digit = Math.floor(Math.random() * 10).toString();
-        if ((difficulty === 'easy' && number.includes(digit)) ||
-            (difficulty === 'medium' && number.split(digit).length - 1 > 2)) {
-            continue;
-        }
-        number += digit;
-    }
-    return number;
-}
+        <div id="gameOverModal" class="modal">
+            <!-- Modal content -->
+            <div class="over-modal-content">
+                <span class="closeGameOver">&times;</span>
+                <h2 id="modaltitle">Game Over!</h2>
+                <p id="modalScore">Your Score: <span id="finalScore"></span></p>
+                <button id="shareButton">Share with a Friend</button>
+                <button id="playAgainButton">Play Again</button>
+            </div>
+        </div>
+    </main>
 
-function startNewGame() {
-    targetNumber = generateRandomNumber(difficultySelect.value);
-    attempts = 0;
-    currentRow = 0;
-    currentGuess = [];
-    guessGrid.innerHTML = ''; 
-    for (let i = 0; i < totalRows * maxGuessLength; i++) {
-        let cell = document.createElement('div');
-        cell.classList.add('guessCell');
-        guessGrid.appendChild(cell);
-    }
-    scoreDisplay.textContent = "Score: 0";
-    resetDigitButtons(); 
+    <footer class="footer mt-2">
+        <p>&copy; 2023 Numble Game</p>
+    </footer>
 
-    let modal = document.getElementById('myModal');
-    modal.style.display = "block";
-}
-
-function resetDigitButtons() {
-    digitButtons.forEach(button => {
-        button.classList.remove('crossed-out');
-        button.disabled = false;
-    });
-}
-
-function updateGridWithGuess() {
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-    guessCells.forEach((cell, index) => {
-        const rowIndex = Math.floor(index / maxGuessLength);
-        const cellIndex = index % maxGuessLength;
-        if (rowIndex === currentRow) {
-            cell.textContent = currentGuess[cellIndex] || '';
-            cell.classList.remove('correct', 'present', 'absent', 'flip');
-        }
-    });
-}
-
-function checkWinCondition(guess) {
-    const guessCells = guessGrid.querySelectorAll('.guessCell');
-    let score = 100 - (10 * attempts);
-    let absentDigits = new Set();
-
-    guess.split('').forEach((digit, index) => {
-        const cellIndex = currentRow * maxGuessLength + index;
-        const cell = guessCells[cellIndex];
-        
-        if (!targetNumber.includes(digit)) {
-            absentDigits.add(digit);
-        }
-
-
-        // Delay flipping and coloring
-        setTimeout(() => {
-            cell.classList.add('flip');
-            if (digit === targetNumber[index]) {
-                cell.classList.add('correct');
-                score += 5;
-            } else if (targetNumber.includes(digit)) {
-                cell.classList.add('present');
-            } else {
-                cell.classList.add('absent');
-            }
-        }, (index + 1) * 500);
-    });
-
-    setTimeout(() => {
-        digitButtons.forEach(button => {
-            if (!targetNumber.includes(button.textContent)) {
-                button.classList.add('crossed-out');
-                button.disabled = true;
-            }
-        });
-
-        if (guess === targetNumber) {
-            endGame(true, score);
-        } else if (currentRow === totalRows - 1) {
-            endGame(false, score);
-        } else {
-            currentRow++;
-            currentGuess = [];
-            updateGridWithGuess();
-        }
-        scoreDisplay.textContent = "Score: " + score;
-    }, maxGuessLength * 600);
-}
-
-function crossOutAbsentDigits(absentDigits) {
-    digitButtons.forEach(button => {
-        if (!absentDigits.has(button.textContent)) {
-            button.classList.add('crossed-out');
-            button.disabled = true;
-        }
-    });
-}
-
-function endGame(isWin, score) {
-    document.getElementById('finalScore').textContent = score;
-    
-    // Show the game over modal
-    let gameOverModal = document.getElementById('gameOverModal');
-    gameOverModal.style.display = "block";
-}
-
-// Event listener for 'Play Again' button
-document.getElementById('playAgainButton').addEventListener('click', () => {
-    gameOverModal.style.display = "none";
-    startNewGame(); // You will need to define this function or replace it with the relevant code
-});
-
-// Event listener for 'Share with a Friend' button
-document.getElementById('shareButton').addEventListener('click', () => {
-    const gameUrl = "https://numble-game.com";
-    navigator.clipboard.writeText(gameUrl).then(() => {
-        alert("Link copied to clipboard!");
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-    });
-});
-
-digitButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        if (currentGuess.length < maxGuessLength) {
-            currentGuess.push(button.textContent);
-            updateGridWithGuess();
-        }
-    });
-});
-
-document.getElementById('backButton').addEventListener('click', () => {
-    if (currentGuess.length > 0) {
-        currentGuess.pop();
-        updateGridWithGuess();
-    }
-});
-
-submitGuess.addEventListener('click', () => {
-    if (currentGuess.length === maxGuessLength) {
-        attempts++;
-        checkWinCondition(currentGuess.join(''));
-    } else {
-        alert("Please enter all 6 digits before submitting.");
-    }
-});
-
-restartGame.addEventListener('click', startNewGame);
-
-var modal = document.getElementById('myModal');
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-var gameOverModal = document.getElementById('gameOverModal');
-var spanCloseGameOver = document.getElementsByClassName("closeGameOver")[0];
-spanCloseGameOver.onclick = function() {
-    gameOverModal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal || event.target == gameOverModal) {
-        modal.style.display = "none";
-        gameOverModal.style.display = "none";
-    }
-}
-
-document.getElementById('playAgainButton').addEventListener('click', () => {
-    gameOverModal.style.display = "none";
-    startNewGame();
-});
-
-document.getElementById('closeModalButton').addEventListener('click', () => {
-    modal.style.display = "none";
-});
-
-startNewGame();
-
-
-</script>
-
+    <script src="resources/js/script.js"></script>
 </body>
 </html>
+
