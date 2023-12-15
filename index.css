@@ -24,3 +24,15 @@ body {
     background-color: #abc4ff;
     color: white;
 }
+
+#logo-img {
+    max-width: 150px; /* Default logo size */
+    margin-left: 40px;
+}
+
+@media only screen and (min-width: 1024px) {
+    #logo-img {
+        max-width: 150px; /* Larger logo on bigger screens */
+    }
+}
+
