@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numble</title>
+    <title>Gaming Hub</title>
     <link rel="stylesheet" href="index.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 </head>
 <body>
-    <header class="header-style">
-        <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
-            <span class="burger-menu-icon"></span>
-        </button>
-        <div class="logo">
-            <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
-        </div>
-    </header>
-
-    <main>
-            <a href='/numble'><button class="button">Numble</button></a>
-            <a href='/rps'><button class="button">RPS</button></a>
-        </div>   
+    <div class="main-container">
+        <header>
+            <h1>Welcome to the Gaming Hub</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a id="numble-link" href="/numble">Numble</a></li>
+                <li><a id="rps-link" href="/rps">Rock Paper Scissors</a></li>
+            </ul>
+        </nav>
+        <footer>
+            <p>&copy; 2023 Gaming Hub</p>
+        </footer>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
