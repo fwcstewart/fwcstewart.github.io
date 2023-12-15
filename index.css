@@ -38,10 +38,23 @@ body, html {
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
 }
 
 .game-card:hover {
     transform: scale(1.05);
+}
+
+.game-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.game-card:hover .game-icon {
+    transform: rotate(-10deg) scale(1.2);
 }
 
 .game-info {
@@ -70,10 +83,13 @@ body, html {
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
 }
 
 .play-btn:hover {
-    background-color: #449d44;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 footer {
@@ -89,4 +105,13 @@ footer {
 
 footer p {
     font-size: 1rem;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.bounce {
+    animation: bounce 0.5s;
 }
