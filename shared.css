@@ -142,17 +142,19 @@ button:hover {
     overflow: auto;
     padding-top: 60px;
     background-color: rgba(0,0,0,0.4);
-    color: black !important;
 }
 
 .modal-content {
     background-color: #fefefe;
-    color: black !important;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal, .modal-content h1, h2, h3, p {
+    color: black !important;
 }
 
 .close-button {
