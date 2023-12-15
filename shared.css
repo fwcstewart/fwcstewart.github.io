@@ -18,13 +18,22 @@ h1, h2, h3, p {
 
 /* Header */
 .header-style {
-    text-align: center;
-    padding: 20px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.header-style h1 {
-    font-size: 2.5rem;
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+#logo-img {
+    max-width: 150px; /* Adjust according to your preference */
+    height: auto;
 }
 
 /* Footer */
@@ -62,7 +71,61 @@ button:hover {
 
 /* Burger Menu */
 .burger-menu-button {
-    display: none;
+    display: none; /* Hidden by default */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.burger-menu-icon, .burger-menu-icon::before, .burger-menu-icon::after {
+    background-color: #fff;
+    height: 3px;
+    width: 30px;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.burger-menu-icon::before { top: -8px; }
+.burger-menu-icon::after { bottom: -8px; }
+
+/* Responsive Design for Burger Menu */
+@media screen and (max-width: 768px) {
+    .burger-menu-button {
+        display: block;
+    }
+
+    .nav-elements {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        padding: 10px 0;
+        background-color: #34495e; /* Adding background for dropdown */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-elements.is-active {
+        display: flex;
+    }
+
+    .nav-elements a {
+        text-align: center;
+        padding: 10px 0;
+        color: white;
+        text-decoration: none;
+        border: none; /* Remove borders */
+        box-sizing: border-box;
+    }
 }
 
 /* Modals */
@@ -101,3 +164,4 @@ button:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
