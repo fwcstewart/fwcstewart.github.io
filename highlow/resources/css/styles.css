@@ -1,0 +1,104 @@
+.container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+.game-section {
+    margin: 20px 0;
+}
+
+.card {
+    background-color: #e3f2fd;
+    color: blue;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 10px auto;
+    width: 200px;
+    transition: transform 0.3s ease;
+}
+
+.card span {
+    font-size: 36px;
+    font-weight: bold;
+    color: #0d47a1;
+}
+
+
+.buttons {
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 25px;
+    font-size: 18px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.guess-btn {
+    width: 100px;
+}
+
+#scoreboard {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#time-container {
+    display: none; /* Hidden by default, shown only in Time Trial mode */
+}
+
+.mode-btn {
+    background-color: #26a69a;
+    margin-bottom: 10px;
+}
+
+.mode-btn:hover {
+    background-color: #00796b;
+}
+
+.instructions {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+.back-btn {
+    border: 1px solid blue;
+    color: blue;
+    border-radius: 6px;
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+.back-btn:hover {
+    background-color: blue;
+    color: white;
+}
