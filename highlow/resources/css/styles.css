@@ -104,6 +104,23 @@
 #leaderboard-section {
     text-align: center;
     padding: var(--padding-medium);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#leaderboard-list {
+    /* Styles for the leaderboard list */
+    list-style-type: none;
+    padding: 0;
+}
+
+#leaderboard-list li {
+    /* Styles for each leaderboard entry */
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
 }
 
 #showLeaderboardBtn, .back-btn {
