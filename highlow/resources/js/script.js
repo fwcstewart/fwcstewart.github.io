@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let skipsRemaining = 1; // Number of skips available to the player
     let multiplier = 1;
 
+    // Attaching event listener for doublePointsBtn within JavaScript instead of HTML
+    const doublePointsBtn = document.getElementById("doublePointsBtn");
+    if (doublePointsBtn) {
+    doublePointsBtn.addEventListener("click", useDoublePoints);
+    } else {
+    console.error('Double Points button not found!');
+    }
+
+    // Ensure startGameBtn exists before trying to add an event listener
+    const startGameBtn = document.getElementById("startGameBtn");
+    if (startGameBtn) {
+    startGameBtn.addEventListener("click", function() {
+        // Functionality for starting the game
+        });
+    } else {
+    console.error('Start Game button not found!');
+}
+    
       function useSkip() {
         if (skipsRemaining > 0) {
             skipsRemaining--;
