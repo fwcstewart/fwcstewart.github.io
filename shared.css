@@ -263,6 +263,10 @@ button:focus {
     align-items: center;
 }
 
+.modal.active {
+    display: flex;
+}
+
 .close-button {
     color: var(--text-secondary-color);
     position: absolute;
