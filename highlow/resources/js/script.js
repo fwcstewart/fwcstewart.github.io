@@ -144,7 +144,7 @@ document.getElementById('closeLeaderboardBtn').addEventListener('click', functio
     document.getElementById('leaderboard-section').style.display = 'none';
     // Show the game mode selection screen when closing the leaderboard
     document.getElementById('game-mode-selection').style.display = 'block';
-});
+}
 
     // Generate Random Number
     function generateNumber() {
