@@ -76,7 +76,7 @@ a:hover {
 
 .nav-item {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--button-text-color);
     padding: 10px 20px;
     display: inline-block;
     margin: 0 5px;
