@@ -195,10 +195,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Back button event listener
+    
     document.getElementById("backBtn").addEventListener("click", () => {
         document.getElementById("game-interface").style.display = "none";
         document.getElementById("game-mode-selection").style.display = "block";
     });
+
+    // Assuming 'showLeaderboardBtn' is the ID of your 'Show Leaderboard' button
+    document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
+    document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
+    document.getElementById('leaderboard-section').style.display = 'none';
+    // Show any sections you hid when opening the leaderboard
+
 
     // Initialize the game
     resetGame();
