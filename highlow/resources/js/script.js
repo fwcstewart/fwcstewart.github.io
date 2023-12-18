@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM elements
+    // Game Element References
     const currentNumberDisplay = document.getElementById("currentNumber");
     const nextNumberDisplay = document.getElementById("nextNumber");
     const higherBtn = document.getElementById("higherBtn");
@@ -13,67 +13,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackElement = document.getElementById('feedback');
     const tutorialModal = document.getElementById('tutorialModal');
     const tutorialText = document.getElementById('tutorialText');
+    const nextTutorialStepBtn = document.getElementById('nextTutorialStep');
 
-    // Game variables
+    // Game State Variables
     let currentNumber, nextNumber, score = 0, streak = 0, level = 1, gameTime = 60, timer;
-    let gameMode = "classic"; // default game mode
+    let gameMode = "classic";
     let doublePoints = false;
-    let doublePointsRemaining = 1; // Start with one double point power-up
-    let skipsRemaining = 1; // Number of skips available to the player
+    let doublePointsRemaining = 1;
+    let skipsRemaining = 1;
     let multiplier = 1;
     let currentTutorialStep = 0;
 
-    // Update tutorial
-    function updateTutorial(step) {
-        tutorialModal.style.display = 'block';
+    // Tutorial Steps
+    const tutorialSteps = [
+        "This is the game area. Here you'll see the current number and make your guesses.",
+        "Click 'Higher' or 'Lower' to make your guess based on whether you think the next number will be higher or lower.",
+        "Your score and level are shown here. Your score increases with each correct guess.",
+        "Use power-ups like 'Skip' or 'Double Points' to help you advance in the game."
+    ];
 
-        switch (step) {
-            case 0:
-                tutorialText.innerText = "This is the game area. Here you'll see the current number and make your guesses.";
-                // Position the modal near the game area
-                break;
-            case 1:
-                tutorialText.innerText = "Click 'Higher' or 'Lower' to make your guess based on whether you think the next number will be higher or lower.";
-                // Position the modal near the buttons
-                break;
-            case 2:
-                tutorialText.innerText = "Your score and level are shown here. Your score increases with each correct guess.";
-                // Position the modal near the score display
-                break;
-            case 3:
-                tutorialText.innerText = "Use power-ups like 'Skip' or 'Double Points' to help you advance in the game.";
-                // Position the modal near the power-ups
-                break;
-            default:
-                tutorialModal.style.display = 'none';
-                return;
+    // Update Tutorial
+    function updateTutorial(step) {
+        if (step < tutorialSteps.length) {
+            tutorialText.innerText = tutorialSteps[step];
+            tutorialModal.style.display = 'block';
+        } else {
+            tutorialModal.style.display = 'none';
         }
     }
 
-    // Event listeners for tutorial
-    document.getElementById('nextTutorialStep').addEventListener('click', function() {
+    // Event Listener for Next Tutorial Step
+    nextTutorialStepBtn.addEventListener('click', function() {
         currentTutorialStep++;
         updateTutorial(currentTutorialStep);
     });
 
-    document.getElementById('startTutorialBtn').addEventListener('click', function() {
-        tutorialModal.style.display = 'none';
-        currentTutorialStep = 0;
-        updateTutorial(currentTutorialStep);
-    });
-
-    document.getElementById('skipTutorialBtn').addEventListener('click', function() {
-        tutorialModal.style.display = 'none';
-    });
-
-    // Double Points Button
+    // Double Points Button Event
     if (doublePointsBtn) {
         doublePointsBtn.addEventListener("click", useDoublePoints);
-    } else {
-        console.error('Double Points button not found!');
     }
 
-    // Use Skip Power-Up
+    // Use Skip Function
     function useSkip() {
         if (skipsRemaining > 0) {
             skipsRemaining--;
@@ -89,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         levelDisplay.textContent = level;
     }
 
-    // Use Double Points Power-Up
+    // Use Double Points Function
     function useDoublePoints() {
         if (doublePointsRemaining > 0) {
             doublePoints = true;
@@ -107,10 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateScore(isCorrect) {
         if (isCorrect) {
             score += 1 * multiplier * (doublePoints ? 2 : 1);
-            doublePoints = false; // Reset double points after use
-            if (doublePoints) {
-                showFeedback(true, 'Double Points Applied!');
-            }
+            doublePoints = false;
             updateScoreboard();
         }
     }
@@ -124,27 +101,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Show Leaderboard
-function showLeaderboard() {
-    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    const leaderboardList = document.getElementById('leaderboard-list');
-    leaderboardList.innerHTML = '';
-    leaderboard.forEach(entry => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${entry.name}: ${entry.score}`;
-        leaderboardList.appendChild(listItem);
-    });
-    document.getElementById('leaderboard-section').style.display = 'block';
-    // Hide game interface and mode selection
-    document.getElementById('game-interface').style.display = 'none';
-    document.getElementById('game-mode-selection').style.display = 'none';
-}
+    function showLeaderboard() {
+        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        const leaderboardList = document.getElementById('leaderboard-list');
+        leaderboardList.innerHTML = '';
+        leaderboard.forEach(entry => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${entry.name}: ${entry.score}`;
+            leaderboardList.appendChild(listItem);
+        });
+        document.getElementById('leaderboard-section').style.display = 'block';
+        document.getElementById('game-interface').style.display = 'none';
+        document.getElementById('game-mode-selection').style.display = 'none';
+    }
 
-// Close Leaderboard and Return to Start Screen
-document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
-    document.getElementById('leaderboard-section').style.display = 'none';
-    // Show the game mode selection screen when closing the leaderboard
-    document.getElementById('game-mode-selection').style.display = 'block';
-}
+    // Close Leaderboard and Return to Start Screen
+    document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
+        document.getElementById('leaderboard-section').style.display = 'none';
+        document.getElementById('game-mode-selection').style.display = 'block';
+    });
+
+    // Show Feedback
+    function showFeedback(isCorrect, message = '') {
+        feedbackElement.textContent = message || (isCorrect ? 'Correct!' : 'Wrong!');
+        feedbackElement.style.color = isCorrect ? 'green' : 'red';
+        setTimeout(() => {
+            feedbackElement.textContent = '';
+        }, 2000);
+    }
 
     // Generate Random Number
     function generateNumber() {
@@ -228,7 +212,7 @@ document.getElementById('closeLeaderboardBtn').addEventListener('click', functio
         resetGame();
     }
 
-    // Event Listeners
+    // Event Listeners for Game Control
     higherBtn.addEventListener("click", () => handleGuess(true));
     lowerBtn.addEventListener("click", () => handleGuess(false));
     gameModeButtons.forEach(btn => {
@@ -245,11 +229,6 @@ document.getElementById('closeLeaderboardBtn').addEventListener('click', functio
         document.getElementById("game-mode-selection").style.display = "block";
     });
 
-    document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
-    document.getElementById('closeLeaderboardBtn').addEventListener('click', () => {
-        document.getElementById('leaderboard-section').style.display = 'none';
-    });
-
-    // Initialize the game
-    resetGame();
+    // Initialize the tutorial
+    updateTutorial(currentTutorialStep);
 });
