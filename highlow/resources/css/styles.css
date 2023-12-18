@@ -209,7 +209,7 @@
     color: red;
 }
 
-#score, #level {
+#score, #level, #streak {
     font-size: 2rem;
     font-weight: bold;
 }
