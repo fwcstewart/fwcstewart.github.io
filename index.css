@@ -1,19 +1,20 @@
 /* Homepage specific styles */
 
 /* Content Layout */
+/* Content Layout */
 .content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px; /* Adjust as needed */
-    padding: 20px; /* Adjust as needed */
+    gap: 20px;
+    padding: 20px;
 }
 
 /* Game Cards */
 .game-card {
-    background-color: #fff; /* Adjust color as needed */
-    color: #333; /* Adjust color as needed */
+    background-color: #fff;
+    color: #333;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -48,7 +49,7 @@
 }
 
 .play-btn {
-    background-color: #4CAF50; /* Adjust color as needed */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -61,10 +62,27 @@
     background-color: #45a049;
 }
 
-/* Footer Styles */
-.footer {
-    background-color: #333; /* Adjust color as needed */
-    color: white;
-    text-align: center;
-    padding: 20px 0;
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .game-card {
+        width: auto; /* Full width for smaller screens */
+        margin: 10px;
+    }
+
+    .game-icon {
+        font-size: 3rem; /* Slightly smaller icons for smaller screens */
+    }
+
+    .game-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .game-card p {
+        font-size: 0.9rem;
+    }
 }
