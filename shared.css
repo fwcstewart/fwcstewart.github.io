@@ -5,13 +5,14 @@
     --header-footer-bg-color: #34495e;
     --button-bg-color: #5cb85c;
     --button-hover-bg-color: #4CAF50;
+    --button-focus-bg-color: #449d44; /* New focus background color */
     --button-text-color: #fff;
     --modal-bg-color: #fefefe;
     --modal-overlay-color: rgba(0, 0, 0, 0.4);
     --link-hover-color: #ccdbfd;
     --border-radius: 15px;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    --font-primary: 'Arial', sans-serif;
+    --font-primary: 'DM Sans', sans-serif; /* Updated primary font */
     --font-size-normal: 1rem;
     --font-size-large: 1.8rem;
     --margin-small: 10px;
@@ -35,12 +36,7 @@ body, html {
     background-color: var(--primary-bg-color);
     color: var(--text-color);
     text-align: center;
-}
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  justify-content: center;
-  align-items: center;
+    font-family: var(--font-primary);
 }
 
 h1, h2, h3, p {
@@ -76,9 +72,8 @@ a:hover {
     height: auto;
 }
 
-/* Navigation */
 .nav-elements {
-    display: flex; /* or other display styles as needed */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -112,6 +107,11 @@ button:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     background-color: var(--button-hover-bg-color);
+}
+
+button:focus {
+    background-color: var(--button-focus-bg-color);
+    outline: none; /* Removing default focus outline */
 }
 
 footer {
@@ -218,12 +218,3 @@ footer p {
     cursor: pointer;
 }
 
-@media (orientation: landscape) {
-    /* Adjustments for landscape orientation */
-}
-
-@media (max-width: 320px) {
-    /* Adjustments for very small screens */
-}
-
-/* Additional Responsive Adjustments as needed */
