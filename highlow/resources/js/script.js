@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
         leaderboard.push(entry);
         leaderboard.sort((a, b) => b.score - a.score); // Ensure you sort by the score property
-        localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 entries
+        localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 3))); // Keep top 3 entries
     }
 
      function showLeaderboard() {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         leaderboardList.innerHTML = ''; // Clear existing leaderboard entries
         leaderboard.forEach((entry) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${entry.name}: ${entry.score}`; // Display the name and score
+            listItem.textContent = `${entry.name}: ${entry.score}: ${gameMode}`; // Display the name and score
             leaderboardList.appendChild(listItem);
         });
         document.getElementById('leaderboard-section').style.display = 'block';
