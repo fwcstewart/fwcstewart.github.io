@@ -247,6 +247,7 @@ button:focus {
 .modal {
 	display: none;
 	justify-content: center;
+	align-items: center;
     	padding: 1rem 3rem;
 	background: white;
 	max-width: 400px;
@@ -264,7 +265,10 @@ button:focus {
 	.x {
 		filter: grayscale(1);
 		border: none;
-		background: none;
+		background: url(https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=879&q=80)
+		no-repeat center center;
+		filter: blur;
+		background-size: cover;
 		position: absolute;
 		top: 15px;
 		right: 10px;
