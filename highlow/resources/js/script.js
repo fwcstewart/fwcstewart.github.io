@@ -59,15 +59,16 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.levelDisplay.textContent = gameState.level;
     }
 
-    function updateGame() {
-        gameState.currentNumber = generateNumber();
-        gameState.nextNumber = generateNumber();
-        elements.currentNumberDisplay.textContent = gameState.currentNumber;
-        elements.nextNumberDisplay.textContent = "?";
-        updateScoreboard();
-        elements.timeLeftDisplay.textContent = gameState.gameTime;
-        document.getElementById('skipsRemaining').textContent = gameState.skipsRemaining;
-    }
+    // Update Game
+function updateGame() {
+    gameState.currentNumber = generateNumber();
+    gameState.nextNumber = generateNumber();
+    elements.currentNumberDisplay.textContent = gameState.currentNumber;
+    elements.nextNumberDisplay.textContent = "?";
+    updateScoreboard();
+    elements.timeLeftDisplay.textContent = gameState.gameTime;
+    elements.skipsRemaining.textContent = gameState.skipsRemaining; // Using elements.skipsRemaining
+}
 
     // Handle Guess
 function handleGuess(isHigher) {
@@ -134,44 +135,46 @@ function updateLeaderboard(entry) {
 }
     
     // Game Over
-    function gameOver() {
-        let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
-        if (playerName) {
-            const entry = { name: playerName, score: score };
-            updateLeaderboard(entry);
-        }
-        resetGame();
+function gameOver() {
+    let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
+    if (playerName) {
+        const entry = { name: playerName, score: gameState.score };
+        updateLeaderboard(entry);
     }
+    resetGame();
+}
+
 
     // Show Feedback
-    function showFeedback(isCorrect, message = '') {
-        feedbackElement.textContent = message || (isCorrect ? 'Correct!' : 'Wrong!');
-        feedbackElement.style.color = isCorrect ? 'green' : 'red';
-        setTimeout(() => {
-            feedbackElement.textContent = '';
-        }, 2000);
-    }
+function showFeedback(isCorrect, message = '') {
+    elements.feedbackElement.textContent = message || (isCorrect ? 'Correct!' : 'Wrong!');
+    elements.feedbackElement.style.color = isCorrect ? 'green' : 'red';
+    setTimeout(() => {
+        elements.feedbackElement.textContent = '';
+    }, 2000);
+}
 
       // Attaching all event listeners
-    attachEventListeners();
+function attachEventListeners() {
+    elements.nextTutorialStepBtn.addEventListener('click', () => {
+        gameState.currentTutorialStep++;
+        updateTutorial(gameState.currentTutorialStep);
+    });
 
-    function attachEventListeners() {
-        elements.nextTutorialStepBtn.addEventListener('click', () => {
-            gameState.currentTutorialStep++;
-            updateTutorial(gameState.currentTutorialStep);
-        });
+    elements.doublePointsBtn.addEventListener("click", useDoublePoints);
+    elements.closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
+    elements.backBtn.addEventListener("click", backToMenu);
 
-        elements.doublePointsBtn.addEventListener("click", useDoublePoints);
-        elements.closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
-        elements.backBtn.addEventListener("click", backToMenu);
+    elements.gameModeButtons.forEach(btn => {
+        btn.addEventListener("click", () => selectGameMode(btn));
+    });
 
-        elements.gameModeButtons.forEach(btn => {
-            btn.addEventListener("click", () => selectGameMode(btn));
-        });
+    elements.higherBtn.addEventListener("click", () => handleGuess(true));
+    elements.lowerBtn.addEventListener("click", () => handleGuess(false));
+}
 
-        elements.higherBtn.addEventListener("click", () => handleGuess(true));
-        elements.lowerBtn.addEventListener("click", () => handleGuess(false));
-    }
+// Call attachEventListeners outside its definition
+attachEventListeners();
 
     function selectGameMode(btn) {
         const mode = btn.getAttribute("data-mode");
