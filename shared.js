@@ -27,10 +27,3 @@ document.addEventListener("DOMContentLoaded", function() {
         navElement.appendChild(a);
     });
 });
-
-// To show the modal
-document.getElementById("Modal").classList.add('active');
-
-// To hide the modal
-document.getElementById("Modal").classList.remove('active');
-
