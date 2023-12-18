@@ -125,11 +125,6 @@ footer {
 }
 
 
-a.menu:hover {
-  background-color:yellow;
-  font-size:20px;
-}
-
 footer p {
     font-size: var(--font-size-normal);
 }
