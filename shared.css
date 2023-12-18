@@ -11,6 +11,13 @@
     --link-hover-color: #ccdbfd;
     --border-radius: 15px;
     --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --font-primary: 'Arial', sans-serif;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.8rem;
+    --margin-small: 10px;
+    --margin-medium: 20px;
+    --padding-small: 10px;
+    --padding-medium: 20px;
 }
 
 * {
@@ -21,13 +28,12 @@
 
 body, html {
     height: 100%;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-primary);
     background-color: var(--primary-bg-color);
     color: var(--text-color);
     text-align: center;
 }
 
-/* Typography */
 h1, h2, h3, p {
     color: var(--text-color);
 }
@@ -41,10 +47,9 @@ a:hover {
     color: var(--link-hover-color);
 }
 
-/* Header */
 .header-style {
     width: 100%;
-    padding: 10px 20px;
+    padding: var(--padding-small) var(--margin-medium);
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: space-between;
@@ -62,19 +67,17 @@ a:hover {
     height: auto;
 }
 
-/* Navigation */
 .nav-item {
     text-decoration: none;
-    padding: 0px 20px;
+    padding: 0 var(--margin-medium);
 }
 
-/* Buttons */
 button {
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
     border: none;
-    padding: 10px 30px;
-    font-size: 1rem;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
     border-radius: var(--border-radius);
     cursor: pointer;
     box-shadow: var(--box-shadow);
@@ -87,32 +90,30 @@ button:hover {
     background-color: var(--button-hover-bg-color);
 }
 
-/* Footer */
 footer {
     color: var(--button-text-color);
     text-align: center;
-    padding: 10px;
+    padding: var(--padding-small);
     position: relative;
     width: 100%;
-    top: 20px;
+    top: var(--margin-small);
     box-shadow: var(--box-shadow);
 }
 
 footer p {
-    font-size: 1rem;
+    font-size: var(--font-size-normal);
 }
 
-/* Burger Menu */
 .burger-menu-button {
-    display: none; /* Hidden by default */
+    display: none;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    padding: var(--padding-small);
     z-index: 100;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: var(--margin-small);
+    right: var(--margin-small);
 }
 
 .burger-menu-icon, .burger-menu-icon::before, .burger-menu-icon::after {
@@ -128,7 +129,6 @@ footer p {
 .burger-menu-icon::before { top: -8px; }
 .burger-menu-icon::after { bottom: -8px; }
 
-/* Responsive Design for Burger Menu */
 @media screen and (max-width: 768px) {
     .burger-menu-button {
         display: block;
@@ -141,7 +141,7 @@ footer p {
         left: 0;
         width: 100%;
         flex-direction: column;
-        padding: 10px 0px;
+        padding: var(--padding-small) 0;
         background-color: var(--header-footer-bg-color);
         box-shadow: var(--box-shadow);
         border-radius: 0 0 10px 10px;
@@ -153,12 +153,11 @@ footer p {
 
     .nav-elements a {
         text-align: center;
-        padding: 10px 0;
+        padding: var(--padding-small) 0;
         color: var(--button-text-color);
     }
 }
 
-/* Modals */
 .modal {
     display: none;
     position: fixed;
@@ -175,7 +174,7 @@ footer p {
 .modal-content {
     background-color: var(--modal-bg-color);
     margin: 5% auto;
-    padding: 20px;
+    padding: var(--padding-medium);
     border: 1px solid #888;
     width: 80%;
     box-shadow: var(--box-shadow);
@@ -204,4 +203,3 @@ footer p {
 }
 
 /* Additional Responsive Adjustments as needed */
-
