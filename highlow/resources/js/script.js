@@ -24,16 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Double Points button not found!');
     }
 
-    // Ensure startGameBtn exists before trying to add an event listener
-    const startGameBtn = document.getElementById("startGameBtn");
-    if (startGameBtn) {
-    startGameBtn.addEventListener("click", function() {
-        // Functionality for starting the game
-        });
-    } else {
-    console.error('Start Game button not found!');
-}
-    
       function useSkip() {
         if (skipsRemaining > 0) {
             skipsRemaining--;
