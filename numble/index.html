@@ -64,22 +64,26 @@
         <button id="restartGame" class="mb-2">Restart</button>
 
         
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Welcome to Numble!</h2>
-                <h3>Here are some instructions to get you started:</h3>
-                <p>Guess the 6-digit number.</p>
-                <p>You have six tries to guess it right.</p>
-                <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
-                <h3>Difficulty Levels</h3>
-                <p>Easy: The target number has no repeating digits.</p>
-                <p>Medium: The target number can have up to two repeating digits.</p>
-                <p>Hard: The target number can have multiple repeating digits.</p>  
-                <button id="closeModalButton">Let's Play!</button>
-            </div>
-        </div>
+       <!-- The overlay with blur effect -->
+<div class="overlay"></div>
+
+<!-- The modal container -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Welcome to Numble!</h2>
+        <h3>Here are some instructions to get you started:</h3>
+        <p>Guess the 6-digit number.</p>
+        <p>You have six tries to guess it right.</p>
+        <p>After each guess, the colour of the tiles will change to show how close your guess was to the number.</p>
+        <h3>Difficulty Levels</h3>
+        <p>Easy: The target number has no repeating digits.</p>
+        <p>Medium: The target number can have up to two repeating digits.</p>
+        <p>Hard: The target number can have multiple repeating digits.</p>
+        <button id="closeModalButton">Let's Play!</button>
+    </div>
+</div>
 
         <div id="gameOverModal" class="modal">
             <!-- Modal content -->
