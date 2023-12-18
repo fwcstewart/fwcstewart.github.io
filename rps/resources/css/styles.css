@@ -64,7 +64,8 @@ body.minimalist .game-mode:hover,
 body.minimalist #score,
 body.minimalist .game-mode,
 body.minimalist #game-history,
-body.minimalist #history-list {
+body.minimalist #history-list
+body.minimalist #result {
     background-color: #e0e0e0;
     color: #000 !important;
     border-color: #333;
