@@ -2,18 +2,18 @@
 
 /* Score Display */
 #scoreDisplay {
-    margin-bottom: var(--margin-small);
-    font-size: var(--font-size-normal);
-    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #fff; /* Specific color for score display */
 }
 
 /* Guess Grid */
 #guessGrid {
-    margin: var(--margin-medium) auto;
+    margin: 20px auto;
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 6 columns */
     grid-template-rows: repeat(6, 1fr); /* 6 rows */
-    gap: var(--margin-small);
+    gap: 5px;
     width: 90%;
     max-width: 800px;
 }
@@ -22,11 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--padding-small);
-    background-color: var(--numble-cell-bg-color);
-    color: var(--numble-cell-color);
-    border: 1px solid var(--numble-cell-border-color);
-    font-size: var(--numble-cell-font-size);
+    padding: 10px;
+    background-color: #abc4ff; /* Specific background color for cells */
+    color: white; /* Specific text color for cells */
+    border: 1px solid white; /* Specific border color for cells */
+    font-size: 20px;
     text-align: center;
     height: 40px;
     transform-style: preserve-3d;
@@ -39,7 +39,14 @@
 }
 
 @keyframes flipIn {
-    /* Define the flipIn animation */
+    0% {
+        transform: rotateY(0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: rotateY(180deg);
+        opacity: 1;
+    }
 }
 
 /* Cell States */
@@ -55,7 +62,7 @@
 
 /* Number Buttons */
 #digitButtons { 
-    margin: var(--margin-medium) auto;
+    margin: 20px auto;
     width: 70%;
     display: flex;
     flex-wrap: wrap;
@@ -63,70 +70,68 @@
 }
 
 .digitButton {
-    padding: var(--padding-small) var(--padding-medium);
-    margin: var(--margin-small);
-    font-size: var(--numble-button-font-size);
-    border: 2px solid var(--numble-button-border-color);
-    background-color: var(--numble-button-bg-color);
-    color: var(--numble-button-color);
-    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 18px;
+    border: 2px solid white;
+    background-color: #f8f8f8; /* Specific background color for digit buttons */
+    color: #333; /* Specific text color for digit buttons */
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: var(--numble-digit-button-width);
+    width: 70px; /* Specific width for digit buttons */
 }
 
 .digitButton:hover {
-    background-color: var(--numble-button-hover-bg-color);
+    background-color: #ccdbfd; /* Specific hover color for digit buttons */
 }
 
 /* Submit and Restart Buttons */
 #submitGuess, #restartGame {
-    padding: var(--padding-small) var(--padding-medium);
-    margin: var(--margin-small);
-    font-size: var(--font-size-normal);
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
     cursor: pointer;
     border: 1px solid white;
-    border-radius: var(--border-radius);
-    background-color: #C1E1C1;
+    border-radius: 6px;
+    background-color: #C1E1C1; /* Specific background color for control buttons */
     color: black;
 }
 
-#submitGuess:hover { background-color: var(--primary-bg-color); }
+#submitGuess:hover { background-color: #abc4ff; /* Specific hover color for submit button */ }
 
 /* Difficulty Dropdown */
 #difficulty {
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-size-normal);
+    padding: 10px 15px;
+    font-size: 16px;
     border: 2px solid white;
-    border-radius: var(--border-radius);
+    border-radius: 5px;
     cursor: pointer;
-    margin-bottom: var(--margin-medium);
-    background-color: var(--modal-bg-color);
-    color: var(--text-color);
+    margin-bottom: 20px;
+    background-color: #fff; /* Specific background color for dropdown */
+    color: #333; /* Specific text color for dropdown */
 }
 
 /* Responsive Adjustments */
 @media (min-width: 600px) {
     .digitButton, #difficulty, #backButton {
-        font-size: var(--font-size-normal);
-        padding: var(--padding-medium);
-        margin: var(--margin-small);
+        font-size: 18px;
+        padding: 15px;
+        margin: 5px;
     }
 }
 
 @media (min-width: 768px) {
     .digitButton, #difficulty, #backButton {
-        font-size: var(--font-size-large);
-        padding: var(--padding-medium);
-        margin: var(--margin-medium);
+        font-size: 20px;
+        padding: 10px;
+        margin: 6px;
     }
 }
 
 @media (max-width: 320px) {
     .digitButton, #difficulty, #backButton {
-        font-size: smaller;
-        padding: var(--padding-small);
+        font-size: 14px;
+        padding: 8px;
     }
 }
-
-/* Additional specific styles as needed */
