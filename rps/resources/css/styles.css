@@ -48,6 +48,7 @@
 /* Countdown Timer */
 #countdown {
     font-size: 3em;
+    max-width: 800px;
     color: white;
     margin-top: 10px;
     padding: 10px;
