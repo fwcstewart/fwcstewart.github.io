@@ -49,7 +49,16 @@
                 <span id="nextNumber">?</span>
             </div>
             <button id="backBtn" class="btn back-btn">Back to Menu</button>
-        </div>
+     
+
+         <div class="buttons">
+        <button id="skipBtn" class="btn powerup-btn" onclick="useSkip()">Skip (Remaining: <span id="skipsRemaining">1</span>)</button>
+        <button id="doublePointsBtn" class="btn powerup-btn" onclick="useDoublePoints()">Double Points</button>
+    </div>
+        
+        <p id="feedback" class="feedback"></p>
+
+        </div>   
 
         <!-- Scoreboard -->
         <div id="scoreboard" class="game-section" style="display: none;">
@@ -58,6 +67,11 @@
             <p>Level: <span id="level">1</span></p>
             <p id="time-container" style="display: none;">Time Left: <span id="timeLeft">0</span></p>
         </div>
+
+        <div id="leaderboard-section" class="game-section" style="display: none;">
+    <button class="btn" onclick="showLeaderboard()">Show Leaderboard</button>
+    </div>
+        
     </div>
     <script src="resources/js/script.js"></script>
   <script src="../shared.js"></script>
