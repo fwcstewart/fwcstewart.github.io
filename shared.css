@@ -232,69 +232,76 @@ button:focus {
 }
 
 .modal {
-	display: none;
-    	position: fixed;
-    	z-index: 1;
-  	left: 0;
-  	top: 0;
-   	width: 100%;
-  	height: 100%;
-    	padding: 1rem 3rem;
-	background-color: white !important;
-	max-width: 400px;
-	padding-top: 2rem;
-	border-radius: 20px;
-	border: 0;
-	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
-	animation: fadeIn 1s ease both;
-	&::backdrop {
-		animation: fadeIn 1s ease both;
-		background: rgb(255 255 255 / 40%);
-		z-index: 2;
-		backdrop-filter: blur(20px);
-	}
-	.x {
-		filter: grayscale(1);
-		border: none;
-		background-color: none;
-		background-size: cover;
-		position: absolute;
-		top: 15px;
-		right: 10px;
-		transition: ease filter, transform 0.3s;
-		cursor: pointer;
-		transform-origin: center;
-		&:hover {
-			filter: grayscale(0);
-			transform: scale(1.1);
-		}
-	}
-	h1, h2, h3 {
-		font-weight: 600;
-		font-size: 1.5rem;
-		padding-bottom: 1rem;
-		color: black !important;
-	}
-	p {
-		font-size: 1rem;
-		line-height: 1.3rem;
-		padding: 0.5rem 0;
-		color: black !important;
-		a {
-			&:visited {
-				color: black !important;
-			}
-		}
-	}
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    padding: 1rem 3rem;
+    background-color: white !important;
+    padding-top: 2rem;
+    border-radius: 20px;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+    animation: fadeIn 1s ease both;
+    backdrop-filter: blur(10px); /* Increased backdrop blur */
+}
+
+.modal::backdrop {
+    animation: fadeIn 1s ease both;
+    background: rgb(255 255 255 / 40%);
+    z-index: 2;
+    backdrop-filter: blur(10px); /* Increased backdrop blur */
+}
+
+.x {
+    filter: grayscale(1);
+    border: none;
+    background-color: none;
+    background-size: cover;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    transition: ease filter, transform 0.3s;
+    cursor: pointer;
+    transform-origin: center;
+}
+
+.x:hover {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+.modal h1,
+.modal h2,
+.modal h3 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+    color: black !important;
+}
+
+.modal p {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    padding: 0.5rem 0;
+    color: black !important;
+}
+
+.modal p a:visited {
+    color: black !important;
 }
 
 @keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .close-button {
