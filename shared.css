@@ -39,12 +39,8 @@ body, html {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  overflow-x: hidden;
-  padding: 20px;
 }
 
 h1, h2, h3, p {
