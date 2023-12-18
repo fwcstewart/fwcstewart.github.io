@@ -10,6 +10,57 @@ const gameModeButtons = document.querySelectorAll(".mode-btn");
 
 let currentNumber, nextNumber, score = 0, streak = 0, level = 1, gameTime = 60, timer;
 let gameMode = "classic"; // default game mode
+let doublePoints = false;
+let skipsRemaining = 1; // Number of skips available to the player
+let multiplier = 1;
+
+function useSkip() {
+    if (skipsRemaining > 0) {
+        skipsRemaining--;
+        updateGame();
+    }
+}
+
+function useDoublePoints() {
+    doublePoints = true;
+}
+
+function updateMultiplier(isCorrect) {
+    if (isCorrect) {
+        multiplier++;
+    } else {
+        multiplier = 1; // Reset on incorrect guess
+    }
+}
+
+function updateScore(isCorrect) {
+    if (isCorrect) {
+        score += 1 * multiplier * (doublePoints ? 2 : 1);
+        doublePoints = false; // Reset double points after use
+    }
+}
+
+function updateLeaderboard(newScore) {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    leaderboard.push(newScore);
+    leaderboard.sort((a, b) => b - a); // Sort in descending order
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 scores
+}
+
+function showLeaderboard() {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    alert("Leaderboard:\n" + leaderboard.join("\n"));
+}
+
+function showFeedback(isCorrect) {
+    const feedbackElement = document.getElementById('feedback');
+    feedbackElement.textContent = isCorrect ? 'Correct!' : 'Wrong!';
+    feedbackElement.style.color = isCorrect ? 'green' : 'red';
+
+    setTimeout(() => {
+        feedbackElement.textContent = '';
+    }, 2000);
+}
 
 function generateNumber() {
     return Math.floor(Math.random() * (10 * level)) + 1;
