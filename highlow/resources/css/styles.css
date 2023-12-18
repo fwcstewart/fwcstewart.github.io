@@ -1,3 +1,5 @@
+/* Styles specific to the Higher or Lower Game */
+
 .container {
     background-color: var(--modal-bg-color);
     padding: var(--padding-medium);
@@ -7,6 +9,7 @@
     max-width: 600px;
     margin: 50px auto;
     text-align: center;
+    animation: fadeIn 0.5s ease;
 }
 
 .game-section {
@@ -16,14 +19,15 @@
 
 .card {
     background-color: #e3f2fd;
-    color: #0d47a1;
     padding: var(--padding-small);
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-    border-radius: 20px;
+    border: none;
+    border-radius: var(--border-radius);
     margin: var(--margin-small) auto;
+    transition: transform 0.3s ease;
     font-size: 36px;
     font-weight: bold;
-    transition: transform 0.3s ease;
+    color: #0d47a1;
 }
 
 .buttons {
@@ -35,10 +39,21 @@
 .guess-btn {
     width: 100px;
     margin: 0 var(--margin-small);
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border-radius: var(--border-radius);
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
+    transition: background-color 0.3s;
+}
+
+.guess-btn:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-text-color);
 }
 
 #scoreboard {
-    display: none;
+    display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: #f1f1f1;
@@ -61,20 +76,26 @@
 }
 
 .back-btn {
-    border: 1px solid blue;
-    color: blue;
+    background-color: #6c7ae0;
+    color: white;
     border-radius: var(--border-radius);
-    background-color: transparent;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
+    transition: background-color 0.3s;
 }
 
 .back-btn:hover {
-    background-color: blue;
-    color: white;
+    background-color: #5a61bf;
 }
 
 .powerup-btn {
-    margin-bottom: var(--margin-small);
     background-color: #f0ad4e;
+    color: white;
+    border-radius: var(--border-radius);
+    padding: var(--padding-small) var(--padding-medium);
+    margin: 0 var(--margin-small);
+    font-size: var(--font-size-normal);
+    transition: background-color 0.3s;
 }
 
 .powerup-btn:hover {
@@ -107,12 +128,18 @@
     border-bottom: 1px solid #ccc;
 }
 
-#showLeaderboardBtn, .back-btn {
-    background-image: linear-gradient(to bottom, #d9534f 0%, #c9302c 100%);
+#showLeaderboardBtn, #closeLeaderboardBtn {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border-radius: var(--border-radius);
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
+    transition: background-color 0.3s;
 }
 
-#showLeaderboardBtn:hover, .back-btn:hover {
-    background-image: linear-gradient(to bottom, #c9302c 0%, #d9534f 100%);
+#showLeaderboardBtn:hover, #closeLeaderboardBtn:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-text-color);
 }
 
 #currentNumber, #nextNumber {
@@ -120,99 +147,25 @@
     font-weight: bold;
 }
 
-#higherBtn, #lowerBtn {
-    background-image: linear-gradient(to bottom, #5bc0de 0%, #31b0d5 100%);
+/* FontAwesome icon styles */
+.powerup-btn i {
+    margin-right: 5px;
 }
 
-#higherBtn:hover, #lowerBtn:hover {
-    background-image: linear-gradient(to bottom, #31b0d5 0%, #5bc0de 100%);
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-#skipBtn, #doublePointsBtn {
-    background-image: linear-gradient(to bottom, #f0ad4e 0%, #ec971f 100%);
-}
-
-#skipBtn:hover, #doublePointsBtn:hover {
-    background-image: linear-gradient(to bottom, #ec971f 0%, #f0ad4e 100%);
-}
-
-.modal-overlay {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
-}
-
-.card-flip {
-    animation: flip 0.6s;
-}
-
-@keyframes flip {
-    from {
-        transform: rotateY(0);
+/* Responsive design */
+@media (max-width: 768px) {
+    .guess-btn, .powerup-btn, .back-btn {
+        width: auto; /* Adjust button width for smaller screens */
     }
-    to {
-        transform: rotateY(180deg);
+
+    .buttons {
+        flex-direction: column;
     }
-}
-
-.card-glow {
-    animation: glow 0.6s alternate infinite;
-}
-
-@keyframes glow {
-    from {
-        box-shadow: 0 0 10px var(--button-bg-color);
-    }
-    to {
-        box-shadow: 0 0 20px var(--button-hover-bg-color);
-    }
-}
-
-.correct-guess {
-    color: green;
-}
-
-.wrong-guess {
-    color: red;
-}
-
-#score, #level, #streak {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.tutorial-modal {
-    display: none;
-    position: fixed;
-    z-index: 20;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-.tutorial-content p {
-    margin-bottom: 20px;
 }
 
