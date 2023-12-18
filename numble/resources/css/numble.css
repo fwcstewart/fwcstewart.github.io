@@ -1,44 +1,28 @@
 /* Numble Game Specific Styles */
 
-:root {
-    /* Define Numble-specific color and size variables */
-    --numble-score-color: #fff;
-    --numble-cell-bg-color: #abc4ff;
-    --numble-cell-color: white;
-    --numble-cell-border-color: white;
-    --numble-button-bg-color: #f8f8f8;
-    --numble-button-hover-bg-color: #ccdbfd;
-    --numble-button-color: #333;
-    --numble-button-border-color: #ffffff;
-    --numble-digit-button-width: 70px;
-    --numble-grid-gap: 5px;
-    --numble-cell-font-size: 20px;
-    --numble-button-font-size: 18px;
-}
-
 /* Score Display */
 #scoreDisplay {
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: var(--numble-score-color);
+    margin-bottom: var(--margin-small);
+    font-size: var(--font-size-normal);
+    color: var(--text-color);
 }
 
 /* Guess Grid */
 #guessGrid {
-    margin: 20px auto;
+    margin: var(--margin-medium) auto;
     display: grid;
     grid-template-columns: repeat(6, 1fr); /* 6 columns */
     grid-template-rows: repeat(6, 1fr); /* 6 rows */
-    gap: var(--numble-grid-gap);
+    gap: var(--margin-small);
     width: 90%;
-    max-width: 800px; /* Limit max width */
+    max-width: 800px;
 }
 
 .guessCell {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: var(--padding-small);
     background-color: var(--numble-cell-bg-color);
     color: var(--numble-cell-color);
     border: 1px solid var(--numble-cell-border-color);
@@ -71,7 +55,7 @@
 
 /* Number Buttons */
 #digitButtons { 
-    margin: 20px auto;
+    margin: var(--margin-medium) auto;
     width: 70%;
     display: flex;
     flex-wrap: wrap;
@@ -79,13 +63,13 @@
 }
 
 .digitButton {
-    padding: 10px 15px;
-    margin: 10px;
+    padding: var(--padding-small) var(--padding-medium);
+    margin: var(--margin-small);
     font-size: var(--numble-button-font-size);
     border: 2px solid var(--numble-button-border-color);
     background-color: var(--numble-button-bg-color);
     color: var(--numble-button-color);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: var(--numble-digit-button-width);
@@ -97,54 +81,52 @@
 
 /* Submit and Restart Buttons */
 #submitGuess, #restartGame {
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 16px;
+    padding: var(--padding-small) var(--padding-medium);
+    margin: var(--margin-small);
+    font-size: var(--font-size-normal);
     cursor: pointer;
     border: 1px solid white;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     background-color: #C1E1C1;
     color: black;
 }
 
-#submitGuess:hover { background-color: #abc4ff; }
+#submitGuess:hover { background-color: var(--primary-bg-color); }
 
 /* Difficulty Dropdown */
 #difficulty {
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
     border: 2px solid white;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    margin-bottom: 20px;
-    background-color: #fff;
-    color: #333;
+    margin-bottom: var(--margin-medium);
+    background-color: var(--modal-bg-color);
+    color: var(--text-color);
 }
 
 /* Responsive Adjustments */
 @media (min-width: 600px) {
     .digitButton, #difficulty, #backButton {
-        font-size: 18px;
-        padding: 15px;
-        margin: 5px;
+        font-size: var(--font-size-normal);
+        padding: var(--padding-medium);
+        margin: var(--margin-small);
     }
 }
 
 @media (min-width: 768px) {
     .digitButton, #difficulty, #backButton {
-        font-size: 20px;
-        padding: 10px;
-        margin: 6px;
+        font-size: var(--font-size-large);
+        padding: var(--padding-medium);
+        margin: var(--margin-medium);
     }
-}
-
-@media (orientation: landscape) {
-    /* Adjustments for landscape orientation */
 }
 
 @media (max-width: 320px) {
     .digitButton, #difficulty, #backButton {
-        font-size: 14px;
-        padding: 8px;
+        font-size: smaller;
+        padding: var(--padding-small);
     }
 }
+
+/* Additional specific styles as needed */
