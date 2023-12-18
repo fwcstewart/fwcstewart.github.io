@@ -115,12 +115,14 @@ button:focus {
 }
 
 .footer {
-  position: relative;
+  position: fixed;
   width: 100%;
   background: #3586ff;
   min-height: 100px;
-  padding: 20px 50px;
-  display: flex;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
