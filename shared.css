@@ -1,5 +1,8 @@
+/* shared.css */
+/* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+/* Root Variables: Centralizing common style values for ease of maintenance */
 :root {
     --primary-bg-color: #1A1A2E;
     --secondary-bg-color: #16213E;
@@ -10,6 +13,10 @@
     --button-bg-color: #E94560;
     --button-hover-bg-color: #D72323;
     --button-text-color: #FFFFFF;
+    --secondary-button-bg-color: #26a69a;
+    --secondary-button-hover-bg-color: #00796b;
+    --tertiary-button-bg-color: #f0ad4e;
+    --tertiary-button-hover-bg-color: #ec971f;
     --modal-bg-color: #FFFFFF;
     --modal-overlay-color: rgba(0, 0, 0, 0.6);
     --link-hover-color: #F5F5F5;
@@ -24,6 +31,7 @@
     --padding-medium: 20px;
 }
 
+/* Basic Reset */
 * {
     margin: 0;
     padding: 0;
@@ -31,10 +39,12 @@
     font-family: var(--font-primary);
 }
 
+/* Scroll Behavior */
 html { 
     scroll-behavior: smooth;
 }
 
+/* Body and HTML Styles */
 body, html {
     height: 100%;
     background-color: var(--primary-bg-color);
@@ -42,10 +52,12 @@ body, html {
     text-align: center;
 }
 
+/* Text Color for Headers and Paragraphs */
 h1, h2, h3, p {
     color: var(--text-color);
 }
 
+/* Link Styles */
 a {
     color: inherit;
     text-decoration: none;
@@ -55,6 +67,7 @@ a:hover {
     color: var(--link-hover-color);
 }
 
+/* Header Styles */
 .header-style {
     width: 100%;
     padding: var(--padding-small);
@@ -65,6 +78,7 @@ a:hover {
     background-color: var(--header-footer-bg-color);
 }
 
+/* Logo Styles */
 .logo {
     display: flex;
     justify-content: center;
@@ -75,12 +89,14 @@ a:hover {
     height: auto;
 }
 
+/* Navigation Elements */
 .nav-elements {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Navigation Item Styles */
 .nav-item {
     text-decoration: none;
     color: var(--button-text-color);
@@ -94,6 +110,7 @@ a:hover {
     color: var(--accent-color);
 }
 
+/* Primary Button Styles */
 button {
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
@@ -116,92 +133,118 @@ button:focus {
     outline: none;
 }
 
-.footer {
-    background-color: var(--header-footer-bg-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: var(--padding-medium);
-    position: relative;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    margin-top: 40px;
+/* Secondary Button Styles */
+.secondary-button {
+    background-color: var(--secondary-button-bg-color);
+    color: var(--button-text-color);
+    /* Rest of the styles are inherited from the primary button */
 }
 
+.secondary-button:hover {
+    background-color: var(--secondary-button-hover-bg-color);
+}
+
+/* Tertiary Button Styles */
+.tertiary-button {
+    background-color: var(--tertiary-button-bg-color);
+    color: var(--button-text-color);
+    /* Rest of the styles are inherited from the primary button */
+}
+
+.tertiary-button:hover {
+    background-color: var(--tertiary-button-hover-bg-color);
+}
+
+/* Footer Styles */
+.footer {
+background-color: var(–header-footer-bg-color);
+color: var(–text-color);
+text-align: center;
+padding: var(–padding-medium);
+position: relative;
+right: 0;
+left: 0;
+bottom: 0;
+width: 100%;
+margin-top: 40px;
+}
+
+/* Social Icon and Menu Styles */
 .social-icon,
 .menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-    flex-wrap: wrap;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 10px 0;
+flex-wrap: wrap;
 }
 
 .social-icon__item,
 .menu__item {
-    list-style: none;
+list-style: none;
 }
 
 .social-icon__link {
-    font-size: 2rem;
-    color: var(--text-color);
-    margin: 0 10px;
-    display: inline-block;
-    transition: transform 0.5s;
+font-size: 2rem;
+color: var(–text-color);
+margin: 0 10px;
+display: inline-block;
+transition: transform 0.5s;
 }
 
 .social-icon__link:hover {
-    color: var(--accent-color);
-    transform: translateY(-5px);
+color: var(–accent-color);
+transform: translateY(-5px);
 }
 
 .menu__link {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin: 0 10px;
-    display: inline-block;
-    transition: opacity 0.5s;
-    text-decoration: none;
-    opacity: 0.75;
-    font-weight: 300;
+font-size: 1.2rem;
+color: var(–text-color);
+margin: 0 10px;
+display: inline-block;
+transition: opacity 0.5s;
+text-decoration: none;
+opacity: 0.75;
+font-weight: 300;
 }
 
 .menu__link:hover {
-    opacity: 1;
+opacity: 1;
 }
 
 .footer p {
-    margin: 15px 0 10px 0;
-    font-size: 1rem;
-    font-weight: 300;
+margin: 15px 0 10px 0;
+font-size: 1rem;
+font-weight: 300;
 }
 
+/* Burger Menu Styles for Mobile */
 .burger-menu-button {
-    display: none;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: var(--padding-small);
-    z-index: 100;
-    position: absolute;
-    top: var(--margin-small);
-    right: var(--margin-small);
+display: none;
+background-color: transparent;
+border: none;
+cursor: pointer;
+padding: var(–padding-small);
+z-index: 100;
+position: absolute;
+top: var(–margin-small);
+right: var(–margin-small);
 }
 
 .burger-menu-icon, .burger-menu-icon::before, .burger-menu-icon::after {
-    background-color: var(--button-text-color);
-    height: 3px;
-    width: 30px;
-    transition: background-color 0.3s, transform 0.3s;
-    position: relative;
-    display: block;
-    margin-bottom: 5px;
+background-color: var(–button-text-color);
+height: 3px;
+width: 30px;
+transition: background-color 0.3s, transform 0.3s;
+position: relative;
+display: block;
+margin-bottom: 5px;
 }
 
 .burger-menu-icon::before { top: -8px; }
 .burger-menu-icon::after { bottom: -8px; }
 
+/* Responsive Styles for the Burger Menu */
 @media screen and (max-width: 768px) {
     .burger-menu-button {
         display: block;
@@ -231,6 +274,7 @@ button:focus {
     }
 }
 
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -315,6 +359,17 @@ button:focus {
 .close-button:focus {
     color: black;
     text-decoration: none;
-    cursor: pointer;
+    cursor:  pointer;
 }
+
+/* Documentation for Shared Styles */
+/*
+  - Roboto font is used throughout for a modern look.
+  - Color and sizing are controlled via root variables for easy theme adjustments.
+  - The header and footer styles provide a consistent layout across different pages.
+  - The modal styling is used for pop-up content, with a fixed full-screen layout.
+  - Responsive styles for mobile devices are included, particularly for the navigation menu.
+  - Button styles are categorized as primary, secondary, and tertiary for varied use.
+*/
+
 
