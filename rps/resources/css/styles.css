@@ -1,28 +1,77 @@
 /* Rock Paper Scissors (RPS) Game Specific Styles */
 
-/* Theme Integration */
+/* Base Theme Styles */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
 body.dark .game-mode-indicator,
 body.dark .game-mode:hover,
-body.dark #result, 
-body.dark #score {
+body.dark #result,
+body.dark #score,
+body.dark #game-modes {
+    background-color: #242424;
     color: #ffffff;
-    background-color: #121212;
+}
+
+body.dark .choice:hover {
+    border-color: #ffffff;
+}
+
+/* Retro Theme */
+body.retro {
+    background-color: #0f0f0f; /* Dark base for vibrant neon colors */
+    color: #0ff;
+    font-family: 'Press Start 2P', cursive; /* Retro-style font */
 }
 
 body.retro .game-mode-indicator,
 body.retro .game-mode:hover,
-body.retro #result, 
-body.retro #score {
+body.retro #result,
+body.retro #score,
+body.retro #game-modes {
+    background-color: #ff00ff;
     color: #0ff;
-    background-color: #f0f;
+    border-color: #0ff;
+}
+
+body.retro .choice {
+    border: 2px solid #ff00ff;
+}
+
+/* Minimalist Theme */
+body.minimalist {
+    background-color: #fff;
+    color: #000;
 }
 
 body.minimalist .game-mode-indicator,
 body.minimalist .game-mode:hover,
-body.minimalist #result, 
-body.minimalist #score {
-    color: #000;
-    background-color: #fff;
+body.minimalist #result,
+body.minimalist #score,
+body.minimalist #game-modes {
+    background-color: #e0e0e0;
+    color: #333;
+    border-color: #333;
+}
+
+body.minimalist .choice {
+    border: 2px solid #333;
+}
+
+/* Common Theme Styles */
+.game-mode-indicator,
+.game-mode,
+#result,
+#score,
+.choice {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 /* Game Mode Indicator */
