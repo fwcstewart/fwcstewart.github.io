@@ -117,25 +117,13 @@ button:focus {
 footer {
     color: var(--button-text-color);
     text-align: center;
-    padding: var(--padding-small);
-    width: 100%;
-    top: var(--margin-small);
-    box-shadow: var(--box-shadow);
+    padding: 10px;
     position: relative;
+    width: 100%;
+    top: 20px;
+    box-shadow: var(--box-shadow);
 }
 
-.footer-content-right {
-  padding-right:40px;
-  margin-top:20px;
-  float:right;
-}
-
-.footer-text-left {
-  font-size:25px;
-  padding-left:40px;
-  float:left;
-  word-spacing:20px;
-}
 
 a.menu:hover {
   background-color:yellow;
