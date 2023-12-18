@@ -122,8 +122,27 @@ footer {
     top: var(--margin-small);
     box-shadow: var(--box-shadow);
     position: fixed;
+    height: 90px;
     left: 0;
     bottom: 0;
+}
+
+.footer-content-right {
+  padding-right:40px;
+  margin-top:20px;
+  float:right;
+}
+
+.footer-text-left {
+  font-size:25px;
+  padding-left:40px;
+  float:left;
+  word-spacing:20px;
+}
+
+a.menu:hover {
+  background-color:yellow;
+  font-size:20px;
 }
 
 footer p {
