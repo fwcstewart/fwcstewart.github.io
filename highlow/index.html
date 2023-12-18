@@ -3,41 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play the Higher or Lower Game - a fun and engaging number guessing game.">
+    <meta name="keywords" content="Higher or Lower, Number Guessing Game, Fun, Interactive Game">
+    <meta property="og:title" content="Higher or Lower Game">
+    <meta property="og:description" content="Challenge yourself with the Higher or Lower Game. Can you guess the right numbers?">
+    <meta property="og:image" content="https://yourwebsite.com/image.jpg"> <!-- Replace with your image link -->
+    <meta property="og:url" content="https://numble-game.com">
+    <meta name="twitter:card" content="summary_large_image">
     <title>Higher or Lower Game</title>
     <link rel="stylesheet" href="resources/css/styles.css">
-  <link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="../shared.css">
 </head>
 <body>
-<header class="header-style">
-    <div class="logo">
-        <a href="https://numble-game.com">
-            <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
-        </a>
-    </div>
-    <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
-        <span class="burger-menu-icon"></span>
-    </button>
-    <div class="nav-elements">
-        <nav>
+    <header class="header-style">
+        <div class="logo">
+            <a href="https://numble-game.com">
+                <img id="logo-img" src="https://lyfeguard.com/storage/app/media/Numble.png" alt="Numble logo">
+            </a>
+        </div>
+        <button class="burger-menu-button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+            <span class="burger-menu-icon"></span>
+        </button>
+        <nav class="nav-elements">
             <!-- Dynamic navigation links will be inserted here -->
         </nav>
-    </div>
-</header>
-    <div class="container">
+    </header>
+    
+    <main class="container">
         <h1>Higher or Lower Game</h1>
 
-        <!-- Game Mode Selection -->
-        <div id="game-mode-selection" class="game-section">
+        <section id="game-mode-selection" class="game-section">
             <button class="btn mode-btn" data-mode="classic">Classic Mode</button>
             <button class="btn mode-btn" data-mode="timeTrial">Time Trial</button>
             <button class="btn mode-btn" data-mode="suddenDeath">Sudden Death</button>
-        </div>
-        <div id="instructions" class="game-section">
-            <p>Guess if the next number will be higher or lower!</p>
-        </div>
+        </section>
 
-        <!-- Game Interface -->
-        <div id="game-interface" class="game-section" style="display: none;">
+        <section id="instructions" class="game-section">
+            <p>Guess if the next number will be higher or lower!</p>
+        </section>
+
+        <section id="game-interface" class="game-section" style="display: none;">
             <div class="card" id="current-card">
                 <span id="currentNumber">0</span>
             </div>
@@ -49,36 +54,36 @@
                 <span id="nextNumber">?</span>
             </div>
             <button id="backBtn" class="btn back-btn">Back to Menu</button>
-     
 
-         <div class="buttons">
-        <button id="skipBtn" class="btn powerup-btn" onclick="useSkip()">Skip (Remaining: <span id="skipsRemaining">1</span>)</button>
-        <button id="doublePointsBtn" class="btn powerup-btn" onclick="useDoublePoints()">Double Points</button>
-    </div>
-        
-        <p id="feedback" class="feedback"></p>
+            <div class="buttons">
+                <button id="skipBtn" class="btn powerup-btn">Skip (Remaining: <span id="skipsRemaining">1</span>)</button>
+                <button id="doublePointsBtn" class="btn powerup-btn">Double Points</button>
+            </div>
 
-        </div>   
+            <p id="feedback" class="feedback"></p>
+        </section>
 
-        <!-- Scoreboard -->
-        <div id="scoreboard" class="game-section" style="display: none;">
+        <section id="scoreboard" class="game-section" style="display: none;">
             <p>Score: <span id="score">0</span></p>
             <p>Streak: <span id="streak">0</span></p>
             <p>Level: <span id="level">1</span></p>
             <p id="time-container" style="display: none;">Time Left: <span id="timeLeft">0</span></p>
-        </div>
+        </section>
 
-        <div id="leaderboard-section" class="game-section" style="display: none;">
-    <h2>Leaderboard</h2>
-    <ol id="leaderboard-list">
-        <!-- Leaderboard entries will be inserted here -->
-    </ol>
-    <button class="btn" id="closeLeaderboardBtn">Close Leaderboard</button>
-</div>
-        
-    </div>
+        <section id="leaderboard-section" class="game-section" style="display: none;">
+            <h2>Leaderboard</h2>
+            <ol id="leaderboard-list">
+                <!-- Leaderboard entries will be inserted here -->
+            </ol>
+            <button class="btn" id="closeLeaderboardBtn">Close Leaderboard</button>
+        </section>
+    </main>
+     <footer>
+        <p>&copy; 2023 Gaming Hub. All rights reserved.</p>
+    </footer>
     <script src="resources/js/script.js"></script>
-  <script src="../shared.js"></script>
+    <script src="../shared.js"></script>
 </body>
 </html>
+
 
