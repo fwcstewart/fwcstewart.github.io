@@ -1,5 +1,30 @@
 /* Rock Paper Scissors (RPS) Game Specific Styles */
 
+/* Theme Integration */
+body.dark .game-mode-indicator,
+body.dark .game-mode:hover,
+body.dark #result, 
+body.dark #score {
+    color: #ffffff;
+    background-color: #121212;
+}
+
+body.retro .game-mode-indicator,
+body.retro .game-mode:hover,
+body.retro #result, 
+body.retro #score {
+    color: #0ff;
+    background-color: #f0f;
+}
+
+body.minimalist .game-mode-indicator,
+body.minimalist .game-mode:hover,
+body.minimalist #result, 
+body.minimalist #score {
+    color: #000;
+    background-color: #fff;
+}
+
 /* Game Mode Indicator */
 .game-mode-indicator {
     display: inline-block;
@@ -12,7 +37,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: background-color 0.3s;
 }
-  
+
 .game-mode-indicator.active {
     background-color: #3498db; /* RPS active mode background color */
 }
@@ -49,12 +74,12 @@
 #countdown {
     font-size: 3em;
     max-width: 800px;
-    color: white;
-    margin-top: 10px;
+    margin: 10px auto;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 /* Result and Score Display */
@@ -62,6 +87,16 @@
     font-size: 1.5em;
     margin-top: 20px;
     color: white;
+    text-align: center;
+}
+
+.score-board, #game-history {
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center it in the page */
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .score h2 {
@@ -102,7 +137,7 @@
 }
 
 /* Game History */
-#game-history, .score-board
+#game-history {
     max-width: 600px; /* Set a maximum width */
     margin: 20px auto; /* Center it in the page */
     padding: 15px;
@@ -123,11 +158,7 @@
     font-size: 1em;
 }
 
-/* Responsive Adjustments */
-/* Add your responsive styles here */
-
-
-/* Responsive Adjustments */
+/* Responsive Adjustments for Medium Screens */
 @media (max-width: 1024px) {
     .choice {
         width: 100px;
@@ -143,6 +174,7 @@
     }
 }
 
+/* Responsive Adjustments for Small Screens */
 @media (max-width: 768px) {
     #game {
         flex-direction: column;
@@ -154,7 +186,7 @@
         margin: 5px;
     }
 
-    .score-board, #game-history, #game, #countdown {
+    .score-board, #game-history {
         width: 100%;
         padding: var(--padding-small);
     }
@@ -176,11 +208,16 @@
         padding: 8px 15px;
     }
 
-    #game-modes, .game-mode-indicator, #history-list {
+    #game-modes, .game-mode-indicator {
         margin: var(--margin-small);
+    }
+
+    #history-list li {
+        font-size: 0.9em;
     }
 }
 
+/* Responsive Adjustments for Extra Small Screens */
 @media (max-width: 480px) {
     .choice {
         width: 60px;
@@ -205,6 +242,7 @@
     }
 }
 
+/* Landscape Orientation Adjustments */
 @media (orientation: landscape) and (max-width: 768px) {
     #game {
         flex-direction: row;
@@ -219,63 +257,5 @@
         font-size: 1em;
         padding: 5px;
         width: 100%;
-    }
-}
-
-body.dark {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.retro {
-    background-color: #f0f;
-    color: #0ff;
-    /* Retro font styles and colors */
-}
-
-body.minimalist {
-    background-color: #fff;
-    color: #000 !important;
-    /* Minimalist styles */
-}
-
-.theme-selector {
-    margin-left: auto; /* Pushes it to the right of the nav elements */
-    padding: 5px 10px;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    display: flex;
-    align-items: center;
-}
-
-.theme-selector label {
-    margin-right: 5px;
-    color: var(--button-text-color);
-    font-size: var(--font-size-normal);
-}
-
-.theme-selector select {
-    padding: 5px;
-    border-radius: 4px;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: 1px solid var(--button-text-color);
-    cursor: pointer;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .theme-selector {
-        order: -1; /* Puts it at the top in a collapsed menu */
-        width: 100%;
-        justify-content: center;
-        margin-left: 0;
-    }
-}
-
-@media (min-width: 1024px) {
-    .score-board, #game-history {
-        width: 80%; /* Adjust width for very wide screens */
     }
 }
