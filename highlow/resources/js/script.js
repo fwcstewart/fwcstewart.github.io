@@ -11,6 +11,7 @@ const gameModeButtons = document.querySelectorAll(".mode-btn");
 let currentNumber, nextNumber, score = 0, streak = 0, level = 1, gameTime = 60, timer;
 let gameMode = "classic"; // default game mode
 let doublePoints = false;
+let doublePointsRemaining = 1; // Start with one double point power-up
 let skipsRemaining = 1; // Number of skips available to the player
 let multiplier = 1;
 
@@ -23,7 +24,12 @@ function useSkip() {
 }
 
 function useDoublePoints() {
-    doublePoints = true;
+    if (doublePointsRemaining > 0) {
+        doublePoints = true;
+        doublePointsRemaining--; // Consume the power-up
+        // Update the UI to reflect the new state
+        document.getElementById('doublePointsBtn').textContent = `Double Points (Remaining: ${doublePointsRemaining})`;
+    }
 }
 
 function updateMultiplier(isCorrect) {
@@ -37,7 +43,10 @@ function updateMultiplier(isCorrect) {
 function updateScore(isCorrect) {
     if (isCorrect) {
         score += 1 * multiplier * (doublePoints ? 2 : 1);
-        doublePoints = false; // Reset double points after use
+        if (doublePoints) {
+            doublePoints = false; // Reset double points after use
+            showFeedback(true, 'Double Points Applied!'); // Show feedback with double points message
+        }
         updateScoreboard(); // Update scoreboard display
     }
 }
