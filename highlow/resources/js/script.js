@@ -78,8 +78,6 @@ function updateGame() {
         }
 }    
 
-    
-}
 
     // Handle Guess
 function handleGuess(isHigher) {
