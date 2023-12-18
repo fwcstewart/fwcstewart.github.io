@@ -60,15 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Update Game
-function updateGame() {
-    gameState.currentNumber = generateNumber();
-    gameState.nextNumber = generateNumber();
-    elements.currentNumberDisplay.textContent = gameState.currentNumber;
-    elements.nextNumberDisplay.textContent = "?";
-    updateScoreboard();
-    elements.timeLeftDisplay.textContent = gameState.gameTime;
-    elements.skipsRemaining.textContent = gameState.skipsRemaining; // Using elements.skipsRemaining
-}
+   function updateGame() {
+        gameState.currentNumber = generateNumber();
+        gameState.nextNumber = generateNumber();
+        elements.currentNumberDisplay.textContent = gameState.currentNumber;
+        elements.nextNumberDisplay.textContent = "?";
+        updateScoreboard();
+        // Make sure this element exists in the HTML, or this line will throw an error.
+        if (elements.skipsRemaining) {
+            elements.skipsRemaining.textContent = gameState.skipsRemaining;
+        }
+    }
 
     // Handle Guess
 function handleGuess(isHigher) {
@@ -103,23 +105,22 @@ function startTimer() {
     }, 1000);
 }
 
-    // Start Game
-   function startGame(selectedMode) {
-    gameState.gameMode = selectedMode;
-    gameState.score = 0;
-    gameState.streak = 0;
-    gameState.level = 1;
-    gameState.gameTime = (selectedMode === "timeTrial") ? 60 : null;
+        function startGame(selectedMode) {
+        gameState.gameMode = selectedMode;
+        gameState.score = 0;
+        gameState.streak = 0;
+        gameState.level = 1;
+        gameState.gameTime = (selectedMode === "timeTrial") ? 60 : null;
 
-    // Start tutorial only after a game mode is selected
-    currentTutorialStep = 0;
-    updateTutorial(currentTutorialStep);
+        // Fixed reference to gameState.currentTutorialStep
+        gameState.currentTutorialStep = 0;
+        updateTutorial(gameState.currentTutorialStep);
 
-    updateGame();
-    if (selectedMode === "timeTrial") {
-        startTimer();
+        updateGame();
+        if (selectedMode === "timeTrial") {
+            startTimer();
+        }
     }
-}
 
     // Reset Game
     function resetGame() {
@@ -155,9 +156,13 @@ function showFeedback(isCorrect, message = '') {
 }
 
    // Attaching all event listeners
-    function attachEventListeners() {
+        function attachEventListeners() {
         elements.gameModeButtons.forEach(btn => {
-            btn.addEventListener("click", () => selectGameMode(btn.getAttribute("data-mode")));
+            // Correctly pass the game mode to the selectGameMode function
+            btn.addEventListener("click", () => {
+                const mode = btn.getAttribute("data-mode");
+                selectGameMode(mode);
+            });
         });
         
         elements.higherBtn.addEventListener("click", () => handleGuess(true));
@@ -212,9 +217,9 @@ attachEventListeners();
     }
 
   // Utility function to generate a random number based on the current level
-function generateNumber() {
-    return Math.floor(Math.random() * (10 * gameState.level)) + 1;
-}
+  function generateNumber() {
+        return Math.floor(Math.random() * (10 * gameState.level)) + 1;
+    }
 
 // Utility function to handle the double points power-up
 function useDoublePoints() {
