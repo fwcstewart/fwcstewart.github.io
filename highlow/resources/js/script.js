@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         leaderboardSection: document.getElementById('leaderboard-section'),
         leaderboardList: document.getElementById('leaderboard-list'),
         closeLeaderboardBtn: document.getElementById('closeLeaderboardBtn'),
+        gameModeSelection: document.getElementById("game-mode-selection"),
+        gameInterface: document.getElementById("game-interface"),
         backBtn: document.getElementById("backBtn")
     };
 
@@ -101,12 +103,12 @@ function startTimer() {
 }
 
     // Start Game
-    function startGame(selectedMode) {
-    gameMode = selectedMode;
-    score = 0;
-    streak = 0;
-    level = 1;
-    gameTime = (selectedMode === "timeTrial") ? 60 : null;
+   function startGame(selectedMode) {
+    gameState.gameMode = selectedMode;
+    gameState.score = 0;
+    gameState.streak = 0;
+    gameState.level = 1;
+    gameState.gameTime = (selectedMode === "timeTrial") ? 60 : null;
 
     // Start tutorial only after a game mode is selected
     currentTutorialStep = 0;
@@ -120,11 +122,17 @@ function startTimer() {
 
     // Reset Game
     function resetGame() {
-        clearInterval(timer);
+    clearInterval(gameState.timer);
         document.querySelectorAll(".game-section").forEach(el => el.style.display = "none");
         document.getElementById("game-mode-selection").style.display = "block";
     }
 
+    // Placeholder for updateLeaderboard function
+function updateLeaderboard(entry) {
+    // Implementation for updating leaderboard
+    console.log("Leaderboard updated", entry);
+}
+    
     // Game Over
     function gameOver() {
         let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
