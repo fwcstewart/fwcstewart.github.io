@@ -236,11 +236,10 @@ function useDoublePoints() {
 }
 
 function useSkips() {
- if (gameState.skipsRemaining > 0) {
-            gameState.skips = true;
-            gameState.skips--;
-            gameState.skipsRemaining.textContent = gameState.skipsRemaining;
-            elements.skipBtn.textContent = `Skips (Remaining: ${gameState.skipsRemaining})`;
+     if (gameState.skipsRemaining > 0) {
+     gameState.skips = true;
+     gameState.skipsRemaining--;
+     elements.skipBtn.textContent = `Skips (Remaining: ${gameState.skipsRemaining})`;
         }
 }
     
