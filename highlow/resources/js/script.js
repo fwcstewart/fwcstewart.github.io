@@ -60,8 +60,28 @@ function updateLeaderboard(newScore) {
 
 function showLeaderboard() {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    alert("Leaderboard:\n" + leaderboard.join("\n"));
+    const leaderboardList = document.getElementById('leaderboard-list');
+    leaderboardList.innerHTML = ''; // Clear existing leaderboard entries
+
+    // Populate leaderboard
+    leaderboard.forEach((score, index) => {
+        const entry = document.createElement('li');
+        entry.textContent = `${index + 1}. Score: ${score}`;
+        leaderboardList.appendChild(entry);
+    });
+
+    // Show leaderboard section and hide other game sections
+    document.getElementById('leaderboard-section').style.display = 'block';
+    document.getElementById('game-interface').style.display = 'none';
+    document.getElementById('game-mode-selection').style.display = 'none';
+    // Add more sections to hide as necessary
 }
+
+// Event listener for closing the leaderboard
+document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
+    document.getElementById('leaderboard-section').style.display = 'none';
+    // Show any sections you hid when opening the leaderboard
+});
 
 function showFeedback(isCorrect) {
     const feedbackElement = document.getElementById('feedback');
