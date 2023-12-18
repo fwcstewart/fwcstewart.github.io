@@ -1,4 +1,4 @@
-/* Homepage specific styles */
+/* Homepage Specific Styles */
 
 /* Content Layout */
 .content {
@@ -6,21 +6,23 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    gap: var(--margin-medium);
+    padding: var(--padding-medium);
 }
 
 /* Game Cards */
 .game-card {
-    color: #fff;
-    border-radius: 10px;
-    border: 1px solid #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
     transition: transform 0.3s ease;
+    position: relative;
     cursor: pointer;
     text-align: center;
-    width: 300px; /* Adjust size as needed */
-    margin: 10px;
+    width: 300px;
+    margin: var(--margin-small);
 }
 
 .game-card:hover {
@@ -29,58 +31,51 @@
 
 .game-icon {
     font-size: 4rem;
-    margin: 20px 0;
+    margin-top: var(--margin-small);
+    margin-bottom: var(--margin-medium);
 }
 
 .game-info {
-    padding: 20px;
+    padding: var(--padding-medium);
 }
 
 .game-card h2 {
-    margin-bottom: 10px;
-    font-size: 1.5rem; /* Adjust size as needed */
+    margin-bottom: var(--margin-small);
+    font-size: var(--font-size-large);
 }
 
 .game-card p {
-    margin-bottom: 20px;
-    font-size: 1rem; /* Adjust size as needed */
+    margin-bottom: var(--margin-medium);
+    font-size: var(--font-size-normal);
 }
 
 .play-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
 }
 
 .play-btn:hover {
-    background-color: #45a049;
+    background-color: var(--button-hover-bg-color);
 }
 
 /* Responsive Design */
 @media only screen and (max-width: 768px) {
     .content {
         flex-direction: column;
-        align-items: stretch;
     }
 
     .game-card {
-        width: auto; /* Full width for smaller screens */
-        margin: 10px;
+        width: 100%;
     }
 
     .game-icon {
-        font-size: 3rem; /* Slightly smaller icons for smaller screens */
-    }
-
-    .game-card h2 {
-        font-size: 1.2rem;
-    }
-
-    .game-card p {
-        font-size: 0.9rem;
+        font-size: 3rem;
     }
 }
