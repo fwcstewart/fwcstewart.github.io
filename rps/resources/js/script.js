@@ -153,3 +153,8 @@ gameImages.forEach(image => {
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector(".close-button").addEventListener("click", closeModal);
 });
+
+document.getElementById('theme').addEventListener('change', function() {
+    const selectedTheme = this.value;
+    document.body.className = selectedTheme;
+});
