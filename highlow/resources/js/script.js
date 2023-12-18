@@ -236,7 +236,7 @@ function useDoublePoints() {
     }
 }
 
-function useSkips {
+function useSkips() {
  if (gameState.skipsRemaining > 0) {
             gameState.skips = true;
             gameState.skips--;
