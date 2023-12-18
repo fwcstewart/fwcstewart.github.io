@@ -17,6 +17,7 @@ let multiplier = 1;
 function useSkip() {
     if (skipsRemaining > 0) {
         skipsRemaining--;
+        document.getElementById('skipsRemaining').textContent = skipsRemaining; // Update skips remaining in the UI
         updateGame();
     }
 }
@@ -37,6 +38,7 @@ function updateScore(isCorrect) {
     if (isCorrect) {
         score += 1 * multiplier * (doublePoints ? 2 : 1);
         doublePoints = false; // Reset double points after use
+        updateScoreboard(); // Update scoreboard display
     }
 }
 
@@ -75,14 +77,19 @@ function updateGame() {
     streakDisplay.textContent = streak;
     levelDisplay.textContent = level;
     timeLeftDisplay.textContent = gameTime;
+
+    document.getElementById('skipsRemaining').textContent = skipsRemaining;
 }
 
 function handleGuess(isHigher) {
     const isCorrect = (isHigher && nextNumber > currentNumber) || (!isHigher && nextNumber < currentNumber);
+    showFeedback(isCorrect); // Show feedback
     nextNumberDisplay.textContent = nextNumber;
 
+    updateMultiplier(isCorrect); // Update multiplier
+    updateScore(isCorrect); // Update score with multiplier and double points
+
     if (isCorrect) {
-        score++;
         streak++;
         level = Math.floor(score / 10) + 1;
     } else {
@@ -186,3 +193,6 @@ resetGame();
 document.getElementById("instructions").style.display = "block";
 document.getElementById("game-interface").style.display = "none";
 document.getElementById("game-mode-selection").style.display = "none";
+
+resetGame();
+
