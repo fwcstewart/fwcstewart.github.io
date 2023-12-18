@@ -251,16 +251,6 @@ button:focus {
     backdrop-filter: blur(10px); /* Increased backdrop blur */
 }
 
-.overlay {
-    position: fixed;
-    z-index: 2; /* Place the overlay above the page content */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(10px); /* Apply the blur effect to the overlay */
-}
-
 .modal::backdrop {
     animation: fadeIn 1s ease both;
     background: rgb(255 255 255 / 40%);
