@@ -188,7 +188,7 @@
 }
 
 /* Button styles within the tutorial modal */
-.tutorial-modal button {
+#nextTutorialStep {
     padding: 10px 20px;
     margin-top: 10px;
     margin-right: 10px;
@@ -201,7 +201,7 @@
     transition: background-color 0.3s ease;
 }
 
-.tutorial-modal button:hover {
+#nextTutorialStep:hover {
     background-color: #0056b3;
 }
 
