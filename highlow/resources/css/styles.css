@@ -15,6 +15,7 @@
 /* Game Section: General layout for each section of the game */
 .game-section {
     margin: var(--margin-medium) auto;
+    margin-bottom: 20px; /* More space between sections */
 }
 
 /* Card styling */
@@ -22,8 +23,10 @@
     background-color: #e3f2fd;
     color: blue;
     padding: var(--padding-small);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #e3f2fd;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    border: none; /* Optionally remove border for a cleaner look */
+    border-radius: 20px; /* Softer rounded corners */
     margin: var(--margin-small) auto;
     transition: transform 0.3s ease;
     font-size: 36px;
@@ -102,3 +105,33 @@
     text-align: center;
     padding: var(--padding-medium);
 }
+
+#showLeaderboardBtn, .back-btn {
+    background-image: linear-gradient(to bottom, #d9534f 0%, #c9302c 100%);
+}
+
+#showLeaderboardBtn:hover, .back-btn:hover {
+    background-image: linear-gradient(to bottom, #c9302c 0%, #d9534f 100%);
+}
+
+#currentNumber, #nextNumber {
+    font-size: 3rem; /* Larger, more prominent numbers */
+    font-weight: bold;
+}
+
+#higherBtn, #lowerBtn {
+    background-image: linear-gradient(to bottom, #5bc0de 0%, #31b0d5 100%);
+}
+
+#higherBtn:hover, #lowerBtn:hover {
+    background-image: linear-gradient(to bottom, #31b0d5 0%, #5bc0de 100%);
+}
+
+#skipBtn, #doublePointsBtn {
+    background-image: linear-gradient(to bottom, #f0ad4e 0%, #ec971f 100%);
+}
+
+#skipBtn:hover, #doublePointsBtn:hover {
+    background-image: linear-gradient(to bottom, #ec971f 0%, #f0ad4e 100%);
+}
+
