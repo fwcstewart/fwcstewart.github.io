@@ -1,7 +1,6 @@
 /* Styles specific to the Higher or Lower Game */
 
 .container {
-    background-color: var(--modal-bg-color);
     padding: var(--padding-medium);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
