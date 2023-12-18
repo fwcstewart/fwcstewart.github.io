@@ -1,4 +1,4 @@
-/* Specific styles for the homepage */
+/* Homepage specific styles */
 
 /* Content Layout */
 .content {
@@ -6,22 +6,22 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--margin-medium);
-    padding: var(--padding-medium);
+    gap: 20px; /* Adjust as needed */
+    padding: 20px; /* Adjust as needed */
 }
 
 /* Game Cards */
 .game-card {
-    background-color: transparent;
-    color: var(--text-color);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--text-color);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    overflow: hidden;
+    background-color: #fff; /* Adjust color as needed */
+    color: #333; /* Adjust color as needed */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
-    position: relative;
     cursor: pointer;
     text-align: center;
+    width: 300px; /* Adjust size as needed */
+    margin: 10px;
 }
 
 .game-card:hover {
@@ -30,30 +30,41 @@
 
 .game-icon {
     font-size: 4rem;
-    margin-top: var(--margin-small);
-    margin-bottom: var(--margin-medium);
-    transition: transform 0.3s ease-in-out;
-}
-
-.game-card:hover .game-icon {
-    transform: rotate(-10deg) scale(1.2);
+    margin: 20px 0;
 }
 
 .game-info {
-    padding: var(--padding-medium);
-    text-align: center;
+    padding: 20px;
 }
 
 .game-card h2 {
-    color: var(--text-color);
-    margin-bottom: var(--margin-small);
-    font-size: var(--font-size-large);
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Adjust size as needed */
 }
 
 .game-card p {
-    color: var(--text-secondary-color);
-    margin-bottom: var(--margin-medium);
-    font-size: var(--font-size-normal);
+    margin-bottom: 20px;
+    font-size: 1rem; /* Adjust size as needed */
 }
 
-/* Additional specific styles as needed */
+.play-btn {
+    background-color: #4CAF50; /* Adjust color as needed */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.play-btn:hover {
+    background-color: #45a049;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #333; /* Adjust color as needed */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
