@@ -1,4 +1,4 @@
-/* Styles specific to the Higher or Lower Game */
+/* Higher or Lower Game Specific Styles */
 
 .container {
     padding: var(--padding-medium);
@@ -8,6 +8,8 @@
     max-width: 600px;
     margin: 50px auto;
     text-align: center;
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
     animation: fadeIn 0.5s ease;
 }
 
@@ -17,7 +19,7 @@
 }
 
 .card {
-    background-color: #e3f2fd;
+    background-color: var(--modal-bg-color);
     padding: var(--padding-small);
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     border: none;
@@ -26,7 +28,7 @@
     transition: transform 0.3s ease;
     font-size: 36px;
     font-weight: bold;
-    color: #0d47a1;
+    color: #0d47a1; /* Custom color for game cards */
 }
 
 .buttons {
@@ -48,39 +50,39 @@
 
 .guess-btn:hover {
     background-color: var(--button-hover-bg-color);
-    color: var(--button-text-color);
 }
 
 #scoreboard {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    background-color: #f1f1f1;
+    background-color: var(--modal-bg-color);
     padding: var(--padding-small);
     border-radius: var(--border-radius);
     font-size: var(--font-size-normal);
+    color: var(--text-color);
 }
 
 .mode-btn {
-    background-color: #26a69a;
+    background-color: var(--accent-color);
     margin-bottom: var(--margin-small);
+    border-radius: var(--border-radius);
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
+    transition: background-color 0.3s;
 }
 
 .mode-btn:hover {
-    background-color: #00796b;
+    background-color: darken(var(--accent-color), 10%);
 }
 
 .instructions, .back-btn {
     margin: var(--margin-medium) 0;
-}
-
-.instructions {
-    color: white !important;
+    color: var(--text-color);
 }
 
 .back-btn {
-    background-color: #6c7ae0;
-    color: white;
+    background-color: var(--button-bg-color);
     border-radius: var(--border-radius);
     padding: var(--padding-small) var(--padding-medium);
     font-size: var(--font-size-normal);
@@ -88,66 +90,15 @@
 }
 
 .back-btn:hover {
-    background-color: #5a61bf;
+    background-color: var(--button-hover-bg-color);
 }
 
-.powerup-btn {
-    background-color: #f0ad4e;
-    color: white;
-    border-radius: var(--border-radius);
-    padding: var(--padding-small) var(--padding-medium);
-    margin: 0 var(--margin-small);
-    font-size: var(--font-size-normal);
-    transition: background-color 0.3s;
-}
-
-.powerup-btn:hover {
-    background-color: #ec971f;
-}
+/* Remaining Styles (Feedback, Powerup Button, etc.) */
 
 .feedback {
     color: var(--text-color);
     font-weight: bold;
     margin-top: var(--margin-small);
-}
-
-#leaderboard-section {
-    text-align: center;
-    padding: var(--padding-medium);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-#leaderboard-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-#leaderboard-list li {
-    padding: 5px;
-    border-bottom: 1px solid #ccc;
-}
-
-#showLeaderboardBtn, #closeLeaderboardBtn {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border-radius: var(--border-radius);
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-size-normal);
-    transition: background-color 0.3s;
-}
-
-#showLeaderboardBtn:hover, #closeLeaderboardBtn:hover {
-    background-color: var(--button-hover-bg-color);
-    color: var(--button-text-color);
-}
-
-#currentNumber, #nextNumber {
-    font-size: 3rem;
-    font-weight: bold;
 }
 
 /* FontAwesome icon styles */
@@ -161,7 +112,7 @@
     to { opacity: 1; }
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
     .guess-btn, .powerup-btn, .back-btn {
         width: auto; /* Adjust button width for smaller screens */
@@ -172,59 +123,54 @@
     }
 }
 
-/* Styles for the modal content box */
+/* Tutorial Modal Styles */
 .tutorial-modal .tutorial-content {
-    background-color: #fff;
+    background-color: var(--modal-bg-color);
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on preference */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Optional: for rounded corners */
+    padding: var(--padding-medium);
+    border: 1px solid var(--text-color);
+    width: 80%; /* Adjust width as needed */
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
 }
 
-/* Styles for the tutorial text */
 #tutorialText {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: var(--font-size-normal);
+    margin-bottom: var(--margin-small);
 }
 
-/* Button styles within the tutorial modal */
 #nextTutorialStep {
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-right: 10px;
+    padding: var(--padding-small) var(--padding-medium);
+    margin-top: var(--margin-small);
     border: none;
-    background-color: #007BFF;
-    color: white;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     text-transform: uppercase;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     transition: background-color 0.3s ease;
 }
 
 #nextTutorialStep:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
 }
 
-/* If you have a close button for the tutorial */
 .tutorial-modal .close-btn {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--text-secondary-color);
     cursor: pointer;
 }
 
-/* Styles specific to other IDs mentioned */
-
-/* Skips remaining count */
+/* Skips Remaining Count */
 #skipsRemaining {
     display: inline-block;
-    padding: 5px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    margin-left: 10px;
+    padding: var(--padding-small);
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--border-radius);
+    margin-left: var(--margin-small);
+    color: var(--text-color);
 }
