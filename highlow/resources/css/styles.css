@@ -1,8 +1,11 @@
+/* Styles specific to Page 2 */
+
+/* Container Layout */
 .container {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--modal-bg-color);
+    padding: var(--padding-medium);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     width: 80%;
     max-width: 600px;
     animation: fadeIn 0.5s ease;
@@ -13,18 +16,19 @@
     to { opacity: 1; }
 }
 
-
+/* Game Section */
 .game-section {
-    margin: 20px 0;
+    margin: var(--margin-medium) 0;
 }
 
+/* Individual Cards */
 .card {
     background-color: #e3f2fd;
     color: blue;
-    padding: 20px;
-    border-radius: 12px;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin: 10px auto;
+    margin: var(--margin-small) auto;
     width: 200px;
     transition: transform 0.3s ease;
 }
@@ -35,25 +39,25 @@
     color: #0d47a1;
 }
 
-
+/* Button Styles */
 .buttons {
-    margin: 20px 0;
+    margin: var(--margin-medium) 0;
 }
 
 .btn {
-    padding: 10px 25px;
-    font-size: 18px;
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: var(--font-size-normal);
     margin: 5px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: background-color 0.2s, transform 0.2s;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
     transform: translateY(-2px);
 }
 
@@ -62,13 +66,13 @@
 }
 
 #scoreboard {
-    font-size: 20px;
+    font-size: var(--font-size-normal);
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 10px;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius);
 }
 
 #time-container {
@@ -77,7 +81,7 @@
 
 .mode-btn {
     background-color: #26a69a;
-    margin-bottom: 10px;
+    margin-bottom: var(--margin-small);
 }
 
 .mode-btn:hover {
@@ -85,16 +89,16 @@
 }
 
 .instructions {
-    margin: 20px 0;
-    font-size: 18px;
-    color: #fff;
+    margin: var(--margin-medium) 0;
+    font-size: var(--font-size-normal);
+    color: var(--text-color);
 }
 
 .back-btn {
     border: 1px solid blue;
     color: blue;
-    border-radius: 6px;
-    margin-top: 20px;
+    border-radius: var(--border-radius);
+    margin-top: var(--margin-medium);
     background-color: transparent;
 }
 
@@ -102,3 +106,6 @@
     background-color: blue;
     color: white;
 }
+
+/* Additional specific styles as needed */
+
