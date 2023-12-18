@@ -25,12 +25,21 @@
 </header>
    
     <main>
-        
         <section id="game-modes">
             <button class="game-mode" id="timed">Timed Game</button>
             <button class="game-mode" id="best-of-three">Best of Three</button>
             <button class="game-mode" id="continuous">Continuous Play</button>
         </section>
+
+         <div class="theme-selector">
+    <label for="theme">Choose Theme:</label>
+    <select id="theme">
+        <option value="default">Default</option>
+        <option value="dark">Dark Mode</option>
+        <option value="retro">Retro</option>
+        <option value="minimalist">Modern Minimalist</option>
+    </select>
+</div>
         
         <!-- Add this below or above your game mode buttons -->
         <div id="game-mode-indicator" class="game-mode-indicator">
@@ -71,15 +80,6 @@
             </div>
         </div>
     </main>
-     <div class="theme-selector">
-    <label for="theme">Choose Theme:</label>
-    <select id="theme">
-        <option value="default">Default</option>
-        <option value="dark">Dark Mode</option>
-        <option value="retro">Retro</option>
-        <option value="minimalist">Modern Minimalist</option>
-    </select>
-</div>
          <footer class="footer">
     <ul class="social-icon">
       <li class="social-icon__item"><a class="social-icon__link" href="#">
