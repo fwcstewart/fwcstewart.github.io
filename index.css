@@ -50,19 +50,7 @@
 }
 
 .play-btn {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: none;
-    padding: var(--padding-small) var(--padding-medium);
-    font-size: var(--font-size-normal);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-    transition: all 0.3s ease;
-}
-
-.play-btn:hover {
-    background-color: var(--button-hover-bg-color);
+    /* Utilize button styles from shared.css */
 }
 
 /* Responsive Design */
