@@ -74,6 +74,10 @@
     margin: var(--margin-medium) 0;
 }
 
+.instructions {
+    color: white !important;
+}
+
 .back-btn {
     background-color: #6c7ae0;
     color: white;
