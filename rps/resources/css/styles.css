@@ -60,7 +60,7 @@ body.minimalist #score,
 body.minimalist .game-mode
 body.dark #game-history {
     background-color: #e0e0e0;
-    color: #333;
+    color: #000;
     border-color: #333;
 }
 
