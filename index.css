@@ -1,20 +1,21 @@
 /* Specific styles for the homepage */
 
-/* Content */
+/* Content Layout */
 .content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 50px 20px;
+    gap: var(--margin-medium);
+    padding: var(--padding-medium);
 }
 
+/* Game Cards */
 .game-card {
     background-color: transparent;
-    color: white;
-    border-radius: 15px;
-    border: 1px solid white;
+    color: var(--text-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--text-color);
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -29,8 +30,8 @@
 
 .game-icon {
     font-size: 4rem;
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: var(--margin-small);
+    margin-bottom: var(--margin-medium);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -39,18 +40,20 @@
 }
 
 .game-info {
-    padding: 30px;
+    padding: var(--padding-medium);
     text-align: center;
 }
 
 .game-card h2 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: var(--margin-small);
+    font-size: var(--font-size-large);
 }
 
 .game-card p {
-    color: #555;
-    margin-bottom: 20px;
-    font-size: 1rem;
+    color: var(--text-secondary-color);
+    margin-bottom: var(--margin-medium);
+    font-size: var(--font-size-normal);
 }
+
+/* Additional specific styles as needed */
