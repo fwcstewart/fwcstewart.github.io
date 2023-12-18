@@ -69,7 +69,6 @@ function updateGame() {
     elements.nextNumberDisplay.textContent = "?";
     updateScoreboard();
     elements.timeLeftDisplay.textContent = gameState.gameTime;
-    elements.skipBtn.textContent = gameState.skipsRemaining;
 }    
 
 
