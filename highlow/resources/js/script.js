@@ -124,7 +124,7 @@ function handleGuess(isHigher) {
     } else {
         if (gameMode === "suddenDeath") {
             alert("Wrong guess. Game over!");
-            resetGame();
+            gameOver();
             return;
         }
         streak = 0; // Reset streak in Classic and Time Trial mode
@@ -139,8 +139,7 @@ function startTimer() {
         timeLeftDisplay.textContent = gameTime;
         if (gameTime <= 0) {
             clearInterval(timer);
-            alert("Time's up! Your score: " + score);
-            resetGame();
+            gameOver(); // Game over when the time is up
         }
     }, 1000);
 }
@@ -215,13 +214,21 @@ function flipCard() {
     }, 500);
 }
 
-// Initialize the game mode selection screen
-resetGame();
+function gameOver() {
+    alert("Game over! Your score: " + score);
+    updateLeaderboard(score); // Add the final score to the leaderboard
+    resetGame();
+}
 
 // Initialize to instructions screen
 document.getElementById("instructions").style.display = "block";
 document.getElementById("game-interface").style.display = "none";
 document.getElementById("game-mode-selection").style.display = "none";
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    resetGame();
+    showLeaderboard(); // Call this function to initialize the leaderboard on game start
+});
 
 resetGame();
 
