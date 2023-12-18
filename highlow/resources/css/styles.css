@@ -7,7 +7,7 @@
     box-shadow: var(--box-shadow);
     width: 100%;
     max-width: 600px;
-    margin: 0 auto; /* Center the container */
+    margin: 50px auto; /* Center the container */
     text-align: center; /* Center text inside the container */
     animation: fadeIn 0.5s ease;
 }
