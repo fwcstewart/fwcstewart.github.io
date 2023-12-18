@@ -234,10 +234,6 @@ body.minimalist .choice {
 
 /* Responsive Adjustments for Small Screens */
 @media (max-width: 768px) {
-    #game {
-        flex-direction: column;
-    }
-
     .choice {
         width: 80px;
         height: 80px;
