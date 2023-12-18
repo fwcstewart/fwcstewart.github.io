@@ -93,23 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Update Leaderboard
-    function updateLeaderboard(entry) {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        leaderboard.push(entry);
-        leaderboard.sort((a, b) => b.score - a.score);
-        localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 3)));
-    }
+ function updateLeaderboard(entry) {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    entry.gameMode = gameMode; // Add game mode to the entry
+    leaderboard.push(entry);
+    leaderboard.sort((a, b) => b.score - a.score);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Increase size if needed
+}
 
-    // Show Leaderboard
-    function showLeaderboard() {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        const leaderboardList = document.getElementById('leaderboard-list');
-        leaderboardList.innerHTML = '';
-        leaderboard.forEach(entry => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${entry.name}: ${entry.score}`;
-            leaderboardList.appendChild(listItem);
-        });
+function showLeaderboard() {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    const leaderboardList = document.getElementById('leaderboard-list');
+    leaderboardList.innerHTML = '';
+    leaderboard.forEach(entry => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${entry.name}: ${entry.score} (Mode: ${entry.gameMode})`; // Show game mode
+        leaderboardList.appendChild(listItem);
+    });
         document.getElementById('leaderboard-section').style.display = 'block';
         document.getElementById('game-interface').style.display = 'none';
         document.getElementById('game-mode-selection').style.display = 'none';
@@ -183,17 +183,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start Game
     function startGame(selectedMode) {
-        gameMode = selectedMode;
-        score = 0;
-        streak = 0;
-        level = 1;
-        gameTime = (selectedMode === "timeTrial") ? 60 : null;
+    gameMode = selectedMode;
+    score = 0;
+    streak = 0;
+    level = 1;
+    gameTime = (selectedMode === "timeTrial") ? 60 : null;
 
-        updateGame();
-        if (selectedMode === "timeTrial") {
-            startTimer();
-        }
+    // Start tutorial only after a game mode is selected
+    currentTutorialStep = 0;
+    updateTutorial(currentTutorialStep);
+
+    updateGame();
+    if (selectedMode === "timeTrial") {
+        startTimer();
     }
+}
 
     // Reset Game
     function resetGame() {
