@@ -69,13 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.nextNumberDisplay.textContent = "?";
         updateScoreboard();
         // Make sure this element exists in the HTML, or this line will throw an error.
-        if (gameState.skipsRemaining > 0) {
-            gameState.skips = true;
-            gameState.skips--;
-            gameState.skipsRemaining.textContent = gameState.skipsRemaining;
-            elements.skipBtn.textContent = `Skips Remaining (${gameState.skipsRemaining})`;
+          if (elements.skipsRemaining) {
+            elements.skipsRemaining.textContent = gameState.skipsRemaining;
         }
     }
+    
 
     // Handle Guess
 function handleGuess(isHigher) {
@@ -185,6 +183,10 @@ function showFeedback(isCorrect, message = '') {
             elements.doublePointsBtn.addEventListener("click", useDoublePoints);
         }
 
+         if(elements.skipBtn) {
+            elements.skipBtn.addEventListener("click", useSkips);
+        }
+
         if(elements.closeLeaderboardBtn) {
             elements.closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
         }
@@ -234,6 +236,15 @@ function useDoublePoints() {
         elements.doublePointsBtn.textContent = `Double Points (Remaining: ${gameState.doublePointsRemaining})`;
     }
 }
+
+function useSkips () {
+    if (gameState.skipsRemaining > 0) {
+            gameState.skips = true;
+            gameState.skips--;
+            gameState.skipsRemaining.textContent = gameState.skipsRemaining;
+            elements.skipBtn.textContent = `Skips (Remaining: ${gameState.skipsRemaining})`;
+        }
+}    
 
 // Utility function to update the score multiplier
 function updateMultiplier(isCorrect) {
