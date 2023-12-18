@@ -15,6 +15,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let doublePointsRemaining = 1; // Start with one double point power-up
     let skipsRemaining = 1; // Number of skips available to the player
     let multiplier = 1;
+    let currentTutorialStep = 0;
+
+function updateTutorial(step) {
+    const tutorialText = document.getElementById('tutorialText');
+    const tutorialModal = document.getElementById('tutorialModal');
+    tutorialModal.style.display = 'block';
+
+    switch (step) {
+        case 0:
+            tutorialText.innerText = "This is the game area. Here you'll see the current number and make your guesses.";
+            // Position the modal near the game area
+            break;
+        case 1:
+            tutorialText.innerText = "Click 'Higher' or 'Lower' to make your guess based on whether you think the next number will be higher or lower.";
+            // Position the modal near the buttons
+            break;
+        case 2:
+            tutorialText.innerText = "Your score and level are shown here. Your score increases with each correct guess.";
+            // Position the modal near the score display
+            break;
+        case 3:
+            tutorialText.innerText = "Use power-ups like 'Skip' or 'Double Points' to help you advance in the game.";
+            // Position the modal near the power-ups
+            break;
+        default:
+            tutorialModal.style.display = 'none';
+            return;
+    }
+}
+
+document.getElementById('nextTutorialStep').addEventListener('click', function() {
+    currentTutorialStep++;
+    updateTutorial(currentTutorialStep);
+});
+
+// Start the tutorial
+updateTutorial(0);
 
     // Attaching event listener for doublePointsBtn within JavaScript instead of HTML
     const doublePointsBtn = document.getElementById("doublePointsBtn");
@@ -217,6 +254,12 @@ document.getElementById('skipTutorialBtn').addEventListener('click', function() 
     document.getElementById('welcomeModal').style.display = 'none';
     // Skip the tutorial and start the game
     });
+
+document.getElementById('startTutorialBtn').addEventListener('click', function() {
+    document.getElementById('welcomeModal').style.display = 'none';
+    currentTutorialStep = 0;
+    updateTutorial(currentTutorialStep);
+});
 
     // Initialize the game
     resetGame();
