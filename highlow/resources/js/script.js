@@ -51,11 +51,11 @@ function updateScore(isCorrect) {
     }
 }
 
-function updateLeaderboard(newScore) {
+function updateLeaderboard(entry) {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboard.push(newScore);
-    leaderboard.sort((a, b) => b - a); // Sort in descending order
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 scores
+    leaderboard.push(entry);
+    leaderboard.sort((a, b) => b.score - a.score); // Ensure you sort by the score property
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 entries
 }
 
 function showLeaderboard() {
@@ -64,18 +64,16 @@ function showLeaderboard() {
     leaderboardList.innerHTML = ''; // Clear existing leaderboard entries
 
     // Populate leaderboard
-    leaderboard.forEach((score, index) => {
-        const entry = document.createElement('li');
-        entry.textContent = `${index + 1}. Score: ${score}`;
-        leaderboardList.appendChild(entry);
+    leaderboard.forEach((entry) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${entry.name}: ${entry.score}`; // Display the name and score
+        leaderboardList.appendChild(listItem);
     });
 
     // Show leaderboard section and hide other game sections
     document.getElementById('leaderboard-section').style.display = 'block';
     document.getElementById('game-interface').style.display = 'none';
     document.getElementById('game-mode-selection').style.display = 'none';
-    // Add more sections to hide as necessary
-}
 
 // Event listener for closing the leaderboard
 document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
@@ -215,8 +213,11 @@ function flipCard() {
 }
 
 function gameOver() {
-    alert("Game over! Your score: " + score);
-    updateLeaderboard(score); // Add the final score to the leaderboard
+    let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
+    if (playerName) {
+        const entry = { name: playerName, score: score }; // Create an entry object
+        updateLeaderboard(entry); // Update leaderboard with the entry object
+    }
     resetGame();
 }
 
@@ -229,6 +230,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     resetGame();
     showLeaderboard(); // Call this function to initialize the leaderboard on game start
 });
+
+document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
 
 resetGame();
 
