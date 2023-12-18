@@ -1,247 +1,185 @@
-const currentNumberDisplay = document.getElementById("currentNumber");
-const nextNumberDisplay = document.getElementById("nextNumber");
-const higherBtn = document.getElementById("higherBtn");
-const lowerBtn = document.getElementById("lowerBtn");
-const scoreDisplay = document.getElementById("score");
-const streakDisplay = document.getElementById("streak");
-const levelDisplay = document.getElementById("level");
-const timeLeftDisplay = document.getElementById("timeLeft");
-const gameModeButtons = document.querySelectorAll(".mode-btn");
+document.addEventListener('DOMContentLoaded', () => {
+    const currentNumberDisplay = document.getElementById("currentNumber");
+    const nextNumberDisplay = document.getElementById("nextNumber");
+    const higherBtn = document.getElementById("higherBtn");
+    const lowerBtn = document.getElementById("lowerBtn");
+    const scoreDisplay = document.getElementById("score");
+    const streakDisplay = document.getElementById("streak");
+    const levelDisplay = document.getElementById("level");
+    const timeLeftDisplay = document.getElementById("timeLeft");
+    const gameModeButtons = document.querySelectorAll(".mode-btn");
 
-let currentNumber, nextNumber, score = 0, streak = 0, level = 1, gameTime = 60, timer;
-let gameMode = "classic"; // default game mode
-let doublePoints = false;
-let doublePointsRemaining = 1; // Start with one double point power-up
-let skipsRemaining = 1; // Number of skips available to the player
-let multiplier = 1;
+    let currentNumber, nextNumber, score = 0, streak = 0, level = 1, gameTime = 60, timer;
+    let gameMode = "classic"; // default game mode
+    let doublePoints = false;
+    let doublePointsRemaining = 1; // Start with one double point power-up
+    let skipsRemaining = 1; // Number of skips available to the player
+    let multiplier = 1;
 
-function useSkip() {
-    if (skipsRemaining > 0) {
-        skipsRemaining--;
-        document.getElementById('skipsRemaining').textContent = skipsRemaining; // Update skips remaining in the UI
-        updateGame();
-    }
-}
-
-function useDoublePoints() {
-    if (doublePointsRemaining > 0) {
-        doublePoints = true;
-        doublePointsRemaining--; // Consume the power-up
-        // Update the UI to reflect the new state
-        document.getElementById('doublePointsBtn').textContent = `Double Points (Remaining: ${doublePointsRemaining})`;
-    }
-}
-
-function updateMultiplier(isCorrect) {
-    if (isCorrect) {
-        multiplier++;
-    } else {
-        multiplier = 1; // Reset on incorrect guess
-    }
-}
-
-function updateScore(isCorrect) {
-    if (isCorrect) {
-        score += 1 * multiplier * (doublePoints ? 2 : 1);
-        if (doublePoints) {
-            doublePoints = false; // Reset double points after use
-            showFeedback(true, 'Double Points Applied!'); // Show feedback with double points message
+      function useSkip() {
+        if (skipsRemaining > 0) {
+            skipsRemaining--;
+            document.getElementById('skipsRemaining').textContent = skipsRemaining; // Update skips remaining in the UI
+            updateGame();
         }
-        updateScoreboard(); // Update scoreboard display
     }
-}
 
-function updateLeaderboard(entry) {
-    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboard.push(entry);
-    leaderboard.sort((a, b) => b.score - a.score); // Ensure you sort by the score property
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 entries
-}
-
-function showLeaderboard() {
-    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    const leaderboardList = document.getElementById('leaderboard-list');
-    leaderboardList.innerHTML = ''; // Clear existing leaderboard entries
-
-    // Populate leaderboard
-    leaderboard.forEach((entry) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${entry.name}: ${entry.score}`; // Display the name and score
-        leaderboardList.appendChild(listItem);
-    });
-
-    // Show leaderboard section and hide other game sections
-    document.getElementById('leaderboard-section').style.display = 'block';
-    document.getElementById('game-interface').style.display = 'none';
-    document.getElementById('game-mode-selection').style.display = 'none';
-
-// Event listener for closing the leaderboard
-document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
-    document.getElementById('leaderboard-section').style.display = 'none';
-    // Show any sections you hid when opening the leaderboard
-});
-
-function showFeedback(isCorrect) {
-    const feedbackElement = document.getElementById('feedback');
-    feedbackElement.textContent = isCorrect ? 'Correct!' : 'Wrong!';
-    feedbackElement.style.color = isCorrect ? 'green' : 'red';
-
-    setTimeout(() => {
-        feedbackElement.textContent = '';
-    }, 2000);
-}
-
-function generateNumber() {
-    return Math.floor(Math.random() * (10 * level)) + 1;
-}
-
-function updateGame() {
-    currentNumber = generateNumber();
-    nextNumber = generateNumber();
-    currentNumberDisplay.textContent = currentNumber;
-    nextNumberDisplay.textContent = "?";
-    scoreDisplay.textContent = score;
-    streakDisplay.textContent = streak;
-    levelDisplay.textContent = level;
-    timeLeftDisplay.textContent = gameTime;
-
-    document.getElementById('skipsRemaining').textContent = skipsRemaining;
-}
-
-function handleGuess(isHigher) {
-    const isCorrect = (isHigher && nextNumber > currentNumber) || (!isHigher && nextNumber < currentNumber);
-    showFeedback(isCorrect); // Show feedback
-    nextNumberDisplay.textContent = nextNumber;
-
-    updateMultiplier(isCorrect); // Update multiplier
-    updateScore(isCorrect); // Update score with multiplier and double points
-
-    if (isCorrect) {
-        streak++;
-        level = Math.floor(score / 10) + 1;
-    } else {
-        if (gameMode === "suddenDeath") {
-            alert("Wrong guess. Game over!");
-            gameOver();
-            return;
+    function useDoublePoints() {
+        if (doublePointsRemaining > 0) {
+            doublePoints = true;
+            doublePointsRemaining--; // Consume the power-up
+            document.getElementById('doublePointsBtn').textContent = `Double Points (Remaining: ${doublePointsRemaining})`;
         }
-        streak = 0; // Reset streak in Classic and Time Trial mode
     }
 
-    setTimeout(updateGame, 2000); // Delay for the next round
-}
+    function updateMultiplier(isCorrect) {
+        if (isCorrect) {
+            multiplier++;
+        } else {
+            multiplier = 1; // Reset on incorrect guess
+        }
+    }
 
-function startTimer() {
-    timer = setInterval(() => {
-        gameTime--;
+    function updateScore(isCorrect) {
+        if (isCorrect) {
+            score += 1 * multiplier * (doublePoints ? 2 : 1);
+            if (doublePoints) {
+                doublePoints = false; // Reset double points after use
+                showFeedback(true, 'Double Points Applied!'); // Show feedback with double points message
+            }
+            updateScoreboard(); // Update scoreboard display
+        }
+    }
+
+    function updateLeaderboard(entry) {
+        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        leaderboard.push(entry);
+        leaderboard.sort((a, b) => b.score - a.score); // Ensure you sort by the score property
+        localStorage.setItem('leaderboard', JSON.stringify(leaderboard.slice(0, 10))); // Keep top 10 entries
+    }
+
+     function showLeaderboard() {
+        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+        const leaderboardList = document.getElementById('leaderboard-list');
+        leaderboardList.innerHTML = ''; // Clear existing leaderboard entries
+        leaderboard.forEach((entry) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${entry.name}: ${entry.score}`; // Display the name and score
+            leaderboardList.appendChild(listItem);
+        });
+        document.getElementById('leaderboard-section').style.display = 'block';
+        document.getElementById('game-interface').style.display = 'none';
+        document.getElementById('game-mode-selection').style.display = 'none';
+    }
+
+    function showFeedback(isCorrect, message = '') {
+        const feedbackElement = document.getElementById('feedback');
+        feedbackElement.textContent = message || (isCorrect ? 'Correct!' : 'Wrong!');
+        feedbackElement.style.color = isCorrect ? 'green' : 'red';
+        setTimeout(() => {
+            feedbackElement.textContent = '';
+        }, 2000);
+    }
+
+    function generateNumber() {
+        return Math.floor(Math.random() * (10 * level)) + 1;
+    }
+
+    function updateGame() {
+        currentNumber = generateNumber();
+        nextNumber = generateNumber();
+        currentNumberDisplay.textContent = currentNumber;
+        nextNumberDisplay.textContent = "?";
+        scoreDisplay.textContent = score;
+        streakDisplay.textContent = streak;
+        levelDisplay.textContent = level;
         timeLeftDisplay.textContent = gameTime;
-        if (gameTime <= 0) {
-            clearInterval(timer);
-            gameOver(); // Game over when the time is up
-        }
-    }, 1000);
-}
-
-function startGame(selectedMode) {
-    gameMode = selectedMode;
-    score = 0;
-    streak = 0;
-    level = 1;
-    gameTime = (selectedMode === "timeTrial") ? 60 : null;
-
-    updateGame();
-    if (selectedMode === "timeTrial") {
-        startTimer();
+        document.getElementById('skipsRemaining').textContent = skipsRemaining;
     }
-}
 
-function resetGame() {
-    clearInterval(timer);
-    document.querySelectorAll(".game-section").forEach(el => el.style.display = "none");
-    document.getElementById("game-mode-selection").style.display = "block";
-}
-
-gameModeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        const mode = btn.getAttribute("data-mode");
-        document.querySelectorAll(".game-section").forEach(el => el.style.display = "block");
-        document.getElementById("game-mode-selection").style.display = "none";
-        startGame(mode);
-    });
-});
-
-higherBtn.addEventListener("click", () => handleGuess(true));
-lowerBtn.addEventListener("click", () => handleGuess(false));
-
-document.getElementById("backBtn").addEventListener("click", function() {
-    document.getElementById("game-interface").style.display = "none";
-    document.getElementById("game-mode-selection").style.display = "block";
-});
-
-document.getElementById("startGameBtn").addEventListener("click", function() {
-    document.getElementById("instructions").style.display = "none";
-    document.getElementById("game-interface").style.display = "block";
-    startGame("classic"); // Start in classic mode by default
-});
-
-// Improved transition for numbers
-function revealNextNumber() {
-    nextNumberDisplay.style.opacity = 0;
-    setTimeout(() => {
+    function handleGuess(isHigher) {
+        const isCorrect = (isHigher && nextNumber > currentNumber) || (!isHigher && nextNumber < currentNumber);
+        showFeedback(isCorrect); // Show feedback
         nextNumberDisplay.textContent = nextNumber;
-        nextNumberDisplay.style.opacity = 1;
-    }, 500);
-}
-
-function updateScoreboard() {
-    // Animate scoreboard
-    const scoreboard = document.getElementById('scoreboard');
-    // Make sure the .show class has the desired CSS properties for the animation
-    scoreboard.classList.remove('show');
-    setTimeout(() => {
-        // Update scores...
-        scoreboard.classList.add('show');
-    }, 300);
-}
-
-function flipCard() {
-    const card = document.getElementById('current-card');
-    card.classList.add('flipped');
-    setTimeout(() => {
-        // Update the number...
-        card.classList.remove('flipped');
-    }, 500);
-}
-    
-function gameOver() {
-    let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
-    if (playerName) {
-        const entry = { name: playerName, score: score };
-        updateLeaderboard(entry); // Pass the entry object to updateLeaderboard
+        updateMultiplier(isCorrect); // Update multiplier
+        updateScore(isCorrect); // Update score with multiplier and double points
+        if (isCorrect) {
+            streak++;
+            level = Math.floor(score / 10) + 1;
+        } else {
+            if (gameMode === "suddenDeath") {
+                alert("Wrong guess. Game over!");
+                gameOver();
+                return;
+            }
+            streak = 0; // Reset streak in Classic and Time Trial mode
+        }
+        setTimeout(updateGame, 2000); // Delay for the next round
     }
-    resetGame();
-}
 
-// Initialize to instructions screen
-document.getElementById("instructions").style.display = "block";
-document.getElementById("game-interface").style.display = "none";
-document.getElementById("game-mode-selection").style.display = "none";
+      function startTimer() {
+        timer = setInterval(() => {
+            gameTime--;
+            timeLeftDisplay.textContent = gameTime;
+            if (gameTime <= 0) {
+                clearInterval(timer);
+                gameOver(); // Game over when the time is up
+            }
+        }, 1000);
+    }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    resetGame();
-    // The startGameBtn event listener should be set inside the DOMContentLoaded event
-    // to ensure the element is available when the script runs.
-    document.getElementById('startGameBtn').addEventListener('click', function() {
-        document.getElementById("instructions").style.display = "none";
-        document.getElementById("game-interface").style.display = "block";
-        startGame("classic"); // Start in classic mode by default
+    function startGame(selectedMode) {
+        gameMode = selectedMode;
+        score = 0;
+        streak = 0;
+        level = 1;
+        gameTime = (selectedMode === "timeTrial") ? 60 : null;
+
+        updateGame();
+        if (selectedMode === "timeTrial") {
+            startTimer();
+        }
+    }
+
+    function resetGame() {
+        clearInterval(timer);
+        document.querySelectorAll(".game-section").forEach(el => el.style.display = "none");
+        document.getElementById("game-mode-selection").style.display = "block";
+    }
+
+    function gameOver() {
+        let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
+        if (playerName) {
+            const entry = { name: playerName, score: score };
+            updateLeaderboard(entry); // Pass the entry object to updateLeaderboard
+        }
+        resetGame();
+    }
+
+    // Event listener setup
+    higherBtn.addEventListener("click", () => handleGuess(true));
+    lowerBtn.addEventListener("click", () => handleGuess(false));
+
+    gameModeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const mode = btn.getAttribute("data-mode");
+            document.querySelectorAll(".game-section").forEach(el => el.style.display = "block");
+            document.getElementById("game-mode-selection").style.display = "none";
+            startGame(mode);
+        });
     });
 
-    // Set up the showLeaderboard button event listener here as well
+    document.getElementById("backBtn").addEventListener("click", () => {
+        document.getElementById("game-interface").style.display = "none";
+        document.getElementById("game-mode-selection").style.display = "block";
+    });
+
+    // Setup for the 'show leaderboard' and 'close leaderboard' buttons
     document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
+    document.getElementById('closeLeaderboardBtn').addEventListener('click', () => {
+        document.getElementById('leaderboard-section').style.display = 'none';
+    });
 
-    // Call showLeaderboard() if you want to show the leaderboard on game start
-    // showLeaderboard();
+    // Initialize the game
+    resetGame();
 });
-    
-
