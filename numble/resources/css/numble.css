@@ -8,6 +8,7 @@
     transition: transform 0.3s ease;
     font-size: 36px;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 /* Guess Grid */
@@ -19,6 +20,7 @@
     gap: 5px;
     width: 90%;
     max-width: 800px;
+    background-color: var(--secondary-bg-color);
 }
 
 .guessCell {
@@ -26,9 +28,9 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background-color: #abc4ff; /* Specific background color for cells */
-    color: white; /* Specific text color for cells */
-    border: 1px solid white; /* Specific border color for cells */
+    background-color: var(--button-bg-color); /* Consistent with shared button color */
+    color: var(--button-text-color); /* Consistent with shared button text color */
+    border: 1px solid var(--button-bg-color); /* Consistent border color */
     font-size: 20px;
     text-align: center;
     height: 40px;
@@ -59,7 +61,7 @@
 .crossed-out {
     text-decoration: line-through;
     opacity: 0.5;
-    color: black;
+    color: var(--text-secondary-color);
     cursor: not-allowed;
 }
 
@@ -76,17 +78,17 @@
     padding: 10px 15px;
     margin: 10px;
     font-size: 18px;
-    border: 2px solid white;
-    background-color: #f8f8f8; /* Specific background color for digit buttons */
-    color: #333; /* Specific text color for digit buttons */
+    border: 2px solid var(--button-text-color);
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 70px; /* Specific width for digit buttons */
+    width: 70px;
 }
 
 .digitButton:hover {
-    background-color: #ccdbfd; /* Specific hover color for digit buttons */
+    background-color: var(--button-hover-bg-color);
 }
 
 /* Submit and Restart Buttons */
@@ -95,24 +97,24 @@
     margin: 5px;
     font-size: 16px;
     cursor: pointer;
-    border: 1px solid white;
+    border: 1px solid var(--button-text-color);
     border-radius: 6px;
-    background-color: #C1E1C1; /* Specific background color for control buttons */
-    color: black;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
 }
 
-#submitGuess:hover { background-color: #abc4ff; /* Specific hover color for submit button */ }
+#submitGuess:hover { background-color: var(--button-hover-bg-color); }
 
 /* Difficulty Dropdown */
 #difficulty {
     padding: 10px 15px;
     font-size: 16px;
-    border: 2px solid white;
+    border: 2px solid var(--button-text-color);
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 20px;
-    background-color: #fff; /* Specific background color for dropdown */
-    color: #333; /* Specific text color for dropdown */
+    background-color: var(--modal-bg-color);
+    color: var(--text-color);
 }
 
 /* Responsive Adjustments */
