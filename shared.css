@@ -58,7 +58,7 @@ a:hover {
 
 .header-style {
     width: 100%;
-    padding: var(--padding-small) var(--margin-medium);
+    padding: var(--padding-small);
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: space-between;
