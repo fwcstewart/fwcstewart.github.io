@@ -28,3 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// To show the modal
+document.getElementById("Modal").classList.add('active');
+
+// To hide the modal
+document.getElementById("Modal").classList.remove('active');
+
