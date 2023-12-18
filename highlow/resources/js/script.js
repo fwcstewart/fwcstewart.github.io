@@ -208,6 +208,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show any sections you hid when opening the leaderboard
     });
 
+    document.getElementById('startTutorialBtn').addEventListener('click', function() {
+    document.getElementById('welcomeModal').style.display = 'none';
+    // Start the tutorial
+    });
+
+document.getElementById('skipTutorialBtn').addEventListener('click', function() {
+    document.getElementById('welcomeModal').style.display = 'none';
+    // Skip the tutorial and start the game
+    });
+
     // Initialize the game
     resetGame();
 });
