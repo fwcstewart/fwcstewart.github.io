@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
     document.getElementById('leaderboard-section').style.display = 'none';
     // Show any sections you hid when opening the leaderboard
-
+    }
 
     // Initialize the game
     resetGame();
