@@ -129,7 +129,12 @@ button:focus {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+  background-color: #333; /* Adjust color as needed */
+ color: white;
+text-align: center;
+padding: 20px 0;
 }
+
 
 .social-icon,
 .menu {
