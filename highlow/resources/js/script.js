@@ -196,6 +196,7 @@ function revealNextNumber() {
 function updateScoreboard() {
     // Animate scoreboard
     const scoreboard = document.getElementById('scoreboard');
+    // Make sure the .show class has the desired CSS properties for the animation
     scoreboard.classList.remove('show');
     setTimeout(() => {
         // Update scores...
@@ -211,12 +212,12 @@ function flipCard() {
         card.classList.remove('flipped');
     }, 500);
 }
-
+    
 function gameOver() {
     let playerName = prompt("Game over! Enter your name for the leaderboard:", "Player");
     if (playerName) {
-        const entry = { name: playerName, score: score }; // Create an entry object
-        updateLeaderboard(entry); // Update leaderboard with the entry object
+        const entry = { name: playerName, score: score };
+        updateLeaderboard(entry); // Pass the entry object to updateLeaderboard
     }
     resetGame();
 }
@@ -228,10 +229,19 @@ document.getElementById("game-mode-selection").style.display = "none";
 
 document.addEventListener('DOMContentLoaded', (event) => {
     resetGame();
-    showLeaderboard(); // Call this function to initialize the leaderboard on game start
+    // The startGameBtn event listener should be set inside the DOMContentLoaded event
+    // to ensure the element is available when the script runs.
+    document.getElementById('startGameBtn').addEventListener('click', function() {
+        document.getElementById("instructions").style.display = "none";
+        document.getElementById("game-interface").style.display = "block";
+        startGame("classic"); // Start in classic mode by default
+    });
+
+    // Set up the showLeaderboard button event listener here as well
+    document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
+
+    // Call showLeaderboard() if you want to show the leaderboard on game start
+    // showLeaderboard();
 });
-
-document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
-
-resetGame();
+    
 
