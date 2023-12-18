@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameMode: "classic",
         doublePoints: false,
         doublePointsRemaining: 1,
+        skips: false,
         skipsRemaining: 1,
         multiplier: 1,
         currentTutorialStep: 0,
@@ -68,8 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.nextNumberDisplay.textContent = "?";
         updateScoreboard();
         // Make sure this element exists in the HTML, or this line will throw an error.
-        if (elements.skipsRemaining) {
-            elements.skipsRemaining.textContent = gameState.skipsRemaining;
+        if (gameState.skipsRemaining > 0) {
+            gameState.skips = true;
+            gameState.skips--;
+            gameState.skipsRemaining.textContent = gameState.skipsRemaining;
             elements.skipBtn.textContent = `Skips Remaining (${gameState.skipsRemaining})`;
         }
     }
