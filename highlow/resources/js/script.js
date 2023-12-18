@@ -154,34 +154,52 @@ function showFeedback(isCorrect, message = '') {
     }, 2000);
 }
 
-      // Attaching all event listeners
-function attachEventListeners() {
-    elements.nextTutorialStepBtn.addEventListener('click', () => {
-        gameState.currentTutorialStep++;
-        updateTutorial(gameState.currentTutorialStep);
-    });
+   // Attaching all event listeners
+    function attachEventListeners() {
+        elements.gameModeButtons.forEach(btn => {
+            btn.addEventListener("click", () => selectGameMode(btn.getAttribute("data-mode")));
+        });
+        
+        elements.higherBtn.addEventListener("click", () => handleGuess(true));
+        elements.lowerBtn.addEventListener("click", () => handleGuess(false));
 
-    elements.doublePointsBtn.addEventListener("click", useDoublePoints);
-    elements.closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
-    elements.backBtn.addEventListener("click", backToMenu);
+        // Check if elements exist before adding event listeners
+        if(elements.nextTutorialStepBtn) {
+            elements.nextTutorialStepBtn.addEventListener('click', () => {
+                gameState.currentTutorialStep++;
+                updateTutorial(gameState.currentTutorialStep);
+            });
+        }
 
-    elements.gameModeButtons.forEach(btn => {
-        btn.addEventListener("click", () => selectGameMode(btn));
-    });
+        if(elements.doublePointsBtn) {
+            elements.doublePointsBtn.addEventListener("click", useDoublePoints);
+        }
 
-    elements.higherBtn.addEventListener("click", () => handleGuess(true));
-    elements.lowerBtn.addEventListener("click", () => handleGuess(false));
-}
+        if(elements.closeLeaderboardBtn) {
+            elements.closeLeaderboardBtn.addEventListener('click', closeLeaderboard);
+        }
+
+        // This might be the problematic button, ensure it exists in your HTML
+        if(elements.backBtn) {
+            elements.backBtn.addEventListener("click", backToMenu);
+        }
+    }
+
+    // Ensure this element exists in your HTML
+    if(elements.gameModeSelection) {
+        attachEventListeners();
+    } else {
+        console.error('Game mode selection element not found!');
+    }
 
 // Call attachEventListeners outside its definition
 attachEventListeners();
 
-    function selectGameMode(btn) {
-        const mode = btn.getAttribute("data-mode");
-        document.querySelectorAll(".game-section").forEach(el => el.style.display = "block");
-        elements.gameModeSelection.style.display = "none";
-        startGame(mode);
-    }
+    function selectGameMode(mode) {
+    document.querySelectorAll(".game-section").forEach(el => el.style.display = "block");
+    elements.gameModeSelection.style.display = "none";
+    startGame(mode);
+}
 
     function closeLeaderboard() {
         elements.leaderboardSection.style.display = 'none';
@@ -227,7 +245,3 @@ function updateScore(isCorrect) {
     // Initial reset of the game
     resetGame();
     });
-
-
-
-
