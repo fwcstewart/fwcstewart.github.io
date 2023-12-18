@@ -2,18 +2,12 @@
 
 /* Score Display */
 #scoreDisplay {
-    background-color: #e3f2fd;
-    color: blue;
     padding: var(--padding-small);
-    background-color: #e3f2fd;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     border: none; /* Optionally remove border for a cleaner look */
-    border-radius: 20px; /* Softer rounded corners */
     margin: var(--margin-small) auto;
     transition: transform 0.3s ease;
     font-size: 36px;
     font-weight: bold;
-    color: #0d47a1;
 }
 
 /* Guess Grid */
