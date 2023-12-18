@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         levelDisplay: document.getElementById("level"),
         timeLeftDisplay: document.getElementById("timeLeft"),
         gameModeButtons: document.querySelectorAll(".mode-btn"),
+        skipsRemaining: document.getElementById("skipsRemaining"),
         skipBtn: document.getElementById("skipBtn"),
         doublePointsBtn: document.getElementById("doublePointsBtn"),
         feedbackElement: document.getElementById('feedback'),
