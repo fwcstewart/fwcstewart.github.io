@@ -124,28 +124,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Show Leaderboard
-    function showLeaderboard() {
-        const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-        const leaderboardList = document.getElementById('leaderboard-list');
-        leaderboardList.innerHTML = '';
-        leaderboard.forEach(entry => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${entry.name}: ${entry.score}`;
-            leaderboardList.appendChild(listItem);
-        });
-        document.getElementById('leaderboard-section').style.display = 'block';
-        document.getElementById('game-interface').style.display = 'none';
-        document.getElementById('game-mode-selection').style.display = 'none';
-    }
+function showLeaderboard() {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    const leaderboardList = document.getElementById('leaderboard-list');
+    leaderboardList.innerHTML = '';
+    leaderboard.forEach(entry => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${entry.name}: ${entry.score}`;
+        leaderboardList.appendChild(listItem);
+    });
+    document.getElementById('leaderboard-section').style.display = 'block';
+    // Hide game interface and mode selection
+    document.getElementById('game-interface').style.display = 'none';
+    document.getElementById('game-mode-selection').style.display = 'none';
+}
 
-    // Show Feedback
-    function showFeedback(isCorrect, message = '') {
-        feedbackElement.textContent = message || (isCorrect ? 'Correct!' : 'Wrong!');
-        feedbackElement.style.color = isCorrect ? 'green' : 'red';
-        setTimeout(() => {
-            feedbackElement.textContent = '';
-        }, 2000);
-    }
+// Close Leaderboard and Return to Start Screen
+document.getElementById('closeLeaderboardBtn').addEventListener('click', function() {
+    document.getElementById('leaderboard-section').style.display = 'none';
+    // Show the game mode selection screen when closing the leaderboard
+    document.getElementById('game-mode-selection').style.display = 'block';
+});
 
     // Generate Random Number
     function generateNumber() {
