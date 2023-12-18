@@ -1,4 +1,4 @@
-:root {
+t:root {
     --primary-bg-color: #abc4ff;
     --text-color: #333;
     --text-secondary-color: #555;
@@ -121,7 +121,7 @@ footer {
     width: 100%;
     top: var(--margin-small);
     box-shadow: var(--box-shadow);
-    position: fixed;
+    position: relative;
     height: 90px;
     left: 0;
     bottom: 0;
