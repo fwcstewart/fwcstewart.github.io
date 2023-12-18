@@ -15,7 +15,8 @@ body.dark .game-mode-indicator,
 body.dark .game-mode:hover,
 body.dark #result,
 body.dark #score,
-body.dark #game-modes {
+body.dark .game-mode
+body.dark #game-history {
     background-color: #242424;
     color: #ffffff;
 }
@@ -35,7 +36,8 @@ body.retro .game-mode-indicator,
 body.retro .game-mode:hover,
 body.retro #result,
 body.retro #score,
-body.retro #game-modes {
+body.retro .game-mode
+body.dark #game-history {
     background-color: #ff00ff;
     color: #0ff;
     border-color: #0ff;
@@ -55,7 +57,8 @@ body.minimalist .game-mode-indicator,
 body.minimalist .game-mode:hover,
 body.minimalist #result,
 body.minimalist #score,
-body.minimalist #game-modes {
+body.minimalist .game-mode
+body.dark #game-history {
     background-color: #e0e0e0;
     color: #333;
     border-color: #333;
