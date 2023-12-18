@@ -230,3 +230,20 @@
         width: 100%;
     }
 }
+
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.retro {
+    background-color: #f0f;
+    color: #0ff;
+    /* Retro font styles and colors */
+}
+
+body.minimalist {
+    background-color: #fff;
+    color: #000;
+    /* Minimalist styles */
+}
