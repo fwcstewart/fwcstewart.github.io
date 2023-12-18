@@ -79,3 +79,26 @@
     background-color: blue;
     color: white;
 }
+
+/* Power-Up Buttons Styling */
+.powerup-btn {
+    margin-bottom: var(--margin-small);
+    background-color: #f0ad4e; /* Example color */
+}
+
+.powerup-btn:hover {
+    background-color: #ec971f; /* Darker shade for hover */
+}
+
+/* Feedback Message Styling */
+.feedback {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-top: var(--margin-small);
+}
+
+/* Leaderboard Section Styling */
+#leaderboard-section {
+    text-align: center;
+    padding: var(--padding-medium);
+}
