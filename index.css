@@ -49,21 +49,34 @@
     font-size: var(--font-size-normal);
 }
 
+/* Utilizing the button styles from shared.css */
 .play-btn {
-    /* Utilize button styles from shared.css */
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: var(--padding-small) var(--padding-medium);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    font-size: var(--font-size-normal);
 }
 
-/* Responsive Design */
+.play-btn:hover {
+    background-color: var(--button-hover-bg-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design for Smaller Screens */
 @media only screen and (max-width: 768px) {
     .content {
         flex-direction: column;
     }
 
     .game-card {
-        width: 100%;
+        width: 100%; /* Adjust the width on smaller screens */
     }
 
     .game-icon {
-        font-size: 3rem;
+        font-size: 3rem; /* Adjust the size of the game icons */
     }
 }
