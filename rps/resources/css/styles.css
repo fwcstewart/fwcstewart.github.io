@@ -55,7 +55,7 @@ body.retro .choice {
 /* Minimalist Theme */
 body.minimalist {
     background-color: #fff;
-    color: #000;
+    color: #000 !important;
     font-family: 'Helvetica Neue', Arial, sans-serif; /* Minimalist font */
 }
 
@@ -66,7 +66,7 @@ body.minimalist .game-mode,
 body.minimalist #game-history,
 body.minimalist #history-list {
     background-color: #e0e0e0;
-    color: #000;
+    color: #000 !important;
     border-color: #333;
 }
 
