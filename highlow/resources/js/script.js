@@ -42,6 +42,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updateScoreboard() {
+    // Updating the scoreboard with the current game values
+    scoreDisplay.textContent = score;
+    streakDisplay.textContent = streak;
+    levelDisplay.textContent = level;
+
+    // Example of adding an animation or visual feedback
+    const scoreboard = document.getElementById('scoreboard');
+    if (scoreboard) {
+        scoreboard.classList.add('highlight-score');
+        setTimeout(() => {
+            scoreboard.classList.remove('highlight-score');
+        }, 500);
+    }
+    }
+
     function useDoublePoints() {
         if (doublePointsRemaining > 0) {
             doublePoints = true;
@@ -174,10 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         resetGame();
     }
 
-    // Event listener setup
+    // Setup event listeners for higherBtn and lowerBtn
     higherBtn.addEventListener("click", () => handleGuess(true));
     lowerBtn.addEventListener("click", () => handleGuess(false));
 
+    // Setup event listeners for game mode selection buttons
     gameModeButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const mode = btn.getAttribute("data-mode");
@@ -187,15 +204,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Back button event listener
     document.getElementById("backBtn").addEventListener("click", () => {
         document.getElementById("game-interface").style.display = "none";
         document.getElementById("game-mode-selection").style.display = "block";
-    });
-
-    // Setup for the 'show leaderboard' and 'close leaderboard' buttons
-    document.getElementById('showLeaderboardBtn').addEventListener('click', showLeaderboard);
-    document.getElementById('closeLeaderboardBtn').addEventListener('click', () => {
-        document.getElementById('leaderboard-section').style.display = 'none';
     });
 
     // Initialize the game
