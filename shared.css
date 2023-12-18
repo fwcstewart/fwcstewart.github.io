@@ -122,7 +122,7 @@ button:focus {
     color: var(--text-color);
     text-align: center;
     padding: var(--padding-medium);
-    position: fixed;
+    position: relative;
     right: 0;
     left: 0;
     bottom: 0;
