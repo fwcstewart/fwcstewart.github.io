@@ -1,9 +1,20 @@
 /* Rock Paper Scissors (RPS) Game Specific Styles */
 
-/* Utilizing shared.css for basic elements, fonts, and common styles */
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-/* Theme Customization */
-/* Dark Theme Styles */
+/* Base Theme Styles */
+body {
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Roboto', sans-serif; /* Default font */
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif; /* Maintaining a modern look */
+}
+
 body.dark .game-mode-indicator,
 body.dark .game-mode:hover,
 body.dark #score,
@@ -14,9 +25,15 @@ body.dark #history-list {
     color: #ffffff;
 }
 
-/* Retro Theme Styles */
+body.dark .choice:hover {
+    border-color: #ffffff;
+}
+
+/* Retro Theme */
 body.retro {
-    font-family: 'Press Start 2P', cursive; /* Specific font for Retro theme */
+    background-color: #0f0f0f; /* Dark base for vibrant neon colors */
+    color: #0ff;
+    font-family: 'Press Start 2P', cursive; /* Retro-style font */
 }
 
 body.retro .game-mode-indicator,
@@ -30,9 +47,15 @@ body.retro #history-list {
     border-color: #0ff;
 }
 
-/* Minimalist Theme Styles */
+body.retro .choice {
+    border: 2px solid #ff00ff;
+}
+
+/* Minimalist Theme */
 body.minimalist {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Specific font for Minimalist theme */
+    background-color: #fff;
+    color: #000 !important;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Minimalist font */
 }
 
 body.minimalist .game-mode-indicator,
@@ -40,98 +63,158 @@ body.minimalist .game-mode:hover,
 body.minimalist #score,
 body.minimalist .game-mode,
 body.minimalist #game-history,
-body.minimalist #history-list {
+body.minimalist #history-list
+body.minimalist #result {
     background-color: #e0e0e0;
-    color: #000;
+    color: #000 !important;
     border-color: #333;
+}
+
+body.minimalist .choice {
+    border: 2px solid #333;
+}
+
+/* Common Theme Styles */
+.game-mode-indicator,
+.game-mode,
+#result,
+#score,
+.choice {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 /* Game Mode Indicator */
 .game-mode-indicator {
-    /* Inherits styles from button in shared.css */
-}
-
-/* Game Mode Buttons */
-.game-mode {
-    /* Inherits styles from button in shared.css, adding specific styles */
-    background-color: transparent;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 15px;
+    background-color: #2ecc71; /* RPS specific background color */
     color: white;
-    border: 1px solid white;
+    font-weight: bold;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
 }
 
-.game-mode:hover {
-    /* Inherits hover effect from button in shared.css */
-    background-color: white;
-    color: black;
+.game-mode-indicator.active {
+    background-color: #3498db; /* RPS active mode background color */
+}
+
+#current-game-mode {
+    text-transform: uppercase;
 }
 
 /* Game Choices (Rock, Paper, Scissors images) */
+#game {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
 .choice {
-    /* Specific styles for game choices */
     width: 120px;
     height: 120px;
-    border-radius: var(--border-radius);
+    border-radius: 15px;
+    background-size: cover;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* RPS choice shadow */
     cursor: pointer;
-    margin: var(--margin-small);
     transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px;
 }
 
 .choice:hover {
-    /* Hover effect for game choices */
     transform: scale(1.1);
-    box-shadow: var(--box-shadow-hover);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* RPS hover shadow */
 }
 
 /* Countdown Timer */
 #countdown {
-    /* Specific styles for countdown display */
     font-size: 3em;
-    padding: var(--padding-small);
-    margin: var(--margin-medium) auto;
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 10px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
 /* Result and Score Display */
 #result, #score {
-    /* Inherits text and color styles from shared.css */
     font-size: 1.5em;
-    margin-top: var(--margin-medium);
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+}
+
+.score-board, #game-history {
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center it in the page */
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.score h2 {
+    color: #34495e; /* RPS text color */
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.score span {
+    font-size: 2em;
+    color: #2ecc71; /* RPS specific color */
+}
+
+/* Game Modes */
+#game-modes {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.game-mode {
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 1px solid white;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1em;
+}
+
+.game-mode:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
 }
 
 /* Game History */
 #game-history {
-    /* Inherits box styles from shared.css */
-    max-width: 600px;
-    margin: var(--margin-medium) auto;
-    padding: var(--padding-small);
+    max-width: 600px; /* Set a maximum width */
+    margin: 20px auto; /* Center it in the page */
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .choice {
-        width: 80px;
-        height: 80px;
-    }
-
-    #countdown, #result, #score {
-        font-size: 1.2em;
-    }
-
-    .game-mode {
-        font-size: var(--font-size-normal);
-        padding: var(--padding-small);
-    }
-
-    #game-modes, .game-mode-indicator, #history-list li {
-        font-size: var(--font-size-normal);
-    }
+#history-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px; /* Adjust spacing as needed */
 }
 
-/* Further responsive and landscape orientation adjustments as needed */
+#history-list li {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
 
 /* Responsive Adjustments for Medium Screens */
 @media (max-width: 1024px) {
