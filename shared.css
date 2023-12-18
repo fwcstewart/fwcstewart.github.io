@@ -118,10 +118,12 @@ footer {
     color: var(--button-text-color);
     text-align: center;
     padding: var(--padding-small);
-    position: relative;
     width: 100%;
     top: var(--margin-small);
     box-shadow: var(--box-shadow);
+    position: fixed;
+    left: 0;
+    bottom: 0;
 }
 
 footer p {
