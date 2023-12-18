@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         levelDisplay: document.getElementById("level"),
         timeLeftDisplay: document.getElementById("timeLeft"),
         gameModeButtons: document.querySelectorAll(".mode-btn"),
+        skipBtn: document.getElementById("skipBtn"),
         doublePointsBtn: document.getElementById("doublePointsBtn"),
         feedbackElement: document.getElementById('feedback'),
         tutorialModal: document.getElementById('tutorialModal'),
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Make sure this element exists in the HTML, or this line will throw an error.
         if (elements.skipsRemaining) {
             elements.skipsRemaining.textContent = gameState.skipsRemaining;
+            elements.skipBtn.textContent = `Skips Remaining (${gameState.skipsRemaining})`;
         }
     }
 
